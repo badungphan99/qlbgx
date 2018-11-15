@@ -50,8 +50,23 @@ public class InforDA {
 		int result = sttm.executeUpdate();
 		
 		return result>0;
-		
-		
+	}
+	public void insertInfo(String time_in, String vehicle_type, String license_plate, int price, int employee_id, int parking_id){
+		String sql = "INSERT INTO infor (time_in,vehicle_type,license_plate,price,employee_id,parking_id)"+"VALUES(?,?,?,?,?,?)";
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,time_in);
+			stmt.setString(2,vehicle_type);
+			stmt.setString(3,license_plate);
+			stmt.setInt(4,price);
+			stmt.setInt(5,employee_id);
+			stmt.setInt(6,parking_id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

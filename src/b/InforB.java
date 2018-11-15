@@ -1,6 +1,9 @@
 package b;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +12,7 @@ import da.InforDA;
 import e.Infor;
 
 public class InforB {
+
 	private InforDA da;
 	
 	public InforB() {
@@ -46,16 +50,22 @@ public class InforB {
 		
 	}
 	
-	public Infor add(Infor infor) {
-		return null;
-	}
+	public Infor add(Infor infor) {return null; }
 	
-	public Infor delete(Infor infor) {
-		return null;
-	}
+	public Infor delete(Infor infor) { return null; }
 	
 	public Infor update(Infor infor) {
 		return null;
 	}
-	
+
+	public void checkin(String vehicleType, String licensePlate){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String time_in = dateFormat.format(date);
+		try {
+			da.insertInfo(time_in,vehicleType,licensePlate,9876,loginSession.getUser().getId(),4);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

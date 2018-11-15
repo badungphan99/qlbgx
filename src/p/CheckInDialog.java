@@ -14,7 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import b.UserB;
+import b.InforB;
 import net.miginfocom.swing.MigLayout;
 
 public class CheckInDialog extends JDialog {
@@ -23,6 +23,7 @@ public class CheckInDialog extends JDialog {
 	private WorkFrame boss;
 	private JLabel lblMessage;
 	private static CheckInDialog checkIn;
+	private InforB inforB = new InforB();
 
 	public static CheckInDialog getCheckInFrame() {
 		return checkIn;
@@ -62,14 +63,14 @@ public class CheckInDialog extends JDialog {
 		JButton btnAdd = new JButton("Add");
 		
 		
-		lblMessage = new JLabel("Please enter your card_id, vehicle type and license plate");
+		lblMessage = new JLabel("Please enter vehicle type and license plate");
 		contentPane.add(lblMessage, "cell 1 3");
 		contentPane.add(btnAdd, "flowx,cell 1 4");
 
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				/// ddang phaan van xem se lam gi
+				inforB.checkin(txttype.getText(),txtlicenseplate.getText());
 				CheckInDialog.this.setVisible(false);
 			}
 		});

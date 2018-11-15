@@ -4,6 +4,10 @@ public class User {
 	private int id;
 	private String username, password, email, fullname;
 	private int role;
+
+	public User(){
+		this.role = -1;
+	};
 	
 	public User(int id, String username, String password, String email, String fullname, int role) {
 		super();
@@ -62,6 +66,9 @@ public class User {
 	public void setRole(int role) {
 		this.role = role;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

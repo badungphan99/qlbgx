@@ -46,7 +46,7 @@ public class UserDA {
 //		return result>0;
 //	}
 	
-	public boolean checkUser(String username, String password) throws SQLException {
+	public User checkUser(String username, String password) throws SQLException {
 		String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		sttm.setString(1, username);
@@ -56,9 +56,12 @@ public class UserDA {
 		ResultSet rs = sttm.executeQuery();
 		
 		if (rs.next()) {
-			return true;
+			User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
+					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"));
+			return user;
 		}
-		return false;
+		User user = new User();
+		return user;
 		
 		
 	}

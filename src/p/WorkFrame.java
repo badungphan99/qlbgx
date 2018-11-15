@@ -49,13 +49,11 @@ public class WorkFrame extends JFrame {
 	}
 
 	private void initModelParkingCard() throws SQLException {
-		System.out.println("parking card");
 		model = parkingcard.getAllParkingCard();
 		table.setModel(model);
 	}
 
 	private void initModelInfor() throws SQLException {
-		System.out.println("em o day xep oi");
 		model = infor.getAllInfor();
 		table.setModel(model);
 	}

@@ -7,8 +7,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import b.loginSession;
 
 public class Runner {
 	public static void main(String[] args) {
@@ -17,18 +21,9 @@ public class Runner {
 
 	}
 //public static void main(String[] args) throws Exception{
-//	Connection conn = ConnectionUtil.getConnection();
-//	List<Infor> infors = new ArrayList<Infor>();
-//	String sql = "SELECT * FROM infor";
-//	Statement sttm = conn.createStatement();
-//	ResultSet rs = sttm.executeQuery(sql);
-//
-//	while (rs.next()) {
-//		Infor infor = new Infor(rs.getInt("id"), rs.getString("time_in"), rs.getString("vehicle_type"),
-//				rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
-//				rs.getInt("employee_id"), rs.getInt("card_id"), rs.getInt("parking_id"));
-//
-//		System.out.println(infor.toString());
+//	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//	Date date = new Date();
+//	String datetime = dateFormat.format(date);
+//	System.out.println(datetime);
 //	}
-//}
 }

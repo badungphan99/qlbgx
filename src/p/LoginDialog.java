@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import b.UserB;
+import e.User;
+import b.loginSession;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -58,8 +60,9 @@ public class LoginDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UserB userB = new UserB();
-					if(userB.checkLogin(txtUsername.getText(), txtPassword.getText())){	
-						System.out.println("Login");
+					User user = userB.checkLogin(txtUsername.getText(), txtPassword.getText());
+					if(user.getRole() != -1){
+						loginSession.setUser(user);
 						LoginDialog.this.setVisible(false);
 						WorkFrame bossFrame = new WorkFrame(parent);
 						bossFrame.setVisible(true);

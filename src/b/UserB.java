@@ -16,7 +16,7 @@ public class UserB {
 		da = new UserDA();
 	}
 	
-	public boolean checkLogin (String username, String password) throws SQLException {
+	public User checkLogin (String username, String password) throws SQLException {
 		return da.checkUser(username, password);
 	}
 	public boolean checkBossLogin (String username, String password) throws SQLException {
