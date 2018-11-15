@@ -18,13 +18,22 @@ public class InforB {
 	public DefaultTableModel getAllInfor() throws SQLException {
 		List <Infor> infors = da.getAll();
 		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("Time in");
+		model.addColumn("Vehicle type");
+		model.addColumn("Licenseplate");
+		model.addColumn("Time out");
+		model.addColumn("Price");
+		model.addColumn("Employee id");
+		model.addColumn("Card id");
+		model.addColumn("Parking id");
 		for (Infor infor : infors) {
 			String []row = new String[9];
 			row[0] = String.valueOf(infor.getId());
-			row[1] = infor.getTimein();
-			row[2] = infor.getVehicletype();
-			row[3] = infor.getLicenseplate();
-			row[4] = infor.getTimeout();
+			row[1] = String.valueOf(infor.getTimein());
+			row[2] = String.valueOf(infor.getVehicletype());
+			row[3] = String.valueOf(infor.getLicenseplate());
+			row[4] = String.valueOf(infor.getTimeout());
 			row[5] = String.valueOf(infor.getPrice());
 			row[6] = String.valueOf(infor.getEmployeeid());
 			row[7] = String.valueOf(infor.getCardid());

@@ -12,7 +12,7 @@ public class Infor {
 	private int employeeid, cardid, parkingid;
 	
 	
-	public Infor(int id, String timein, String vehicletype, String license, String timeout, int price,
+	public Infor(int id, String timein, String vehicletype, String licenseplate, String timeout, int price,
 			int employeeid, int cardid, int parkingid) {
 		super();
 		this.id = id;
@@ -115,7 +115,10 @@ public class Infor {
 	public void setParkingid(int parkingid) {
 		this.parkingid = parkingid;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		String s = id +" " + timein +" " + vehicletype +" " + licenseplate +" " + timeout +" " + price +" " + employeeid +" " + cardid +" " + parkingid;
+		return s;
+	}
 }

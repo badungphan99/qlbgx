@@ -65,11 +65,19 @@ public class CheckInDialog extends JDialog {
 		lblMessage = new JLabel("Please enter your card_id, vehicle type and license plate");
 		contentPane.add(lblMessage, "cell 1 3");
 		contentPane.add(btnAdd, "flowx,cell 1 4");
-		
+
+		btnAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				/// ddang phaan van xem se lam gi
+				CheckInDialog.this.setVisible(false);
+			}
+		});
+
+
 		JButton btnCancel = new JButton("Cancel");
 		contentPane.add(btnCancel, "cell 1 4");
-		
-		
+
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override

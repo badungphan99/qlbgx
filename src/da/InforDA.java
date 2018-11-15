@@ -11,7 +11,7 @@ import java.sql.Statement;
 import e.Infor;
 
 public class InforDA {
-	private Connection conn;
+	private static Connection conn;
 
 	public InforDA()  {
 		try {
@@ -53,4 +53,5 @@ public class InforDA {
 		
 		
 	}
+
 }
