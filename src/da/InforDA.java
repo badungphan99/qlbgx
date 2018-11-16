@@ -33,9 +33,9 @@ public class InforDA {
 		ResultSet rs = sttm.executeQuery(sql);
 
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
-					rs.getInt("employee_id"), rs.getInt("card_id"), rs.getInt("parking_id"));
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			
 			infors.add(infor);
 		}
@@ -67,6 +67,22 @@ public class InforDA {
 			e.printStackTrace();
 		}
 
+	}
+
+	public Infor getCardId(String license_plate) throws SQLException{
+		String sql = "SELECT * FROM infor";
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+
+		while (rs.next()) {
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if(license_plate.equalsIgnoreCase(infor.getLicenseplate())){
+				return infor;
+			}
+		}
+		return new Infor();
 	}
 
 }

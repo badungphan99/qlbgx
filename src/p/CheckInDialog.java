@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import b.InforB;
+import e.Infor;
 import net.miginfocom.swing.MigLayout;
 
 public class CheckInDialog extends JDialog {
@@ -40,13 +41,13 @@ public class CheckInDialog extends JDialog {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 		
-		JLabel lblcardid = new JLabel("Card ID");
-		contentPane.add(lblcardid, "cell 0 0,alignx trailing");
+//		JLabel lblcardid = new JLabel("Card ID");
+//		contentPane.add(lblcardid, "cell 0 0,alignx trailing");
 		
-		txtcardid = new JTextField();
-		contentPane.add(txtcardid, "cell 1 0,growx");
+//		txtcardid = new JTextField();
+//		contentPane.add(txtcardid, "cell 1 0,growx");
 		
-		txtcardid.setColumns(10);
+//		txtcardid.setColumns(10);
 		
 		JLabel lbltype = new JLabel("Vehicle Type");
 		contentPane.add(lbltype, "cell 0 1,alignx trailing");
@@ -60,7 +61,7 @@ public class CheckInDialog extends JDialog {
 		txtlicenseplate = new JTextField();
 		contentPane.add(txtlicenseplate, "cell 1 2,growx");
 		
-		JButton btnAdd = new JButton("Add");
+		JButton btnAdd = new JButton("Check In");
 		
 		
 		lblMessage = new JLabel("Please enter vehicle type and license plate");
@@ -70,7 +71,10 @@ public class CheckInDialog extends JDialog {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				inforB.checkin(txttype.getText(),txtlicenseplate.getText());
+				Infor infor = inforB.checkin(txttype.getText(),txtlicenseplate.getText());
+				System.out.println(infor.getCardid());
+				/// Viết vào chỗ này một dialog làm sao đấy để nó có thể bắn ra được số của vé xe
+				/// Dữ liệu của vé xe sẽ là infor.getCardid()
 				CheckInDialog.this.setVisible(false);
 			}
 		});

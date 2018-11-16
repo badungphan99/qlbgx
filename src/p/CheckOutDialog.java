@@ -48,23 +48,28 @@ public class CheckOutDialog extends JDialog{
 			contentPane.add(txtlicenseplate, "cell 1 1,growx");
 			
 			
-			JButton btnAdd = new JButton("Add");
+			JButton btnCheckOut = new JButton("Check Out");
 			
 			
 			lblMessage = new JLabel("Please enter your card_id and license plate");
 			contentPane.add(lblMessage, "cell 1 2");
-			contentPane.add(btnAdd, "flowx,cell 1 3");
+			contentPane.add(btnCheckOut, "flowx,cell 1 3");
 			
 			JButton btnCancel = new JButton("Cancel");
 			contentPane.add(btnCancel, "cell 1 3");
-			
+
+			btnCheckOut.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent actionEvent) {
+					CheckOutDialog.this.setVisible(false);
+				}
+			});
 			
 			btnCancel.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					CheckOutDialog.this.setVisible(false);
-					
 				}
 			});
 		}

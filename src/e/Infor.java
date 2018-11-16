@@ -4,18 +4,19 @@ import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 
 public class Infor {
-	private int id;
 	private String timein;
 	private String vehicletype, licenseplate;
 	private String timeout;
 	private int price;
 	private int employeeid, cardid, parkingid;
 	
-	
-	public Infor(int id, String timein, String vehicletype, String licenseplate, String timeout, int price,
-			int employeeid, int cardid, int parkingid) {
+	public Infor(){
+		this.cardid = -1;
+	}
+
+	public Infor(int cardid, String timein, String vehicletype, String licenseplate, String timeout, int price,
+			int employeeid, int parkingid) {
 		super();
-		this.id = id;
 		this.timein = timein;
 		this.vehicletype = vehicletype;
 		this.licenseplate = licenseplate;
@@ -24,16 +25,6 @@ public class Infor {
 		this.employeeid = employeeid;
 		this.cardid = cardid;
 		this.parkingid = parkingid;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 
@@ -118,7 +109,7 @@ public class Infor {
 
 	@Override
 	public String toString() {
-		String s = id +" " + timein +" " + vehicletype +" " + licenseplate +" " + timeout +" " + price +" " + employeeid +" " + cardid +" " + parkingid;
+		String s =  timein +" " + vehicletype +" " + licenseplate +" " + timeout +" " + price +" " + employeeid +" " + cardid +" " + parkingid;
 		return s;
 	}
 }

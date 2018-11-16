@@ -3,13 +3,13 @@ package e;
 public class User {
 	private int id;
 	private String username, password, email, fullname;
-	private int role;
+	private int role,parking_id;
 
 	public User(){
 		this.role = -1;
 	};
 	
-	public User(int id, String username, String password, String email, String fullname, int role) {
+	public User(int id, String username, String password, String email, String fullname, int role, int parking_id) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -17,6 +17,7 @@ public class User {
 		this.email = email;
 		this.fullname = fullname;
 		this.role = role;
+		this.parking_id = parking_id;
 	}
 
 	public int getId() {
@@ -67,8 +68,12 @@ public class User {
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return super.toString();
+	public int getParking_id() {
+		return parking_id;
 	}
+
+	public void setParking_id(int parking_id) {
+		this.parking_id = parking_id;
+	}
+
 }

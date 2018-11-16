@@ -139,7 +139,11 @@ public class WorkFrame extends JFrame {
 				CheckInDialog checkinDl = new CheckInDialog(WorkFrame.this);
 				checkinDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				checkinDl.setVisible(true);
-
+				try {
+					initModelInfor();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 

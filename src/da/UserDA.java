@@ -32,7 +32,7 @@ public class UserDA {
 
 		while (rs.next()) {
 			User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
-					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"));
+					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
 			users.add(user);
 		}
 		return users;
@@ -57,7 +57,7 @@ public class UserDA {
 		
 		if (rs.next()) {
 			User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
-					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"));
+					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
 			return user;
 		}
 		User user = new User();
