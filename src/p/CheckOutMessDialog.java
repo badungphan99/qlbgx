@@ -16,7 +16,7 @@ public class CheckOutMessDialog extends JDialog{
     private static CheckInDialog checkIn;
     private InforB inforB = new InforB();
 
-    public CheckOutMessDialog(WorkFrame bossframe,int card_id) {
+    public CheckOutMessDialog(WorkFrame bossframe, String mess) {
         super(bossframe, "Check In", true);
         setAlwaysOnTop(true);
         this.setSize(600, 200);
@@ -25,11 +25,15 @@ public class CheckOutMessDialog extends JDialog{
         setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 
-        JLabel card_number = new JLabel("Card number: ");
-        contentPane.add(card_number, "cell 0 1,alignx trailing");
+//        JLabel card_number = new JLabel("Card number: ");
+//        contentPane.add(card_number, "cell 0 1,alignx trailing");
+//
+//        JLabel numberOfCard = new JLabel(String.valueOf(card_id));
+//        contentPane.add(numberOfCard, "cell 1 1,growx");
 
-        JLabel numberOfCard = new JLabel(String.valueOf(card_id));
-        contentPane.add(numberOfCard, "cell 1 1,growx");
+            JLabel card_number = new JLabel(mess);
+            contentPane.add(card_number, "cell 0 1,alignx trailing");
+
 
 
         JButton btnOk = new JButton("Ok");

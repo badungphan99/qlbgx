@@ -1,6 +1,10 @@
 package da;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -124,5 +128,30 @@ public class InforDA {
 		((PreparedStatement) sttm).setString(1,time_out);
 		((PreparedStatement) sttm).setInt(2,card_id);
 		((PreparedStatement) sttm).executeUpdate();
+	}
+
+	public String price(int card_id) throws SQLException{
+		String sql = "SELECT * FROM infor";
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+
+		while (rs.next()) {
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if(card_id == infor.getCardid()){
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				try {
+					Date time_in = dateFormat.parse(infor.getTimein());
+					Date time_out = dateFormat.parse(infor.getTimeout());
+					long duration = (time_out.getTime() - time_in.getTime()) / (60 * 60 * 1000) % 24;
+					return String.valueOf(duration);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+		return "doan xem";
 	}
 }

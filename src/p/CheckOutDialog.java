@@ -2,6 +2,7 @@ package p;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -64,9 +65,16 @@ public class CheckOutDialog extends JDialog{
 			btnCheckOut.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
-					String s = inforB.checkOut(Integer.parseInt(txtcardid.getText()),txtlicenseplate.getText());
-					System.out.print(s);
-					CheckOutDialog.this.setVisible(false);
+                    String mess = null;
+                    try {
+                        mess = inforB.checkOut(Integer.parseInt(txtcardid.getText()),txtlicenseplate.getText());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    CheckOutDialog.this.setVisible(false);
+					CheckOutMessDialog checkOutMessDialog = new CheckOutMessDialog(bossframe,mess);
+					checkOutMessDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					checkOutMessDialog.setVisible(true);
 				}
 			});
 			
