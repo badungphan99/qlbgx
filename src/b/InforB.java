@@ -73,4 +73,22 @@ public class InforB {
 		}
 		return new Infor();
 	}
+
+	public String checkOut(int card_id,String licensePlate){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String time_out = dateFormat.format(date);
+		try {
+			if (da.checkCardId(card_id).getCardid() == -1){
+				return "Khong ton tai card id nay";
+			}else if (da.checkLicensePlate(card_id, licensePlate).getCardid() == -1){
+				return "Ve xe khong dung voi bien so";
+			}else {
+				da.insertTimeOut(card_id,time_out);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return licensePlate;
+	}
 }

@@ -18,7 +18,6 @@ public class Runner {
 	public static void main(String[] args) {
 		FirstFrame firstFrame = new FirstFrame();
 		firstFrame.setVisible(true);
-
 	}
 //public static void main(String[] args) throws Exception{
 //	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

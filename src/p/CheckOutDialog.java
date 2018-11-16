@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import b.InforB;
+import e.Infor;
 import net.miginfocom.swing.MigLayout;
 
 public class CheckOutDialog extends JDialog{
@@ -18,6 +20,7 @@ public class CheckOutDialog extends JDialog{
 		private WorkFrame boss;
 		private JLabel lblMessage;
 		private static CheckInDialog checkIn;
+		private InforB inforB = new InforB();
 
 		public static CheckInDialog getCheckInFrame() {
 			return checkIn;
@@ -61,6 +64,8 @@ public class CheckOutDialog extends JDialog{
 			btnCheckOut.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
+					String s = inforB.checkOut(Integer.parseInt(txtcardid.getText()),txtlicenseplate.getText());
+					System.out.print(s);
 					CheckOutDialog.this.setVisible(false);
 				}
 			});

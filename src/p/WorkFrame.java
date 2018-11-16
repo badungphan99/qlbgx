@@ -154,6 +154,11 @@ public class WorkFrame extends JFrame {
 				CheckOutDialog checkoutDl = new CheckOutDialog(WorkFrame.this);
 				checkoutDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				checkoutDl.setVisible(true);
+				try {
+					initModelInfor();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 
 			}
 		});

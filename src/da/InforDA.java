@@ -85,4 +85,44 @@ public class InforDA {
 		return new Infor();
 	}
 
+	public Infor checkCardId(int card_id) throws SQLException{
+		String sql = "SELECT * FROM infor";
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+
+		while (rs.next()) {
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if(card_id == infor.getCardid()){
+				return infor;
+			}
+		}
+		return new Infor();
+	}
+
+	public Infor checkLicensePlate(int card_id, String licensePlate) throws SQLException{
+		String sql = "SELECT * FROM infor";
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+
+		while (rs.next()) {
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if((card_id == infor.getCardid()) && (licensePlate.equalsIgnoreCase(infor.getLicenseplate()))){
+				return infor;
+			}
+		}
+		return new Infor();
+	}
+
+	public void insertTimeOut(int card_id,String time_out) throws SQLException{
+		String sql = "UPDATE infor SET time_out = ? WHERE card_id = ?";
+		Statement sttm = null;
+		sttm = conn.prepareStatement(sql);
+		((PreparedStatement) sttm).setString(1,time_out);
+		((PreparedStatement) sttm).setInt(2,card_id);
+		((PreparedStatement) sttm).executeUpdate();
+	}
 }

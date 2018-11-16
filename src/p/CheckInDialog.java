@@ -72,10 +72,10 @@ public class CheckInDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				Infor infor = inforB.checkin(txttype.getText(),txtlicenseplate.getText());
-				System.out.println(infor.getCardid());
-				/// Viết vào chỗ này một dialog làm sao đấy để nó có thể bắn ra được số của vé xe
-				/// Dữ liệu của vé xe sẽ là infor.getCardid()
 				CheckInDialog.this.setVisible(false);
+				CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
+				cardIdDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				cardIdDialog.setVisible(true);
 			}
 		});
 
