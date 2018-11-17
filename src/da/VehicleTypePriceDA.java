@@ -35,6 +35,9 @@ public class VehicleTypePriceDA {
                 sql = sql + ", parking_perios = ?, overdue = 2, per_hour = ?, per_day = ? WHERE id = 1";
                 break;
                 //xxxx
+
+
+            ///zhashdasd
         }
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
