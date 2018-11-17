@@ -1,6 +1,7 @@
 package p;
 
 import da.ConnectionUtil;
+import da.UserDA;
 import e.Infor;
 
 import java.sql.Connection;
@@ -18,6 +19,14 @@ public class Runner {
 	public static void main(String[] args) {
 		FirstFrame firstFrame = new FirstFrame();
 		firstFrame.setVisible(true);
+		
+//		UserDA userDA = new UserDA();
+//		try {
+//			userDA.editUser(8, "huyen", "000005", "phamhuyen@", "Pham Huyen", 1, 2);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 //public static void main(String[] args) throws Exception{
 //	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

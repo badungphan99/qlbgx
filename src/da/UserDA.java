@@ -38,15 +38,8 @@ public class UserDA {
 		return users;
 	}
 	
-//	public boolean deleteUser (int id) throws SQLException {
-//		String sql = "DELETE FROM user WHERE employee_id = ?";
-//		PreparedStatement sttm = conn.prepareStatement(sql);
-//		sttm.setInt(1, id);
-//		int result = sttm.executeUpdate();
-//		return result>0;
-//	}
-	
 	public User checkUser(String username, String password) throws SQLException {
+
 		String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		sttm.setString(1, username);
@@ -66,6 +59,19 @@ public class UserDA {
 		
 	}
 	
+	public boolean checkUserExist(String username) throws SQLException {
+		String sql = "SELECT * FROM user WHERE username = ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setString(1, username);
+
+		ResultSet rs = sttm.executeQuery();
+
+		if (rs.next()) {
+			return false;
+		}
+		return true;
+
+	}
 	public boolean checkBossUser(String username, String password) throws SQLException {
 		String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
@@ -85,5 +91,44 @@ public class UserDA {
 		return false;
 		
 		
+	}
+	
+	public void insertUser(User user) throws SQLException {
+		String sql = "INSERT INTO user (employee_id, username, password, email, fullname, role, parking_id)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setInt(1, user.getId());
+		sttm.setString(2, user.getUsername());
+		sttm.setString(3, user.getPassword());
+		sttm.setString(4, user.getEmail());
+		sttm.setString(5, user.getFullname());
+		sttm.setInt(6, user.getRole());
+		sttm.setInt(7, user.getParking_id());
+
+		sttm.executeUpdate();
+
+	}
+	
+	public void editUser(User user) throws SQLException {
+		String sqlEdit = "UPDATE user SET email = ?, fullname = ?, role = ?, parking_id = ? WHERE username = ?";
+		PreparedStatement sttm = conn.prepareStatement(sqlEdit);
+		sttm.setString(1, user.getEmail());
+		sttm.setString(2, user.getFullname());
+		sttm.setInt(3, user.getRole());
+		sttm.setInt(4, user.getParking_id());
+		sttm.setString(5, user.getUsername());
+
+		sttm.executeUpdate();
+
+		sttm.close();
+	}
+	
+	
+	public void deleteUser(String username) throws SQLException {
+		String sql = "DELETE FROM user WHERE username = ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setString(1, username);
+		sttm.executeUpdate();
+		sttm.close();
 	}
 }

@@ -25,13 +25,11 @@ import b.ParkingCardB;
 public class WorkFrame extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
-	private JButton btnEdit;
-	private JButton btnDelete;
-	private JButton btnAdd;
 	private JButton btncheckIn, btncheckOut;
 	private JButton btnParking, btnParking_Card, btnInfor;
 	private DefaultTableModel model;
 	private JMenu mnuser, mnparking, mnparkingcard, mninfor;
+	private JMenuItem addParking, editParking, deleteParking;
 	private UserB user;
 	private ParkingB parking;
 	private ParkingCardB parkingcard;
@@ -120,6 +118,21 @@ public class WorkFrame extends JFrame {
 		JMenuItem displayParking = new JMenuItem("Display Parkings");
 		mnparking.add(displayParking);
 
+		addParking = new JMenuItem("Add Parking");
+		mnparking.add(addParking);
+		
+		addParking.setEnabled(false);
+		
+		editParking = new JMenuItem("Edit Parking");
+		mnparking.add(editParking);
+		
+		editParking.setEnabled(false);
+		
+		deleteParking = new JMenuItem("Delete Parking");
+		mnparking.add(deleteParking);
+		
+		deleteParking.setEnabled(false);
+		
 		JMenuItem displayParkingCard = new JMenuItem("Display Parking Cards");
 		mnparkingcard.add(displayParkingCard);
 
@@ -184,7 +197,54 @@ public class WorkFrame extends JFrame {
 				}
 			}
 		});
+		
+		addUser.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddUserDialog addUserDl = new AddUserDialog(WorkFrame.this);
+				addUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				addUserDl.setVisible(true);
+
+				try {
+					initModelUser();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		editUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SelectUserEditDialog slUserEditDl = new SelectUserEditDialog(WorkFrame.this);
+				slUserEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				slUserEditDl.setVisible(true);
+				try {
+					initModelUser();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		deleteUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DeleteUserDialog delUserDl = new DeleteUserDialog(WorkFrame.this);
+				delUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				delUserDl.setVisible(true);
+	
+
+				try {
+					initModelUser();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		displayParking.addActionListener(new ActionListener() {
 
 			@Override
@@ -228,6 +288,9 @@ public class WorkFrame extends JFrame {
 
 	void enableControl() {
 		mnuser.setEnabled(true);
+		addParking.setEnabled(true);
+		editParking.setEnabled(true);
+		deleteParking.setEnabled(true);
 	}
 
 }
