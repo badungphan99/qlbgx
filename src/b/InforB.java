@@ -18,7 +18,7 @@ public class InforB {
 	public InforB() {
 		da = new InforDA();
 	}
-	
+	// Hiện thị ra thành một bảng thông tin xe trong bãi
 	public DefaultTableModel getAllInfor() throws SQLException {
 		List <Infor> infors = da.getAll();
 		DefaultTableModel model = new DefaultTableModel();
@@ -55,7 +55,7 @@ public class InforB {
 	public Infor update(Infor infor) {
 		return null;
 	}
-
+    // check in xe khi vào bãi, tạm thời giá đang fix cứng thành một số
 	public Infor checkin(String vehicleType, String licensePlate){
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -73,7 +73,9 @@ public class InforB {
 		}
 		return new Infor();
 	}
-
+    /* Sử dụng card id = -1 để nhận biết lỗi vì card id luôn > 0
+    * Ở đây có 2 lần check một lần để check xem vé xe có tồn tại hay không
+    * lần thứ 2 thì kiểm tra biển số xe và vé có nằng trong cùng một hàng hay không */
 	public String checkOut(int card_id,String licensePlate)throws SQLException{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -85,7 +87,6 @@ public class InforB {
 		}else {
 		    da.insertTimeOut(card_id,time_out);
 		}
-
 		return da.price(card_id);
 
     }

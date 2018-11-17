@@ -14,18 +14,13 @@ import javax.swing.border.EmptyBorder;
 import b.InforB;
 import e.Infor;
 import net.miginfocom.swing.MigLayout;
-
+// phần này để hiện thị ra lỗi khi nhập card id và biển số hoặc là hiển thị giá tiền cần trả
 public class CheckOutDialog extends JDialog{
 		private JPanel contentPane;
-		private JTextField txtcardid, txttype, txtlicenseplate;
+		private JTextField txtcardid, txtlicenseplate;
 		private WorkFrame boss;
 		private JLabel lblMessage;
-		private static CheckInDialog checkIn;
 		private InforB inforB = new InforB();
-
-		public static CheckInDialog getCheckInFrame() {
-			return checkIn;
-		}
 
 		public CheckOutDialog(WorkFrame bossframe) {
 			super(bossframe, "Check Out", true);

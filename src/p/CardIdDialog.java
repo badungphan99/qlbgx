@@ -1,9 +1,7 @@
 package p;
+// class này để hiện thị số vé xe sau khi check in (Gióng như việc in ra vé xe  )
 
-import b.InforB;
-import e.Infor;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
@@ -11,15 +9,6 @@ import java.awt.event.ActionListener;
 
 public class CardIdDialog extends JDialog {
     private JPanel contentPane;
-    private JTextField txtcardid, txttype, txtlicenseplate;
-    private WorkFrame boss;
-    private JLabel lblMessage;
-    private static CheckInDialog checkIn;
-    private InforB inforB = new InforB();
-
-    public static CheckInDialog getCheckInFrame() {
-        return checkIn;
-    }
 
     public CardIdDialog(WorkFrame bossframe,int card_id) {
         super(bossframe, "Check In", true);

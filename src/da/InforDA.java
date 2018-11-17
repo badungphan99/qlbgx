@@ -55,6 +55,8 @@ public class InforDA {
 		
 		return result>0;
 	}
+	//Thêm thông tin về xe gửi vào bảng
+
 	public void insertInfo(String time_in, String vehicle_type, String license_plate, int price, int employee_id, int parking_id){
 		String sql = "INSERT INTO infor (time_in,vehicle_type,license_plate,price,employee_id,parking_id)"+"VALUES(?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
@@ -72,7 +74,7 @@ public class InforDA {
 		}
 
 	}
-
+	// trả lại số thẻ để in ra
 	public Infor getCardId(String license_plate) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();
@@ -88,7 +90,7 @@ public class InforDA {
 		}
 		return new Infor();
 	}
-
+	// kiểm tra tính hợp lệ của vé xe (vé có tồn tại hay không)
 	public Infor checkCardId(int card_id) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();
@@ -104,7 +106,7 @@ public class InforDA {
 		}
 		return new Infor();
 	}
-
+	// kiểm tra xem vé và biển số xe có trùng nhau hay không
 	public Infor checkLicensePlate(int card_id, String licensePlate) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();
@@ -120,7 +122,7 @@ public class InforDA {
 		}
 		return new Infor();
 	}
-
+	// Thêm thời gian check out
 	public void insertTimeOut(int card_id,String time_out) throws SQLException{
 		String sql = "UPDATE infor SET time_out = ? WHERE card_id = ?";
 		Statement sttm = null;
@@ -129,7 +131,7 @@ public class InforDA {
 		((PreparedStatement) sttm).setInt(2,card_id);
 		((PreparedStatement) sttm).executeUpdate();
 	}
-
+	// Tính tiền gửi xe dựa trên thời gian
 	public String price(int card_id) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();

@@ -1,5 +1,5 @@
 package b;
-
+// class này giống như 1 token để lưu trữ thông tin răng có người đang đăng nhập và biết đấy là ai
 import e.User;
 
 public class loginSession{
