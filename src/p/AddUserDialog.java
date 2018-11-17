@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,15 +18,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import b.UserB;
+import b.ParkingB;
 import e.User;
 import net.miginfocom.swing.MigLayout;
 
 public class AddUserDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
-	private JTextField txtUsername, txtEmail, txtFullname, txtRole, txtParkingId;
+	private JTextField txtUsername, txtEmail, txtFullname;
 	private JPasswordField txtPassword;
 	private JLabel lblMessage;
-
+	private JComboBox <String> parkingIdBox, roleBox;
 	public AddUserDialog(WorkFrame parent) {
 		super(parent, "Add User", true);
 		setAlwaysOnTop(true);
@@ -64,22 +68,32 @@ public class AddUserDialog extends JDialog {
 		JLabel lblRole = new JLabel("Role");
 		contentPane.add(lblRole, "cell 0 4,alignx trailing");
 
-		txtRole = new JTextField();
-		contentPane.add(txtRole, "cell 1 4,growx");
+		String [] role = {"Nhân viên", "Chủ"};
+		roleBox = new JComboBox<String>(role);
+		contentPane.add(roleBox, "cell 1 4,growx");
 
 		JLabel lblParkingId = new JLabel("Parking ID");
 		contentPane.add(lblParkingId, "cell 0 5,alignx trailing");
 
-		txtParkingId = new JTextField();
-		contentPane.add(txtParkingId, "cell 1 5,growx");
+		ParkingB parkingB = new ParkingB();
+		String [] parkingId = parkingB.getAllParkingID();
+		parkingIdBox = new JComboBox<String>(parkingId);
+		contentPane.add(parkingIdBox, "cell 1 5,growx");
+	
 
 		JButton btnAddUser = new JButton("Add");
 		btnAddUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UserB userB = new UserB();
-					int role = Integer.parseInt(txtRole.getText());
-					int parkingId = Integer.parseInt(txtParkingId.getText());
+					String roleSelectBox = roleBox.getSelectedItem().toString();
+					int role;
+					if (roleSelectBox.equalsIgnoreCase("Chủ")){
+						role = 0;
+					}else {
+						role = 1;
+					}
+					int parkingId = Integer.parseInt(parkingIdBox.getSelectedItem().toString());
 					if (userB.checkUserExist(txtUsername.getText())) {
 						User user = new User(0, txtUsername.getText(), txtPassword.getText(), txtEmail.getText(), txtFullname.getText(), role, parkingId);
 						userB.AddUser(user);

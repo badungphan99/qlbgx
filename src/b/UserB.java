@@ -79,4 +79,7 @@ public class UserB {
 		}
 	}
 	
+	public String[] getAllUsername() {
+		return da.getAllUsername();
+	}
 }

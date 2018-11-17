@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,9 +17,9 @@ import b.UserB;
 import e.User;
 import net.miginfocom.swing.MigLayout;
 public class DeleteUserDialog  extends JDialog{
-	private final JPanel contentPane = new JPanel();;
-	private JTextField txtUsername;
+	private final JPanel contentPane = new JPanel();
 	private JLabel lblMessage;
+	private JComboBox<String> usernameBox;
 	
 	public DeleteUserDialog(WorkFrame parent) {
 		super(parent, "Delete User", true);
@@ -26,7 +27,7 @@ public class DeleteUserDialog  extends JDialog{
 
 		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
 		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 600, 100);
+		setBounds(100, 100, 600, 200);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -35,34 +36,27 @@ public class DeleteUserDialog  extends JDialog{
 		JLabel lblemployeeID = new JLabel("Username");
 		contentPane.add(lblemployeeID, "cell 0 0,alignx trailing");
 
-		
-		txtUsername = new JTextField();
-		contentPane.add(txtUsername, "cell 1 0,growx");
+		UserB userB = new UserB();
+		String [] usernames = userB.getAllUsername();
+		usernameBox = new JComboBox<String>(usernames);
+		contentPane.add(usernameBox, "cell 1 0,growx");
 
 		JButton btnDeleteUser = new JButton("Delete");
 		btnDeleteUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					UserB userB = new UserB();
-					if (!userB.checkUserExist(txtUsername.getText())) {
-						String username = txtUsername.getText();
-						int n = JOptionPane.showConfirmDialog(DeleteUserDialog.this, "Delete user "  + txtUsername.getText() + " ?", "Confirm delete user", JOptionPane.YES_NO_CANCEL_OPTION);
-						if (n == JOptionPane.YES_OPTION) {
-							userB.DeleteUser(username);
-							DeleteUserDialog.this.dispose();
-						}
-					} else {
-						lblMessage.setForeground(Color.RED);
-						lblMessage.setText("Username is not exist!");
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				UserB userB = new UserB();
+				String username = usernameBox.getSelectedItem().toString();
+				int n = JOptionPane.showConfirmDialog(DeleteUserDialog.this,
+						"Are you sure you want to delete user '" + username + "' ?", "Confirm User Delete",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				if (n == JOptionPane.YES_OPTION) {
+					userB.DeleteUser(username);
+					DeleteUserDialog.this.dispose();
 				}
 			}
 		});
 
-		lblMessage = new JLabel("Please enter username of the user that you want delete!");
+		lblMessage = new JLabel("Please select username of the user that you want to delete!");
 		contentPane.add(lblMessage, "cell 1 1");
 		contentPane.add(btnDeleteUser, "flowx,cell 1 2");
 

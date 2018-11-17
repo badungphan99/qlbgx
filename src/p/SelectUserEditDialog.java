@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,9 +20,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class SelectUserEditDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
-	private JTextField txtUsername;
 	private JLabel lblMessage;
-
+	private JComboBox<String> usernameBox;
 	
 	
 	public SelectUserEditDialog(WorkFrame parent) {
@@ -39,32 +39,23 @@ public class SelectUserEditDialog extends JDialog {
 		JLabel lblUsername = new JLabel("Username");
 		contentPane.add(lblUsername, "cell 0 0,alignx trailing");
 
-		
-		txtUsername = new JTextField();
-		contentPane.add(txtUsername, "cell 1 0,growx");
+		UserB userB = new UserB();
+		String [] usernames = userB.getAllUsername();
+		usernameBox = new JComboBox<String>(usernames);
+		contentPane.add(usernameBox, "cell 1 0,growx");
 		
 		
 		JButton btnSelectUser = new JButton("OK");
 		btnSelectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					UserB userB = new UserB();
-					if (!userB.checkUserExist(txtUsername.getText())) {
-						EditUserDialog editUserDl = new EditUserDialog(parent, txtUsername.getText());
-						editUserDl.setVisible(true);
-						SelectUserEditDialog.this.dispose();
-					} else {
-						lblMessage.setForeground(Color.RED);
-						lblMessage.setText("Username is not exist!");
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				String username = usernameBox.getSelectedItem().toString();
+				EditUserDialog editUserDl = new EditUserDialog(parent, username);
+				editUserDl.setVisible(true);
+				SelectUserEditDialog.this.dispose();
 			}
 		});
 
-		lblMessage = new JLabel("Please enter username of the user that you want to edit!");
+		lblMessage = new JLabel("Please select username of the user that you want to edit!");
 		contentPane.add(lblMessage, "cell 1 2");
 		contentPane.add(btnSelectUser, "flowx,cell 1 3");
 

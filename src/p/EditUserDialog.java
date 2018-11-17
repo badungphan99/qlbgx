@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,15 +17,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import b.ParkingB;
 import b.UserB;
 import e.User;
 import net.miginfocom.swing.MigLayout;
 
 public class EditUserDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
-	private JTextField txtEmail, txtFullname, txtRole, txtParkingId;
+	private JTextField txtEmail, txtFullname;
 	private JLabel lblMessage;
-
+	private JComboBox <String> parkingIdBox, roleBox;
 	public EditUserDialog(WorkFrame parent, String usernameEdit) {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
@@ -52,21 +54,30 @@ public class EditUserDialog extends JDialog {
 		JLabel lblRole = new JLabel("Role");
 		contentPane.add(lblRole, "cell 0 2,alignx trailing");
 
-		txtRole = new JTextField();
-		contentPane.add(txtRole, "cell 1 2,growx");
+		String [] role = {"Nhân viên", "Chủ"};
+		roleBox = new JComboBox<String>(role);
+		contentPane.add(roleBox, "cell 1 2,growx");
 
 		JLabel lblParkingId = new JLabel("Parking ID");
 		contentPane.add(lblParkingId, "cell 0 3,alignx trailing");
 
-		txtParkingId = new JTextField();
-		contentPane.add(txtParkingId, "cell 1 3,growx");
+		ParkingB parkingB = new ParkingB();
+		String [] parkingId = parkingB.getAllParkingID();
+		parkingIdBox = new JComboBox<String>(parkingId);
+		contentPane.add(parkingIdBox, "cell 1 3,growx");
 
 		JButton btnAddUser = new JButton("Add");
 		btnAddUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserB userB = new UserB();
-				int role = Integer.parseInt(txtRole.getText());
-				int parkingId = Integer.parseInt(txtParkingId.getText());
+				String roleSelectBox = roleBox.getSelectedItem().toString();
+				int role;
+				if (roleSelectBox.equalsIgnoreCase("Chủ")){
+					role = 0;
+				}else {
+					role = 1;
+				}
+				int parkingId = Integer.parseInt((parkingIdBox.getSelectedItem().toString()));
 
 				User user = new User(0, usernameEdit, "", txtEmail.getText(), txtFullname.getText(), role,
 						parkingId);

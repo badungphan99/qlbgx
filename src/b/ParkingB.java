@@ -42,4 +42,8 @@ public class ParkingB {
 	public Parking update (Parking parking) {
 		return null;
 	}
+	
+	public String [] getAllParkingID(){
+		return da.getAllParkingId();
+	}
 }

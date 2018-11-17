@@ -131,4 +131,31 @@ public class UserDA {
 		sttm.executeUpdate();
 		sttm.close();
 	}
+	
+	public String[] getAllUsername(){
+		List<String> usernames = new ArrayList<String>();
+		String sql = "SELECT username FROM user";
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
+
+			while (rs.next()) {
+				String username = rs.getString("username");
+				usernames.add(username);
+			}
+			sttm.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String []usr = new String [usernames.size()];
+		
+		for (int i = 0; i < usernames.size(); i++) {
+			usr[i] = usernames.get(i);
+		}
+		
+		return usr;
+	}
 }

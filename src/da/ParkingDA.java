@@ -49,4 +49,32 @@ public class ParkingDA {
 		return result>0;
 	}
 
+	
+	public String [] getAllParkingId() {
+		List<String> parkingIDs = new ArrayList<String>();
+		String sql = "SELECT parking_id FROM parking";
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
+			
+			while (rs.next()) {
+				String parkingID = String.valueOf(rs.getInt("parking_id"));
+				parkingIDs.add(parkingID);
+				
+			}
+			sttm.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String [] pkId = new String[parkingIDs.size()];
+		for (int i = 0; i < parkingIDs.size(); i++) {
+			pkId[i] = parkingIDs.get(i);
+		}
+		return pkId;
+	}
+	
+	
 }
