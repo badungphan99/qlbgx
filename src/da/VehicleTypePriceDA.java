@@ -38,6 +38,11 @@ public class VehicleTypePriceDA {
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1,price);
+
+            stmt.setInt(2,parkingPerios);
+            stmt.setInt(3,overdue);
+            stmt.setInt(4,perHour);
+            stmt.setInt(5,perDay);
         } catch (SQLException e) {
             e.printStackTrace();
         }
