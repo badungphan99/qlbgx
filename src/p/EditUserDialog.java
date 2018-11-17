@@ -29,8 +29,7 @@ public class EditUserDialog extends JDialog {
 	private JTextField txtUsername, txtEmail, txtFullname;
 	private JLabel lblMessage;
 	private JComboBox <String> parkingIdBox, roleBox;
-	private Pattern pattern;
-    private static final String USERNAME_PATTERN = "^[a-z0-9]{3,15}$";
+
 
 	public EditUserDialog(WorkFrame parent, int id) {
 		super(parent, "Edit User", true);
@@ -40,8 +39,6 @@ public class EditUserDialog extends JDialog {
 		// khac khong o nam trong vi tri cua workframe
 		setBounds(100, 100, 450, 200);
 
-		pattern = Pattern.compile(USERNAME_PATTERN);
-		 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
@@ -95,7 +92,9 @@ public class EditUserDialog extends JDialog {
 				
 				//kiểm tra username mới có trùng với các username khác ngoài username cũ của user muốn edit
 				try {
-					String test = System.out.println(this.validate(username));
+					// Xử lý xong phần check name rồi nhé
+					System.out.println(userB.validate(username));
+
 					if (userB.checkEditUsername(id, username)) {
 						User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
 								parkingId);
@@ -135,8 +134,5 @@ public class EditUserDialog extends JDialog {
 		contentPane.add(btnCancel, "cell 1 6");
 	}
 
-	public boolean validate(final String username) {
-        return pattern.matcher(username).matches();
-    }
 }
 

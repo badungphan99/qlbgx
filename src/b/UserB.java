@@ -2,6 +2,7 @@ package b;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -81,6 +82,12 @@ public class UserB {
 	
 	public boolean checkEditUsername(int id, String username) throws SQLException {
 		return da.checkEditUsername(id, username);
+	}
+
+
+	// Cái này đẻ kiểm tra tính hợp lệ của username thôi mà
+	public boolean validate(final String username) {
+		return Pattern.compile("^[a-z09]{3,15}$").matcher(username).matches();
 	}
 	
 	

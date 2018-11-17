@@ -29,4 +29,24 @@ public class Runner {
 //		vehicleTypePriceDA.insertVehicleSetting(2,7771,1,5,4,5);
 //	}
 
+
+
+//	public static boolean validate(final String username) {
+//		return Pattern.compile("^[a-z09]{3,15}$").matcher(username).matches();
+//	}
+//
+//	public static void main(String[] args) {
+//		//Scanner scan = new Scanner(System.in);
+//		//String s= scan.next();
+//		//true
+//		//System.out.println(runner.validate(s));
+//
+//		System.out.println(validate("abc "));
+//	}
+
+
+
+
+
+
 }
