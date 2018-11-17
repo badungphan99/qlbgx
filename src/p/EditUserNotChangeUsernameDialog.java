@@ -2,11 +2,9 @@ package p;
 
 import javax.swing.JDialog;
 import java.awt.Color;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,15 +22,12 @@ import b.UserB;
 import e.User;
 import net.miginfocom.swing.MigLayout;
 
-public class EditUserDialog extends JDialog {
+public class EditUserNotChangeUsernameDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
-	private JTextField txtUsername, txtEmail, txtFullname;
+	private JTextField txtEmail, txtFullname;
 	private JLabel lblMessage;
 	private JComboBox <String> parkingIdBox, roleBox;
-	private Pattern pattern;
-    private static final String USERNAME_PATTERN = "^[a-z0-9]{3,15}$";
-
-	public EditUserDialog(WorkFrame parent, int id) {
+	public EditUserNotChangeUsernameDialog(WorkFrame parent, int id, String usernameEdit) {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
@@ -40,44 +35,36 @@ public class EditUserDialog extends JDialog {
 		// khac khong o nam trong vi tri cua workframe
 		setBounds(100, 100, 450, 200);
 
-		pattern = Pattern.compile(USERNAME_PATTERN);
-		 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
-		
-		JLabel lblUsername = new JLabel("Username");
-		contentPane.add(lblUsername, "cell 0 0,alignx trailing");
-		
-		txtUsername = new JTextField();
-		contentPane.add(txtUsername, "cell 1 0,growx");
-		
+
 		JLabel lblEmail = new JLabel("Email");
-		contentPane.add(lblEmail, "cell 0 1,alignx trailing");
+		contentPane.add(lblEmail, "cell 0 0,alignx trailing");
 
 		txtEmail = new JTextField();
-		contentPane.add(txtEmail, "cell 1 1,growx");
+		contentPane.add(txtEmail, "cell 1 0,growx");
 
 		JLabel lblFullname = new JLabel("Fullname");
-		contentPane.add(lblFullname, "cell 0 2,alignx trailing");
+		contentPane.add(lblFullname, "cell 0 1,alignx trailing");
 
 		txtFullname = new JTextField();
-		contentPane.add(txtFullname, "cell 1 2,growx");
+		contentPane.add(txtFullname, "cell 1 1,growx");
 
 		JLabel lblRole = new JLabel("Role");
-		contentPane.add(lblRole, "cell 0 3,alignx trailing");
+		contentPane.add(lblRole, "cell 0 2,alignx trailing");
 
 		String [] role = {"Employee", "Boss"};
 		roleBox = new JComboBox<String>(role);
-		contentPane.add(roleBox, "cell 1 3,growx");
+		contentPane.add(roleBox, "cell 1 2,growx");
 
 		JLabel lblParkingId = new JLabel("Parking ID");
-		contentPane.add(lblParkingId, "cell 0 4,alignx trailing");
+		contentPane.add(lblParkingId, "cell 0 3,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
 		String [] parkingId = parkingB.getAllParkingID();
 		parkingIdBox = new JComboBox<String>(parkingId);
-		contentPane.add(parkingIdBox, "cell 1 4,growx");
+		contentPane.add(parkingIdBox, "cell 1 3,growx");
 
 		JButton btnAddUser = new JButton("Add");
 		btnAddUser.addActionListener(new ActionListener() {
@@ -91,36 +78,19 @@ public class EditUserDialog extends JDialog {
 					role = 1;
 				}
 				int parkingId = Integer.parseInt((parkingIdBox.getSelectedItem().toString()));
-				String username = txtUsername.getText();
+
+				User user = new User(id, usernameEdit, "", txtEmail.getText(), txtFullname.getText(), role,
+						parkingId);
 				
-				//kiểm tra username mới có trùng với các username khác ngoài username cũ của user muốn edit
-				try {
-					String test = System.out.println(this.validate(username));
-					if (userB.checkEditUsername(id, username)) {
-						User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
-								parkingId);
-						
-						userB.EditUser(user);
-						EditUserDialog.this.dispose();
-						JOptionPane.showMessageDialog(parent, "Success!", "Edit User", JOptionPane.INFORMATION_MESSAGE);
-					} else {
-						lblMessage.setForeground(Color.RED);
-						lblMessage.setText("Username is already taken!");
-					}
-				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				userB.EditUser(user);
+				EditUserNotChangeUsernameDialog.this.dispose();
+				JOptionPane.showMessageDialog(parent, "Success!", "Edit User", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 
 		lblMessage = new JLabel("Please enter information related to the user");
-		contentPane.add(lblMessage, "cell 1 5");
-		contentPane.add(btnAddUser, "flowx,cell 1 6");
+		contentPane.add(lblMessage, "cell 1 4");
+		contentPane.add(btnAddUser, "flowx,cell 1 5");
 
 		JButton btnCancel = new JButton("Cancel");
 
@@ -129,14 +99,10 @@ public class EditUserDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				EditUserDialog.this.dispose();
+				EditUserNotChangeUsernameDialog.this.dispose();
 			}
 		});
-		contentPane.add(btnCancel, "cell 1 6");
+		contentPane.add(btnCancel, "cell 1 5");
 	}
 
-	public boolean validate(final String username) {
-        return pattern.matcher(username).matches();
-    }
 }
-

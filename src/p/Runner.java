@@ -19,14 +19,14 @@ import java.util.regex.Pattern;
 import java.util.Scanner;
 
 public class Runner {
-//	public static void main(String[] args) {
-//		FirstFrame firstFrame = new FirstFrame();
-//		firstFrame.setVisible(true);
-//
-//	}
-	public static void main(String[] args) throws Exception{
-		VehicleTypePriceDA vehicleTypePriceDA = new VehicleTypePriceDA();
-		vehicleTypePriceDA.insertBicycleSetting(6,1,6,5,4);
+	public static void main(String[] args) {
+		FirstFrame firstFrame = new FirstFrame();
+		firstFrame.setVisible(true);
+
 	}
+//	public static void main(String[] args) throws Exception{
+//		VehicleTypePriceDA vehicleTypePriceDA = new VehicleTypePriceDA();
+//		vehicleTypePriceDA.insertVehicleSetting(2,7771,1,5,4,5);
+//	}
 
 }

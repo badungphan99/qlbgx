@@ -19,7 +19,7 @@ import net.miginfocom.swing.MigLayout;
 public class DeleteUserDialog  extends JDialog{
 	private final JPanel contentPane = new JPanel();
 	private JLabel lblMessage;
-	private JComboBox<String> usernameBox;
+	private JComboBox<String> employeeIdBox;
 	
 	public DeleteUserDialog(WorkFrame parent) {
 		super(parent, "Delete User", true);
@@ -37,20 +37,21 @@ public class DeleteUserDialog  extends JDialog{
 		contentPane.add(lblemployeeID, "cell 0 0,alignx trailing");
 
 		UserB userB = new UserB();
-		String [] usernames = userB.getAllUsername();
-		usernameBox = new JComboBox<String>(usernames);
-		contentPane.add(usernameBox, "cell 1 0,growx");
+		String [] employeeIds = userB.getAllEmployeeID();
+		employeeIdBox = new JComboBox<String>(employeeIds);
+		contentPane.add(employeeIdBox, "cell 1 0,growx");
 
 		JButton btnDeleteUser = new JButton("Delete");
 		btnDeleteUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserB userB = new UserB();
-				String username = usernameBox.getSelectedItem().toString();
+				String employeeId = employeeIdBox.getSelectedItem().toString();
+				int id = Integer.parseInt(employeeId.trim());
 				int n = JOptionPane.showConfirmDialog(DeleteUserDialog.this,
-						"Are you sure you want to delete user '" + username + "' ?", "Confirm User Delete",
+						"Are you sure you want to delete user '" + employeeId + "' ?", "Confirm User Delete",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				if (n == JOptionPane.YES_OPTION) {
-					userB.DeleteUser(username);
+					userB.DeleteUser(id);
 					DeleteUserDialog.this.dispose();
 				}
 			}

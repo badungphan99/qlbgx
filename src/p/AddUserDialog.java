@@ -68,7 +68,7 @@ public class AddUserDialog extends JDialog {
 		JLabel lblRole = new JLabel("Role");
 		contentPane.add(lblRole, "cell 0 4,alignx trailing");
 
-		String [] role = {"Nhân viên", "Chủ"};
+		String [] role = {"Employee", "Boss"};
 		roleBox = new JComboBox<String>(role);
 		contentPane.add(roleBox, "cell 1 4,growx");
 
@@ -101,7 +101,7 @@ public class AddUserDialog extends JDialog {
 						AddUserDialog.this.dispose();
 					} else {
 						lblMessage.setForeground(Color.RED);
-						lblMessage.setText("Username is already taken");
+						lblMessage.setText("Username is already taken!");
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

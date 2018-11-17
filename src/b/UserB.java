@@ -70,16 +70,29 @@ public class UserB {
 		}
 	}
 	
-	public void DeleteUser(String username) {
+	public void DeleteUser(int id) {
 		try {
-			da.deleteUser(username);
+			da.deleteUser(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	public boolean checkEditUsername(int id, String username) throws SQLException {
+		return da.checkEditUsername(id, username);
+	}
+	
+	
+	//chưa cần dùng đến nhưng đừng xóa đi vì có thể dùng đến
 	public String[] getAllUsername() {
 		return da.getAllUsername();
+	}
+	
+	public String getUsernameBySelectId(int id) {
+		return da.getUsernameBySelectID(id);
+	}
+	public String[] getAllEmployeeID() {
+		return da.getAllEmployeeID();
 	}
 }

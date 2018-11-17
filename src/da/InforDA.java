@@ -43,6 +43,7 @@ public class InforDA {
 			
 			infors.add(infor);
 		}
+		sttm.close();
 
 		return infors;
 	}
@@ -52,7 +53,7 @@ public class InforDA {
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		sttm.setInt(1, id);
 		int result = sttm.executeUpdate();
-		
+		sttm.close();
 		return result>0;
 	}
 	//Thêm thông tin về xe gửi vào bảng
@@ -69,6 +70,7 @@ public class InforDA {
 			stmt.setInt(5,employee_id);
 			stmt.setInt(6,parking_id);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,6 +90,7 @@ public class InforDA {
 				return infor;
 			}
 		}
+		sttm.close();
 		return new Infor();
 	}
 	// kiểm tra tính hợp lệ của vé xe (vé có tồn tại hay không)
@@ -104,6 +107,7 @@ public class InforDA {
 				return infor;
 			}
 		}
+		sttm.close();
 		return new Infor();
 	}
 	// kiểm tra xem vé và biển số xe có trùng nhau hay không
@@ -120,6 +124,7 @@ public class InforDA {
 				return infor;
 			}
 		}
+		sttm.close();
 		return new Infor();
 	}
 	// Thêm thời gian check out
@@ -130,6 +135,7 @@ public class InforDA {
 		((PreparedStatement) sttm).setString(1,time_out);
 		((PreparedStatement) sttm).setInt(2,card_id);
 		((PreparedStatement) sttm).executeUpdate();
+		sttm.close();
 	}
 	// Tính tiền gửi xe dựa trên thời gian
 	public String price(int card_id) throws SQLException{
@@ -154,6 +160,7 @@ public class InforDA {
 
 			}
 		}
+		sttm.close();
 		return "doan xem";
 	}
 }
