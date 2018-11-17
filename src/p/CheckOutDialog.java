@@ -61,12 +61,12 @@ public class CheckOutDialog extends JDialog{
 				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
                     String mess = null;
-                    try {
-                        mess = inforB.checkOut(Integer.parseInt(txtcardid.getText()),txtlicenseplate.getText());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    CheckOutDialog.this.setVisible(false);
+					try {
+						mess = inforB.checkOut(Integer.parseInt(txtcardid.getText()),txtlicenseplate.getText());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					CheckOutDialog.this.setVisible(false);
 					CheckOutMessDialog checkOutMessDialog = new CheckOutMessDialog(bossframe,mess);
 					checkOutMessDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					checkOutMessDialog.setVisible(true);

@@ -5,20 +5,20 @@ import java.time.format.DateTimeFormatter;
 
 public class Infor {
 	private String timein;
-	private String vehicletype, licenseplate;
+	private String licenseplate;
 	private String timeout;
-	private int price;
+	private int price, id_vehicle;
 	private int employeeid, cardid, parkingid;
 	
 	public Infor(){
 		this.cardid = -1;
 	}
 
-	public Infor(int cardid, String timein, String vehicletype, String licenseplate, String timeout, int price,
+	public Infor(int cardid, String timein, int id_vehicle, String licenseplate, String timeout, int price,
 			int employeeid, int parkingid) {
 		super();
 		this.timein = timein;
-		this.vehicletype = vehicletype;
+		this.id_vehicle = id_vehicle;
 		this.licenseplate = licenseplate;
 		this.timeout = timeout;
 		this.price = price;
@@ -38,13 +38,13 @@ public class Infor {
 	}
 
 
-	public String getVehicletype() {
-		return vehicletype;
+	public int getId_vehicle() {
+		return id_vehicle;
 	}
 
 
-	public void setVehicletype(String vehicletype) {
-		this.vehicletype = vehicletype;
+	public void setId_vehicle(int id_vehicle) {
+		this.id_vehicle = id_vehicle;
 	}
 
 
@@ -107,9 +107,4 @@ public class Infor {
 		this.parkingid = parkingid;
 	}
 
-	@Override
-	public String toString() {
-		String s =  timein +" " + vehicletype +" " + licenseplate +" " + timeout +" " + price +" " + employeeid +" " + cardid +" " + parkingid;
-		return s;
-	}
 }

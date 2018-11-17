@@ -37,7 +37,7 @@ public class InforDA {
 		ResultSet rs = sttm.executeQuery(sql);
 
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			
@@ -58,13 +58,13 @@ public class InforDA {
 	}
 	//Thêm thông tin về xe gửi vào bảng
 
-	public void insertInfo(String time_in, String vehicle_type, String license_plate, int price, int employee_id, int parking_id){
-		String sql = "INSERT INTO infor (time_in,vehicle_type,license_plate,price,employee_id,parking_id)"+"VALUES(?,?,?,?,?,?)";
+	public void insertInfo(String time_in, int id_vehicle, String license_plate, int price, int employee_id, int parking_id){
+		String sql = "INSERT INTO infor (time_in,id_vehicle,license_plate,price,employee_id,parking_id)"+"VALUES(?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,time_in);
-			stmt.setString(2,vehicle_type);
+			stmt.setInt(2,id_vehicle);
 			stmt.setString(3,license_plate);
 			stmt.setInt(4,price);
 			stmt.setInt(5,employee_id);
@@ -83,7 +83,7 @@ public class InforDA {
 		ResultSet rs = sttm.executeQuery(sql);
 
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			if(license_plate.equalsIgnoreCase(infor.getLicenseplate())){
@@ -100,7 +100,7 @@ public class InforDA {
 		ResultSet rs = sttm.executeQuery(sql);
 
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			if(card_id == infor.getCardid()){
@@ -117,7 +117,7 @@ public class InforDA {
 		ResultSet rs = sttm.executeQuery(sql);
 
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			if((card_id == infor.getCardid()) && (licensePlate.equalsIgnoreCase(infor.getLicenseplate()))){
@@ -137,14 +137,14 @@ public class InforDA {
 		((PreparedStatement) sttm).executeUpdate();
 		sttm.close();
 	}
-	// Tính tiền gửi xe dựa trên thời gian
-	public String price(int card_id) throws SQLException{
+	// Tính thời gian gửi xe
+	public int[] time(int card_id) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();
 		ResultSet rs = sttm.executeQuery(sql);
-
+		int[] info = new int[2];
 		while (rs.next()) {
-			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getString("vehicle_type"),
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			if(card_id == infor.getCardid()){
@@ -152,8 +152,11 @@ public class InforDA {
 				try {
 					Date time_in = dateFormat.parse(infor.getTimein());
 					Date time_out = dateFormat.parse(infor.getTimeout());
-					long duration = (time_out.getTime() - time_in.getTime()) / (60 * 60 * 1000) % 24;
-					return String.valueOf(duration);
+					int day = time_out.getDate() - time_in.getDate();
+					long duration = day*24 + (time_out.getTime() - time_in.getTime()) / (60 * 60 * 1000) % 24;
+					info[0] = infor.getId_vehicle();
+					info[1] = (int) duration;
+					return info;
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -161,6 +164,6 @@ public class InforDA {
 			}
 		}
 		sttm.close();
-		return "doan xem";
+		return info;
 	}
 }

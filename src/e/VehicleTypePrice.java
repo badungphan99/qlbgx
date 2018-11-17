@@ -2,14 +2,14 @@ package e;
 
 public class VehicleTypePrice {
     private String vehicleType;
-    private int idVehicle, price, parkingPerios, overdue, perHour, perDay;
+    private int idVehicle, price, parkingPerios, mode, perHour, perDay;
 
-    public VehicleTypePrice(String vehicleType, int idVehicle, int price, int parkingPerios, int overdue, int perHour, int perDay) {
+    public VehicleTypePrice(int idVehicle, String vehicleType,  int price, int parkingPerios, int mode, int perHour, int perDay) {
         this.vehicleType = vehicleType;
         this.idVehicle = idVehicle;
         this.price = price;
         this.parkingPerios = parkingPerios;
-        this.overdue = overdue;
+        this.mode = mode;
         this.perHour = perHour;
         this.perDay = perDay;
     }
@@ -46,12 +46,12 @@ public class VehicleTypePrice {
         this.parkingPerios = parkingPerios;
     }
 
-    public int getOverdue() {
-        return overdue;
+    public int getMode() {
+        return mode;
     }
 
-    public void setOverdue(int overDue) {
-        this.overdue = overDue;
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 
     public int getPerHour() {

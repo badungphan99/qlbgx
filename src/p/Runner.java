@@ -26,7 +26,7 @@ public class Runner {
 	}
 //	public static void main(String[] args) throws Exception{
 //		VehicleTypePriceDA vehicleTypePriceDA = new VehicleTypePriceDA();
-//		vehicleTypePriceDA.insertVehicleSetting(2,7771,1,5,4,5);
+//		vehicleTypePriceDA.insertVehicleSetting(1,771,1,1,4,5);
 //	}
 
 
