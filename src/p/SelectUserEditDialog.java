@@ -61,7 +61,7 @@ public class SelectUserEditDialog extends JDialog {
 				// chọn Yes thì mở dialog có phần nhập username, chon No thì mở dialog ko có
 				// phần nhập username và giữ nguyên username tương ứng với id đã chọn
 				if (n == JOptionPane.YES_OPTION) {
-					System.out.println("Từ từ đã t chưa làm xong phần này");
+					
 					EditUserDialog editUserDl = new EditUserDialog(parent, id);
 					editUserDl.setVisible(true);
 				} else {

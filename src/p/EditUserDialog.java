@@ -96,12 +96,21 @@ public class EditUserDialog extends JDialog {
 					System.out.println(userB.validate(username));
 
 					if (userB.checkEditUsername(id, username)) {
-						User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
-								parkingId);
+						if (userB.validate(username)) {
+							User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
+									parkingId);
+							
+							userB.EditUser(user);
+							EditUserDialog.this.dispose();
+							JOptionPane.showMessageDialog(parent, "Success!", "Edit User", JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							lblMessage.setForeground(Color.RED);
+							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
+							lblMessageTwo.setForeground(Color.RED);
+							lblMessageTwo.setText("and don't have non-alphabetical and non - numeric character!");
+				
+						}
 						
-						userB.EditUser(user);
-						EditUserDialog.this.dispose();
-						JOptionPane.showMessageDialog(parent, "Success!", "Edit User", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
