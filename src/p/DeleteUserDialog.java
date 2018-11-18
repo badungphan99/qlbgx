@@ -33,7 +33,7 @@ public class DeleteUserDialog  extends JDialog{
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 
-		JLabel lblemployeeID = new JLabel("Username");
+		JLabel lblemployeeID = new JLabel("ID");
 		contentPane.add(lblemployeeID, "cell 0 0,alignx trailing");
 
 		UserB userB = new UserB();

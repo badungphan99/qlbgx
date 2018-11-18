@@ -27,7 +27,7 @@ import net.miginfocom.swing.MigLayout;
 public class EditUserDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
 	private JTextField txtUsername, txtEmail, txtFullname;
-	private JLabel lblMessage;
+	private JLabel lblMessage, lblMessageTwo;
 	private JComboBox <String> parkingIdBox, roleBox;
 
 
@@ -37,7 +37,7 @@ public class EditUserDialog extends JDialog {
 
 		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
 		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 450, 200);
+		setBounds(100, 100, 550, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -93,7 +93,7 @@ public class EditUserDialog extends JDialog {
 				//kiểm tra username mới có trùng với các username khác ngoài username cũ của user muốn edit
 				try {
 					// Xử lý xong phần check name rồi nhé
-					System.out.println(userB.validate(username));
+		//			System.out.println(userB.validate(username));
 
 					if (userB.checkEditUsername(id, username)) {
 						if (userB.validate(username)) {
@@ -128,7 +128,11 @@ public class EditUserDialog extends JDialog {
 
 		lblMessage = new JLabel("Please enter information related to the user");
 		contentPane.add(lblMessage, "cell 1 5");
-		contentPane.add(btnAddUser, "flowx,cell 1 6");
+		
+		lblMessageTwo = new JLabel("");
+		contentPane.add(lblMessageTwo, "cell 1 6");
+		
+		contentPane.add(btnAddUser, "flowx,cell 1 7");
 
 		JButton btnCancel = new JButton("Cancel");
 
@@ -140,7 +144,7 @@ public class EditUserDialog extends JDialog {
 				EditUserDialog.this.dispose();
 			}
 		});
-		contentPane.add(btnCancel, "cell 1 6");
+		contentPane.add(btnCancel, "cell 1 7");
 	}
 
 }
