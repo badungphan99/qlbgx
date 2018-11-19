@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="miglayout15-swing">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/miglayout15-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mysql-connector-java-5.1.44-bin.jar!/" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>
