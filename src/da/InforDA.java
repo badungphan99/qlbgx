@@ -130,11 +130,11 @@ public class InforDA {
 	// Thêm thời gian check out
 	public void insertTimeOut(int card_id,String time_out) throws SQLException{
 		String sql = "UPDATE infor SET time_out = ? WHERE card_id = ?";
-		Statement sttm = null;
+		PreparedStatement sttm = null;
 		sttm = conn.prepareStatement(sql);
-		((PreparedStatement) sttm).setString(1,time_out);
-		((PreparedStatement) sttm).setInt(2,card_id);
-		((PreparedStatement) sttm).executeUpdate();
+		sttm.setString(1,time_out);
+		sttm.setInt(2,card_id);
+		sttm.executeUpdate();
 		sttm.close();
 	}
 	// Tính thời gian gửi xe

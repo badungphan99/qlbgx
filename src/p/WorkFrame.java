@@ -148,7 +148,7 @@ public class WorkFrame extends JFrame {
 		//label.setSize(1000,300);
 		label.setSize(1000,300);
 		try {
-			BufferedImage image = ImageIO.read(new File("/home/nhathiu/Dev/lthdt_2018_qlbgx/image/baixe3.jpg"));
+			BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
 			ImageIcon icon = new ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
 			label.setIcon(icon);
 		} catch (IOException e) {
