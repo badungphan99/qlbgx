@@ -27,7 +27,8 @@ public class AddUserDialog extends JDialog {
 	private JTextField txtUsername, txtEmail, txtFullname;
 	private JPasswordField txtPassword;
 	private JLabel lblMessage, lblMessageTwo;
-	private JComboBox <String> parkingIdBox, roleBox;
+	private JComboBox<String> parkingIdBox, roleBox;
+
 	public AddUserDialog(WorkFrame parent) {
 		super(parent, "Add User", true);
 		setAlwaysOnTop(true);
@@ -68,7 +69,7 @@ public class AddUserDialog extends JDialog {
 		JLabel lblRole = new JLabel("Role");
 		contentPane.add(lblRole, "cell 0 4,alignx trailing");
 
-		String [] role = {"Employee", "Boss"};
+		String[] role = { "Employee", "Boss" };
 		roleBox = new JComboBox<String>(role);
 		contentPane.add(roleBox, "cell 1 4,growx");
 
@@ -76,10 +77,9 @@ public class AddUserDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 5,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] parkingId = parkingB.getAllParkingID();
+		String[] parkingId = parkingB.getAllParkingID();
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 5,growx");
-	
 
 		JButton btnAddUser = new JButton("Add");
 		btnAddUser.addActionListener(new ActionListener() {
@@ -88,19 +88,21 @@ public class AddUserDialog extends JDialog {
 					UserB userB = new UserB();
 					String roleSelectBox = roleBox.getSelectedItem().toString();
 					int role;
-					if (roleSelectBox.equalsIgnoreCase("Chủ")){
+					if (roleSelectBox.equalsIgnoreCase("Chủ")) {
 						role = 0;
-					}else {
+					} else {
 						role = 1;
 					}
 					int parkingId = Integer.parseInt(parkingIdBox.getSelectedItem().toString());
 					if (userB.checkUserExist(txtUsername.getText())) {
 						if (userB.validate(txtUsername.getText())) {
-						User user = new User(0, txtUsername.getText(), txtPassword.getText(), txtEmail.getText(), txtFullname.getText(), role, parkingId);
-						userB.AddUser(user);
-						AddUserDialog.this.dispose();
-						JOptionPane.showMessageDialog(AddUserDialog.this, "Success!", "Add User", JOptionPane.INFORMATION_MESSAGE);
-						}else {
+							User user = new User(0, txtUsername.getText(), txtPassword.getText(), txtEmail.getText(),
+									txtFullname.getText(), role, parkingId);
+							userB.AddUser(user);
+							AddUserDialog.this.dispose();
+							JOptionPane.showMessageDialog(AddUserDialog.this, "Success!", "Add User",
+									JOptionPane.INFORMATION_MESSAGE);
+						} else {
 							lblMessage.setForeground(Color.RED);
 							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
 							lblMessageTwo.setForeground(Color.RED);
@@ -119,10 +121,10 @@ public class AddUserDialog extends JDialog {
 
 		lblMessage = new JLabel("Please enter information related to the user");
 		contentPane.add(lblMessage, "cell 1 6");
-		
+
 		lblMessageTwo = new JLabel("");
 		contentPane.add(lblMessageTwo, "cell 1 7");
-		
+
 		contentPane.add(btnAddUser, "flowx,cell 1 8");
 		JButton btnCancel = new JButton("Cancel");
 

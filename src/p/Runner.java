@@ -24,29 +24,4 @@ public class  Runner {
 		firstFrame.setVisible(true);
 
 	}
-//	public static void main(String[] args) throws Exception{
-//		VehicleTypePriceDA vehicleTypePriceDA = new VehicleTypePriceDA();
-//		vehicleTypePriceDA.insertVehicleSetting(1,771,1,1,4,5);
-//	}
-
-
-
-//	public static boolean validate(final String username) {
-//		return Pattern.compile("^[a-z09]{3,15}$").matcher(username).matches();
-//	}
-//
-//	public static void main(String[] args) {
-//		//Scanner scan = new Scanner(System.in);
-//		//String s= scan.next();
-//		//true
-//		//System.out.println(runner.validate(s));
-//
-//		System.out.println(validate("abc "));
-//	}
-
-
-
-
-
-
 }

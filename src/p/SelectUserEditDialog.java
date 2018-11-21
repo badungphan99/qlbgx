@@ -25,7 +25,7 @@ public class SelectUserEditDialog extends JDialog {
 	private JLabel lblMessage;
 	private JComboBox<String> employeeIdBox;
 	private JCheckBox changeUsername, notChangeUsername;
-
+	
 	public SelectUserEditDialog(WorkFrame parent) {
 		super(parent, "Selec User Edit", true);
 		// setAlwaysOnTop(true);

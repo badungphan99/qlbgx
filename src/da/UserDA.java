@@ -234,9 +234,10 @@ public class UserDA {
 		return usr;
 	}
 	
+	//không lấy với id = 1 vì đó là tài khoản root ko thể thay đổi thông tin qua giao diện
 	public String[] getAllEmployeeID(){
 		List<String> employeeIds = new ArrayList<String>();
-		String sql = "SELECT employee_id FROM user";
+		String sql = "SELECT employee_id FROM user WHERE employee_id != 1 ORDER BY employee_id ASC";
 		Statement sttm = null;
 		String employee_id = "";
 		try {

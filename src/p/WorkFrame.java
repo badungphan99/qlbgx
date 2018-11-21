@@ -143,7 +143,7 @@ public class WorkFrame extends JFrame {
 		btncheckOut = new JButton("Check Out");
 		panel.add(btncheckOut);
 		jpanel = new JPanel();
-		contentPane.add(jpanel,BorderLayout.CENTER);
+//		contentPane.add(jpanel,BorderLayout.CENTER);
 		label = new JLabel();
 		//label.setSize(1000,300);
 		label.setSize(1000,300);
