@@ -1,15 +1,19 @@
-
 package p;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,43 +30,40 @@ public class WorkFrame extends JFrame {
 	private DefaultTableModel model;
 	private JMenu mnuser, mnparking, mnparkingcard, mninfor;
 	private JMenuItem addParking, editParking, deleteParking;
-	private  JPanel jpanel;
-	private JLabel label;
-
 	private UserB user;
-    private ParkingB parking;
-    private ParkingCardB parkingcard;
-    private InforB infor;
+	private ParkingB parking;
+	private ParkingCardB parkingcard;
+	private InforB infor;
 	private static WorkFrame boss;
 
-   private void initModelUser() throws SQLException {
-        model = user.getAllUser();
-        table.setModel(model);
-    }
+	private void initModelUser() throws SQLException {
+		model = user.getAllUser();
+		table.setModel(model);
+	}
 
-    private void initModelParking() throws SQLException {
-        model = parking.getAllParking();
-        table.setModel(model);
-    }
+	private void initModelParking() throws SQLException {
+		model = parking.getAllParking();
+		table.setModel(model);
+	}
 
-    private void initModelParkingCard() throws SQLException {
-        model = parkingcard.getAllParkingCard();
-        table.setModel(model);
-    }
+	private void initModelParkingCard() throws SQLException {
+		model = parkingcard.getAllParkingCard();
+		table.setModel(model);
+	}
 
-    private void initModelInfor() throws SQLException {
-        model = infor.getAllInfor();
-        table.setModel(model);
-    }
+	private void initModelInfor() throws SQLException {
+		model = infor.getAllInfor();
+		table.setModel(model);
+	}
 
 	public WorkFrame(FirstFrame firstframe) {
-        user = new UserB();
-        parking = new ParkingB();
-        parkingcard = new ParkingCardB();
-        infor = new InforB();
+		user = new UserB();
+		parking = new ParkingB();
+		parkingcard = new ParkingCardB();
+		infor = new InforB();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1024, 768);
+		this.setSize(900, 600);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -89,7 +90,7 @@ public class WorkFrame extends JFrame {
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-
+		
 		mnuser = new JMenu("User");
 		mnparking = new JMenu("Parking");
 		mnparkingcard = new JMenu("Parking Card");
@@ -119,42 +120,31 @@ public class WorkFrame extends JFrame {
 
 		addParking = new JMenuItem("Add Parking");
 		mnparking.add(addParking);
-
+		
 		addParking.setEnabled(false);
-
+		
 		editParking = new JMenuItem("Edit Parking");
 		mnparking.add(editParking);
-
+		
 		editParking.setEnabled(false);
-
+		
 		deleteParking = new JMenuItem("Delete Parking");
 		mnparking.add(deleteParking);
-
+		
 		deleteParking.setEnabled(false);
-
+		
 		JMenuItem displayParkingCard = new JMenuItem("Display Parking Cards");
 		mnparkingcard.add(displayParkingCard);
 
 		JMenuItem displayInfor = new JMenuItem("Display Infors");
 		mninfor.add(displayInfor);
+
 		btncheckIn = new JButton("Check In");
 		panel.add(btncheckIn);
 
 		btncheckOut = new JButton("Check Out");
 		panel.add(btncheckOut);
-		jpanel = new JPanel();
-		contentPane.add(jpanel,BorderLayout.CENTER);
-		label = new JLabel();
-		//label.setSize(1000,300);
-		label.setSize(1000,300);
-		try {
-			BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
-			ImageIcon icon = new ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
-			label.setIcon(icon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		jpanel.add(label);
+
 		btncheckIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -207,7 +197,7 @@ public class WorkFrame extends JFrame {
 				}
 			}
 		});
-
+		
 		addUser.addActionListener(new ActionListener() {
 
 			@Override
@@ -238,7 +228,7 @@ public class WorkFrame extends JFrame {
 				}
 			}
 		});
-
+		
 		deleteUser.addActionListener(new ActionListener() {
 
 			@Override
@@ -246,7 +236,7 @@ public class WorkFrame extends JFrame {
 				DeleteUserDialog delUserDl = new DeleteUserDialog(WorkFrame.this);
 				delUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				delUserDl.setVisible(true);
-
+	
 
 				try {
 					initModelUser();
@@ -295,8 +285,6 @@ public class WorkFrame extends JFrame {
 		});
 
 	}
-
-
 
 	void enableControl() {
 		mnuser.setEnabled(true);
