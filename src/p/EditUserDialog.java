@@ -107,10 +107,8 @@ public class EditUserDialog extends JDialog {
 							lblMessage.setForeground(Color.RED);
 							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
 							lblMessageTwo.setForeground(Color.RED);
-							lblMessageTwo.setText("and don't have non-alphabetical and non - numeric character!");
-				
+							lblMessageTwo.setText("and mustn't have non-alphanumeric character!");
 						}
-						
 					} else {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");

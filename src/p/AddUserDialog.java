@@ -26,7 +26,7 @@ public class AddUserDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
 	private JTextField txtUsername, txtEmail, txtFullname;
 	private JPasswordField txtPassword;
-	private JLabel lblMessage;
+	private JLabel lblMessage, lblMessageTwo;
 	private JComboBox <String> parkingIdBox, roleBox;
 	public AddUserDialog(WorkFrame parent) {
 		super(parent, "Add User", true);
@@ -34,7 +34,7 @@ public class AddUserDialog extends JDialog {
 
 		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
 		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,10 +95,17 @@ public class AddUserDialog extends JDialog {
 					}
 					int parkingId = Integer.parseInt(parkingIdBox.getSelectedItem().toString());
 					if (userB.checkUserExist(txtUsername.getText())) {
+						if (userB.validate(txtUsername.getText())) {
 						User user = new User(0, txtUsername.getText(), txtPassword.getText(), txtEmail.getText(), txtFullname.getText(), role, parkingId);
 						userB.AddUser(user);
-						JOptionPane.showMessageDialog(AddUserDialog.this, "Success!", "Add User", JOptionPane.INFORMATION_MESSAGE);
 						AddUserDialog.this.dispose();
+						JOptionPane.showMessageDialog(AddUserDialog.this, "Success!", "Add User", JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							lblMessage.setForeground(Color.RED);
+							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
+							lblMessageTwo.setForeground(Color.RED);
+							lblMessageTwo.setText("and mustn't have non-alphanumeric character!");
+						}
 					} else {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
@@ -112,8 +119,11 @@ public class AddUserDialog extends JDialog {
 
 		lblMessage = new JLabel("Please enter information related to the user");
 		contentPane.add(lblMessage, "cell 1 6");
-		contentPane.add(btnAddUser, "flowx,cell 1 7");
-
+		
+		lblMessageTwo = new JLabel("");
+		contentPane.add(lblMessageTwo, "cell 1 7");
+		
+		contentPane.add(btnAddUser, "flowx,cell 1 8");
 		JButton btnCancel = new JButton("Cancel");
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -124,7 +134,7 @@ public class AddUserDialog extends JDialog {
 				AddUserDialog.this.dispose();
 			}
 		});
-		contentPane.add(btnCancel, "cell 1 7");
+		contentPane.add(btnCancel, "cell 1 8");
 	}
 
 }
