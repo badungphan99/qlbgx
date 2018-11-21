@@ -18,7 +18,7 @@ import b.loginSession;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
-public class Runner {
+public class  Runner {
 	public static void main(String[] args) {
 		FirstFrame firstFrame = new FirstFrame();
 		firstFrame.setVisible(true);
