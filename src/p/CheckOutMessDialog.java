@@ -32,6 +32,7 @@ public class CheckOutMessDialog extends JDialog{
 //        contentPane.add(numberOfCard, "cell 1 1,growx");
 
             JLabel card_number = new JLabel(mess);
+
             contentPane.add(card_number, "cell 0 1,alignx trailing");
 
 

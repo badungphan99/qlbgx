@@ -147,14 +147,14 @@ public class WorkFrame extends JFrame {
 		label = new JLabel();
 		//label.setSize(1000,300);
 		label.setSize(1000,300);
-		try {
+		/*try {
 			BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
 			ImageIcon icon = new ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
 			label.setIcon(icon);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		jpanel.add(label);
+		jpanel.add(label);*/
 		btncheckIn.addActionListener(new ActionListener() {
 
 			@Override

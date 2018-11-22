@@ -26,9 +26,9 @@ public class CheckInDialog extends JDialog {
 	private static CheckInDialog checkIn;
 	private InforB inforB = new InforB();
 
-	public static CheckInDialog getCheckInFrame() {
+	/*public static CheckInDialog getCheckInFrame() {
 		return checkIn;
-	}
+	}*/
 
 	public CheckInDialog(WorkFrame bossframe) {
 		super(bossframe, "Check In", true);
