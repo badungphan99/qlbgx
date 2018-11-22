@@ -62,5 +62,17 @@ public class ParkingB {
 		return da.isNotExistParkingName(parkingName);
 	}
 	
+	public String [] getAllParkingIdActive(){
+		return da.getAllParkingIdActive();
+	}
+	
+	public void deactiveParking(int id) {
+		try {
+			da.deactiveParking(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

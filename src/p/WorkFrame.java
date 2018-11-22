@@ -26,7 +26,7 @@ public class WorkFrame extends JFrame {
 	private JButton btnParking, btnParking_Card, btnInfor;
 	private DefaultTableModel model;
 	private JMenu mnuser, mnparking, mnparkingcard, mninfor;
-	private JMenuItem addParking, editParking, deleteParking;
+	private JMenuItem addParking, editParking, deactiveParking;
 	private JPanel jpanel;
 	private JLabel label;
 
@@ -128,10 +128,10 @@ public class WorkFrame extends JFrame {
 
 		editParking.setEnabled(false);
 
-		deleteParking = new JMenuItem("Delete Parking");
-		mnparking.add(deleteParking);
+		deactiveParking = new JMenuItem("Deactive Parking");
+		mnparking.add(deactiveParking);
 
-		deleteParking.setEnabled(false);
+		deactiveParking.setEnabled(false);
 
 		JMenuItem displayParkingCard = new JMenuItem("Display Parking Cards");
 		mnparkingcard.add(displayParkingCard);
@@ -258,6 +258,19 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
+		deactiveParking.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DeactiveParkingDialog deactParkingDl = new DeactiveParkingDialog(WorkFrame.this);
+				deactParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				deactParkingDl.setVisible(true);
+				
+				initModelParking();
+				
+			}
+		});
+		
 		displayParkingCard.addActionListener(new ActionListener() {
 
 			@Override
@@ -290,7 +303,7 @@ public class WorkFrame extends JFrame {
 		mnuser.setEnabled(true);
 		addParking.setEnabled(true);
 		editParking.setEnabled(true);
-		deleteParking.setEnabled(true);
+		deactiveParking.setEnabled(true);
 	}
 
 }

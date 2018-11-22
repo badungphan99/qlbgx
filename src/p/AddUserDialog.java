@@ -77,7 +77,7 @@ public class AddUserDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 5,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String[] parkingId = parkingB.getAllParkingID();
+		String[] parkingId = parkingB.getAllParkingIdActive();
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 5,growx");
 

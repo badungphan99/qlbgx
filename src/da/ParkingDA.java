@@ -51,16 +51,6 @@ public class ParkingDA {
 		return parkings;
 	}
 	
-	public boolean deleteParking(int id) throws SQLException {
-		String sql = "DELETE FROM parking WHERE parking_id = ?";
-		PreparedStatement sttm = conn.prepareStatement(sql);
-		
-		sttm.setInt(1, id);
-		int result = sttm.executeUpdate();
-		return result>0;
-	}
-
-	
 	public String [] getAllParkingId() {
 		List<String> parkingIDs = new ArrayList<String>();
 		String sql = "SELECT parking_id FROM parking";
@@ -114,4 +104,38 @@ public class ParkingDA {
 		sttm.executeUpdate();
 
 	} 
+	
+	public void deactiveParking(int id) throws SQLException {
+		String sql = "UPDATE parking SET active = 0 WHERE parking_id = ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		
+		sttm.setInt(1, id);
+		sttm.executeUpdate();
+		sttm.close();
+	}
+	public String [] getAllParkingIdActive() {
+		List<String> parkingIDs = new ArrayList<String>();
+		String sql = "SELECT parking_id FROM parking WHERE active = true";
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
+			
+			while (rs.next()) {
+				String parkingID = String.valueOf(rs.getInt("parking_id"));
+				parkingIDs.add(parkingID);
+				
+			}
+			sttm.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String [] pkId = new String[parkingIDs.size()];
+		for (int i = 0; i < parkingIDs.size(); i++) {
+			pkId[i] = parkingIDs.get(i);
+		}
+		return pkId;
+	}
 }

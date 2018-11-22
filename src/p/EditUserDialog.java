@@ -72,7 +72,7 @@ public class EditUserDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 4,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] parkingId = parkingB.getAllParkingID();
+		String [] parkingId = parkingB.getAllParkingIdActive();
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 4,growx");
 
