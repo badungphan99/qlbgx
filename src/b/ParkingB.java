@@ -13,15 +13,15 @@ public class ParkingB {
 		da = new ParkingDA();
 	}
 	
-	public DefaultTableModel getAllParking() throws SQLException {
+	public DefaultTableModel getAllParking() {
 		List<Parking> parkings = da.getAll();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Parking_ID");
 		model.addColumn("Parking_name");
 		model.addColumn("Active");
-		model.addColumn("Bicycle Lot");
-		model.addColumn("Motobike Lot");
-		model.addColumn("Car Lot");
+		model.addColumn("Bicycle_Lot");
+		model.addColumn("Motorbike_Lot");
+		model.addColumn("Car_Lot");
 		
 		for (Parking parking : parkings) {
 			String []row = new String[6];
@@ -37,7 +37,14 @@ public class ParkingB {
 		return model;
 	}
 	
-	public Parking add(Parking parking) { return null; }
+	public void addParking(Parking parking) {
+		try {
+			da.insertParking(parking);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public Parking delete(Parking parking) {
 		return null;
@@ -50,4 +57,10 @@ public class ParkingB {
 	public String [] getAllParkingID(){
 		return da.getAllParkingId();
 	}
+	
+	public boolean isNotExistParkingName(String parkingName) throws SQLException {
+		return da.isNotExistParkingName(parkingName);
+	}
+	
+	
 }

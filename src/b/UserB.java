@@ -29,7 +29,7 @@ public class UserB {
 		return da.checkBossUser(username, password);
 	}
 	
-	public DefaultTableModel getAllUser() throws SQLException {
+	public DefaultTableModel getAllUser(){
 		List<User> users = da.getAll();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Employee_id");
@@ -79,7 +79,7 @@ public class UserB {
 			e.printStackTrace();
 		}
 	}
-	//dádsd
+	
 	
 	public boolean checkEditUsername(int id, String username) throws SQLException {
 		return da.checkEditUsername(id, username);
@@ -87,8 +87,8 @@ public class UserB {
 
 
 	// Cái này đẻ kiểm tra tính hợp lệ của username thôi mà
-	public boolean validate(final String username) {
-		return Pattern.compile("^[a-z09]{3,15}$").matcher(username).matches();
+	public boolean isValidate(final String name) {
+		return Pattern.compile("^[a-z09]{3,15}$").matcher(name).matches();
 	}
 	
 	

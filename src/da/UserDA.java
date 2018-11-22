@@ -24,17 +24,24 @@ public class UserDA {
 		}
 	}
 
-	public List<User> getAll() throws SQLException {
+	public List<User> getAll(){
 		List<User> users = new ArrayList<User>();
 		String sql = "SELECT * FROM user";
-		Statement sttm = conn.createStatement();
-		ResultSet rs = sttm.executeQuery(sql);
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
 
-		while (rs.next()) {
-			User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
-					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
-			users.add(user);
+			while (rs.next()) {
+				User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
+						rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return users;
 	}
 	

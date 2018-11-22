@@ -88,14 +88,14 @@ public class AddUserDialog extends JDialog {
 					UserB userB = new UserB();
 					String roleSelectBox = roleBox.getSelectedItem().toString();
 					int role;
-					if (roleSelectBox.equalsIgnoreCase("Chủ")) {
+					if (roleSelectBox.equalsIgnoreCase("Boss")) {
 						role = 0;
 					} else {
 						role = 1;
 					}
 					int parkingId = Integer.parseInt(parkingIdBox.getSelectedItem().toString());
 					if (userB.checkUserExist(txtUsername.getText())) {
-						if (userB.validate(txtUsername.getText())) {
+						if (userB.isValidate(txtUsername.getText())) {
 							User user = new User(0, txtUsername.getText(), txtPassword.getText(), txtEmail.getText(),
 									txtFullname.getText(), role, parkingId);
 							userB.AddUser(user);
@@ -104,7 +104,7 @@ public class AddUserDialog extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							lblMessage.setForeground(Color.RED);
-							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
+							lblMessage.setText("Username is not validate! It must have 3-15 characters ");
 							lblMessageTwo.setForeground(Color.RED);
 							lblMessageTwo.setText("and mustn't have non-alphanumeric character!");
 						}

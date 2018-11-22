@@ -1,5 +1,6 @@
 
 package p;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,40 +27,40 @@ public class WorkFrame extends JFrame {
 	private DefaultTableModel model;
 	private JMenu mnuser, mnparking, mnparkingcard, mninfor;
 	private JMenuItem addParking, editParking, deleteParking;
-	private  JPanel jpanel;
+	private JPanel jpanel;
 	private JLabel label;
 
 	private UserB user;
-    private ParkingB parking;
-    private ParkingCardB parkingcard;
-    private InforB infor;
+	private ParkingB parking;
+	private ParkingCardB parkingcard;
+	private InforB infor;
 	private static WorkFrame boss;
 
-   private void initModelUser() throws SQLException {
-        model = user.getAllUser();
-        table.setModel(model);
-    }
+	private void initModelUser(){
+		model = user.getAllUser();
+		table.setModel(model);
+	}
 
-    private void initModelParking() throws SQLException {
-        model = parking.getAllParking();
-        table.setModel(model);
-    }
+	private void initModelParking(){
+		model = parking.getAllParking();
+		table.setModel(model);
+	}
 
-    private void initModelParkingCard() throws SQLException {
-        model = parkingcard.getAllParkingCard();
-        table.setModel(model);
-    }
+	private void initModelParkingCard() throws SQLException {
+		model = parkingcard.getAllParkingCard();
+		table.setModel(model);
+	}
 
-    private void initModelInfor() throws SQLException {
-        model = infor.getAllInfor();
-        table.setModel(model);
-    }
+	private void initModelInfor() throws SQLException {
+		model = infor.getAllInfor();
+		table.setModel(model);
+	}
 
 	public WorkFrame(FirstFrame firstframe) {
-        user = new UserB();
-        parking = new ParkingB();
-        parkingcard = new ParkingCardB();
-        infor = new InforB();
+		user = new UserB();
+		parking = new ParkingB();
+		parkingcard = new ParkingCardB();
+		infor = new InforB();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1024, 768);
@@ -145,16 +146,15 @@ public class WorkFrame extends JFrame {
 		jpanel = new JPanel();
 //		contentPane.add(jpanel,BorderLayout.CENTER);
 		label = new JLabel();
-		//label.setSize(1000,300);
-		label.setSize(1000,300);
-		/*try {
-			BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
-			ImageIcon icon = new ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
-			label.setIcon(icon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		jpanel.add(label);*/
+		// label.setSize(1000,300);
+		label.setSize(1000, 300);
+		/*
+		 * try { BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
+		 * ImageIcon icon = new
+		 * ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
+		 * label.setIcon(icon); } catch (IOException e) { e.printStackTrace(); }
+		 * jpanel.add(label);
+		 */
 		btncheckIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -198,13 +198,7 @@ public class WorkFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				try {
-					initModelUser();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				initModelUser();
 			}
 		});
 
@@ -215,12 +209,8 @@ public class WorkFrame extends JFrame {
 				AddUserDialog addUserDl = new AddUserDialog(WorkFrame.this);
 				addUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addUserDl.setVisible(true);
-
-				try {
-					initModelUser();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				
+				initModelUser();
 			}
 		});
 
@@ -231,11 +221,8 @@ public class WorkFrame extends JFrame {
 				SelectUserEditDialog slUserEditDl = new SelectUserEditDialog(WorkFrame.this);
 				slUserEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				slUserEditDl.setVisible(true);
-				try {
-					initModelUser();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				
+				initModelUser();
 			}
 		});
 
@@ -246,25 +233,28 @@ public class WorkFrame extends JFrame {
 				DeleteUserDialog delUserDl = new DeleteUserDialog(WorkFrame.this);
 				delUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				delUserDl.setVisible(true);
-
-
-				try {
-					initModelUser();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				
+				initModelUser();
 			}
 		});
+		
 		displayParking.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					initModelParking();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				initModelParking();
+			}
+		});
+
+		addParking.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddParkingDialog addParkingDl = new AddParkingDialog(WorkFrame.this);
+				addParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				addParkingDl.setVisible(true);
+
+				initModelParking();
 			}
 		});
 
@@ -295,8 +285,6 @@ public class WorkFrame extends JFrame {
 		});
 
 	}
-
-
 
 	void enableControl() {
 		mnuser.setEnabled(true);

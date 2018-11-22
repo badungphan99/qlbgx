@@ -1,6 +1,8 @@
 package da;
 
 import e.Parking;
+import e.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,23 +24,30 @@ public class ParkingDA {
 		
 	}
 	
-	public List<Parking> getAll() throws SQLException{
+	public List<Parking> getAll() {
 		List<Parking> parkings = new ArrayList<Parking>();
 		String sql = "SELECT * FROM parking";
-		Statement sttm = conn.createStatement();
-		ResultSet rs = sttm.executeQuery(sql);
-		
-		while (rs.next()) {
-			int id = rs.getInt("parking_id");
-			String name = rs.getString("parking_name");
-			boolean active = rs.getBoolean("active");
-			int bicycleLot = rs.getInt("bicycle_lot");
-			int motobikeLot = rs.getInt("motobike_lot");
-			int carLot = rs.getInt("car_lot");
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
 			
-			Parking parking = new Parking(id, name, active, bicycleLot, motobikeLot, carLot);
-			parkings.add(parking);
+			while (rs.next()) {
+				int id = rs.getInt("parking_id");
+				String name = rs.getString("parking_name");
+				boolean active = rs.getBoolean("active");
+				int bicycleLot = rs.getInt("bicycle_lot");
+				int motobikeLot = rs.getInt("motorbike_lot");
+				int carLot = rs.getInt("car_lot");
+				
+				Parking parking = new Parking(id, name, active, bicycleLot, motobikeLot, carLot);
+				parkings.add(parking);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return parkings;
 	}
 	
@@ -78,5 +87,31 @@ public class ParkingDA {
 		return pkId;
 	}
 	
+	public boolean isNotExistParkingName(String parkingName) throws SQLException {
+		String sql = "SELECT * FROM parking WHERE parking_name = ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setString(1, parkingName);
+
+		ResultSet rs = sttm.executeQuery();
+
+		if (rs.next()) {
+			//đã tồn taị
+			return false;
+		}
+		//chưa tồn tại
+		return true;
+	}
 	
+	public void insertParking(Parking parking) throws SQLException {
+		String sql = "INSERT INTO parking (parking_name, active, bicycle_lot, motorbike_lot, car_lot)"
+				+ "VALUES (?, ?, ?, ?, ?)";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setString(1, parking.getName());
+		sttm.setBoolean(2, parking.isActive());
+		sttm.setInt(3, parking.getBicycleLot());
+		sttm.setInt(4, parking.getMotobikeLot());
+		sttm.setInt(5, parking.getCarLot());
+		sttm.executeUpdate();
+
+	} 
 }
