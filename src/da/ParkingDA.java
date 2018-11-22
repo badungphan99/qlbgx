@@ -31,11 +31,13 @@ public class ParkingDA {
 		while (rs.next()) {
 			int id = rs.getInt("parking_id");
 			String name = rs.getString("parking_name");
-			int slots = rs.getInt("parking_lot");
+			boolean active = rs.getBoolean("active");
+			int bicycleLot = rs.getInt("bicycle_lot");
+			int motobikeLot = rs.getInt("motobike_lot");
+			int carLot = rs.getInt("car_lot");
 			
-			Parking parking = new Parking(id, name, slots);
+			Parking parking = new Parking(id, name, active, bicycleLot, motobikeLot, carLot);
 			parkings.add(parking);
-			
 		}
 		return parkings;
 	}
