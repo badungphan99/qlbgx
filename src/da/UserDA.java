@@ -33,8 +33,15 @@ public class UserDA {
 			ResultSet rs = sttm.executeQuery(sql);
 
 			while (rs.next()) {
-				User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
+				int id = rs.getInt("employee_id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				boolean active = rs.getBoolean("active");
+				String email = rs.getString("email");
+				String fullname = rs.getString("fullname");
+				int role = rs.getInt("role");
+				int parkingId = rs.getInt("parking_id");
+				User user = new User(id, username, password, active, email, fullname, role, parkingId);
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -56,8 +63,15 @@ public class UserDA {
 		ResultSet rs = sttm.executeQuery();
 		
 		if (rs.next()) {
-			User user = new User(rs.getInt("employee_id"), rs.getString("username"), rs.getString("password"),
-					rs.getString("email"), rs.getString("fullname"), rs.getInt("role"), rs.getInt("parking_id"));
+			int id = rs.getInt("employee_id");
+			String name = rs.getString("username");
+			String pass = rs.getString("password");
+			boolean active = rs.getBoolean("active");
+			String email = rs.getString("email");
+			String fullname = rs.getString("fullname");
+			int role = rs.getInt("role");
+			int parkingId = rs.getInt("parking_id");
+			User user = new User(id, name, pass, active, email, fullname, role, parkingId);
 			return user;
 		}
 		User user = new User();

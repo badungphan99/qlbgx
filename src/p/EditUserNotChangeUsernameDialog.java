@@ -79,7 +79,7 @@ public class EditUserNotChangeUsernameDialog extends JDialog {
 				}
 				int parkingId = Integer.parseInt((parkingIdBox.getSelectedItem().toString()));
 
-				User user = new User(id, usernameEdit, "", txtEmail.getText(), txtFullname.getText(), role,
+				User user = new User(id, usernameEdit, "", true, txtEmail.getText(), txtFullname.getText(), role,
 						parkingId);
 				
 				userB.EditUser(user);

@@ -29,7 +29,7 @@ public class ParkingB {
 			row[1] = String.valueOf(parking.getName());
 			row[2] = String.valueOf(parking.isActive());
 			row[3] = String.valueOf(parking.getBicycleLot());
-			row[4] = String.valueOf(parking.getMotobikeLot());
+			row[4] = String.valueOf(parking.getMotorbikeLot());
 			row[5] = String.valueOf(parking.getCarLot());
 
 			model.addRow(row);

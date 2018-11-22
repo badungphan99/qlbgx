@@ -34,19 +34,21 @@ public class UserB {
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Employee_id");
 		model.addColumn("Username");
+		model.addColumn("Active");
 		model.addColumn("Email");
 		model.addColumn("Fullname");
 		model.addColumn("Role");
 		model.addColumn("Parking ID");
 		
 		for (User user : users) {
-			String []row = new String[6];
+			String []row = new String[7];
 			row[0] = String.valueOf(user.getId());
 			row[1] = user.getUsername();
-			row[2] = user.getEmail();
-			row[3] = user.getFullname();
-			row[4] = String.valueOf(user.getRole());
-			row[5] = String.valueOf(user.getParking_id());
+			row[2] = String.valueOf(user.isActive());
+			row[3] = user.getEmail();
+			row[4] = user.getFullname();
+			row[5] = String.valueOf(user.getRole());
+			row[6] = String.valueOf(user.getParking_id());
 			
 			model.addRow(row);
 		}

@@ -25,7 +25,7 @@ public class WorkFrame extends JFrame {
 	private JButton btncheckIn, btncheckOut;
 	private JButton btnParking, btnParking_Card, btnInfor;
 	private DefaultTableModel model;
-	private JMenu mnuser, mnparking, mnparkingcard, mninfor;
+	private JMenu mnUser, mnParking, mnparkingcard, mnInfor, mnDisplay;
 	private JMenuItem addParking, editParking, activeParking, deactiveParking;
 	private JPanel jpanel;
 	private JLabel label;
@@ -36,12 +36,12 @@ public class WorkFrame extends JFrame {
 	private InforB infor;
 	private static WorkFrame boss;
 
-	private void initModelUser(){
+	private void initModelUser() {
 		model = user.getAllUser();
 		table.setModel(model);
 	}
 
-	private void initModelParking(){
+	private void initModelParking() {
 		model = parking.getAllParking();
 		table.setModel(model);
 	}
@@ -91,50 +91,63 @@ public class WorkFrame extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 
-		mnuser = new JMenu("User");
-		mnparking = new JMenu("Parking");
+		mnUser = new JMenu("User");
+		mnParking = new JMenu("Parking");
 		mnparkingcard = new JMenu("Parking Card");
-		mninfor = new JMenu("Infor");
+		mnInfor = new JMenu("Infor");
 
-		menuBar.add(mnuser);
-		menuBar.add(mnparking);
+		menuBar.add(mnUser);
+		menuBar.add(mnParking);
 		menuBar.add(mnparkingcard);
-		menuBar.add(mninfor);
+		menuBar.add(mnInfor);
 
-		mnuser.setEnabled(false);
+		mnUser.setEnabled(false);
 
-		JMenuItem displayUser = new JMenuItem("Display Users");
-		mnuser.add(displayUser);
-
+		mnDisplay = new JMenu("Display");
+		mnUser.add(mnDisplay);
+		mnUser.addSeparator();
+		
+		JMenuItem displayAllUser = new JMenuItem("All");
+		mnDisplay.add(displayAllUser);
+		
+		JMenuItem displayActiveUser = new JMenuItem("Active");
+		mnDisplay.add(displayActiveUser);
+		
+		JMenuItem displayNotActiveUser = new JMenuItem("Not Active");
+		mnDisplay.add(displayNotActiveUser);
+		
 		JMenuItem addUser = new JMenuItem("Add User");
-		mnuser.add(addUser);
+		mnUser.add(addUser);
 
 		JMenuItem editUser = new JMenuItem("Edit User");
-		mnuser.add(editUser);
+		mnUser.add(editUser);
 
 		JMenuItem deleteUser = new JMenuItem("Delete User");
-		mnuser.add(deleteUser);
+		mnUser.add(deleteUser);
 
+		
+		
+		
 		JMenuItem displayParking = new JMenuItem("Display Parkings");
-		mnparking.add(displayParking);
+		mnParking.add(displayParking);
 
 		addParking = new JMenuItem("Add Parking");
-		mnparking.add(addParking);
+		mnParking.add(addParking);
 
 		addParking.setEnabled(false);
 
 		editParking = new JMenuItem("Edit Parking");
-		mnparking.add(editParking);
+		mnParking.add(editParking);
 
 		editParking.setEnabled(false);
 
 		activeParking = new JMenuItem("Active Parking");
-		mnparking.add(activeParking);
-		
+		mnParking.add(activeParking);
+
 		activeParking.setEnabled(false);
-		
+
 		deactiveParking = new JMenuItem("Deactive Parking");
-		mnparking.add(deactiveParking);
+		mnParking.add(deactiveParking);
 
 		deactiveParking.setEnabled(false);
 
@@ -142,7 +155,7 @@ public class WorkFrame extends JFrame {
 		mnparkingcard.add(displayParkingCard);
 
 		JMenuItem displayInfor = new JMenuItem("Display Infors");
-		mninfor.add(displayInfor);
+		mnInfor.add(displayInfor);
 		btncheckIn = new JButton("Check In");
 		panel.add(btncheckIn);
 
@@ -199,7 +212,7 @@ public class WorkFrame extends JFrame {
 
 			}
 		});
-		displayUser.addActionListener(new ActionListener() {
+		displayAllUser.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -214,7 +227,7 @@ public class WorkFrame extends JFrame {
 				AddUserDialog addUserDl = new AddUserDialog(WorkFrame.this);
 				addUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addUserDl.setVisible(true);
-				
+
 				initModelUser();
 			}
 		});
@@ -226,7 +239,7 @@ public class WorkFrame extends JFrame {
 				SelectUserEditDialog slUserEditDl = new SelectUserEditDialog(WorkFrame.this);
 				slUserEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				slUserEditDl.setVisible(true);
-				
+
 				initModelUser();
 			}
 		});
@@ -238,11 +251,11 @@ public class WorkFrame extends JFrame {
 				DeleteUserDialog delUserDl = new DeleteUserDialog(WorkFrame.this);
 				delUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				delUserDl.setVisible(true);
-				
+
 				initModelUser();
 			}
 		});
-		
+
 		displayParking.addActionListener(new ActionListener() {
 
 			@Override
@@ -263,30 +276,30 @@ public class WorkFrame extends JFrame {
 			}
 		});
 		activeParking.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ActiveParkingDialog actParkingDl = new ActiveParkingDialog(WorkFrame.this);
 				actParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				actParkingDl.setVisible(true);
-				
+
 				initModelParking();
-				
+
 			}
 		});
 		deactiveParking.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DeactiveParkingDialog deactParkingDl = new DeactiveParkingDialog(WorkFrame.this);
 				deactParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				deactParkingDl.setVisible(true);
-				
+
 				initModelParking();
-				
+
 			}
 		});
-		
+
 		displayParkingCard.addActionListener(new ActionListener() {
 
 			@Override
@@ -316,7 +329,7 @@ public class WorkFrame extends JFrame {
 	}
 
 	void enableControl() {
-		mnuser.setEnabled(true);
+		mnUser.setEnabled(true);
 		addParking.setEnabled(true);
 		editParking.setEnabled(true);
 		activeParking.setEnabled(true);

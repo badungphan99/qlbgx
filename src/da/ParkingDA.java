@@ -37,10 +37,10 @@ public class ParkingDA {
 				String name = rs.getString("parking_name");
 				boolean active = rs.getBoolean("active");
 				int bicycleLot = rs.getInt("bicycle_lot");
-				int motobikeLot = rs.getInt("motorbike_lot");
+				int motorbikeLot = rs.getInt("motorbike_lot");
 				int carLot = rs.getInt("car_lot");
 				
-				Parking parking = new Parking(id, name, active, bicycleLot, motobikeLot, carLot);
+				Parking parking = new Parking(id, name, active, bicycleLot, motorbikeLot, carLot);
 				parkings.add(parking);
 			}
 		} catch (SQLException e) {
@@ -99,7 +99,7 @@ public class ParkingDA {
 		sttm.setString(1, parking.getName());
 		sttm.setBoolean(2, parking.isActive());
 		sttm.setInt(3, parking.getBicycleLot());
-		sttm.setInt(4, parking.getMotobikeLot());
+		sttm.setInt(4, parking.getMotorbikeLot());
 		sttm.setInt(5, parking.getCarLot());
 		sttm.executeUpdate();
 

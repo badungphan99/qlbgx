@@ -97,7 +97,7 @@ public class EditUserDialog extends JDialog {
 
 					if (userB.checkEditUsername(id, username)) {
 						if (userB.isValidate(username)) {
-							User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
+							User user = new User(id, username, "", true, txtEmail.getText(), txtFullname.getText(), role,
 									parkingId);
 							
 							userB.EditUser(user);

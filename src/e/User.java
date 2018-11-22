@@ -2,18 +2,21 @@ package e;
 
 public class User {
 	private int id;
-	private String username, password, email, fullname;
+	private String username, password;
+	private boolean active;
+	private String email, fullname;
 	private int role,parking_id;
 
 	public User(){
 		this.role = -1;
 	};
 	
-	public User(int id, String username, String password, String email, String fullname, int role, int parking_id) {
+	public User(int id, String username, String password,boolean active, String email, String fullname, int role, int parking_id) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.active = active;
 		this.email = email;
 		this.fullname = fullname;
 		this.role = role;
@@ -44,6 +47,14 @@ public class User {
 		this.password = password;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
