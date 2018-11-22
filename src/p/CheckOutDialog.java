@@ -26,7 +26,7 @@ public class CheckOutDialog extends JDialog{
 			super(bossframe, "Check Out", true);
 			setAlwaysOnTop(true);
 		
-			this.setSize(600, 200);
+			this.setSize(450, 160);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);

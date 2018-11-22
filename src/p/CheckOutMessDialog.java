@@ -5,6 +5,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,10 +18,12 @@ public class CheckOutMessDialog extends JDialog{
     private InforB inforB = new InforB();
 
     public CheckOutMessDialog(WorkFrame bossframe, String mess) {
-        super(bossframe, "Check In", true);
+        super(bossframe, "CheckIN", true);
         setAlwaysOnTop(true);
-        this.setSize(600, 200);
+        this.setSize(100, 50);
+       // this.setLayout( new BorderLayout(0,0));
         contentPane = new JPanel();
+      //  contentPane.setLayout(new BorderLayout(0,0));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
@@ -31,15 +34,14 @@ public class CheckOutMessDialog extends JDialog{
 //        JLabel numberOfCard = new JLabel(String.valueOf(card_id));
 //        contentPane.add(numberOfCard, "cell 1 1,growx");
 
-            JLabel card_number = new JLabel(mess);
+        JLabel card_number = new JLabel(mess);
 
-            contentPane.add(card_number, "cell 0 1,alignx trailing");
+        contentPane.add(card_number, "cell 0 1,alignx trailing");
 
 
-
+        contentPane.add(card_number);
         JButton btnOk = new JButton("Ok");
-        contentPane.add(btnOk, "flowx,cell 1 4");
-
+        contentPane.add(btnOk, "flowx,cell 1 4", FlowLayout.LEADING);
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

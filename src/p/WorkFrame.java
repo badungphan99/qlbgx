@@ -1,6 +1,6 @@
 
 package p;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -63,6 +63,7 @@ public class WorkFrame extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1024, 768);
+		this.setBackground(Color.blue);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

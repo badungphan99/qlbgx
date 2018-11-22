@@ -1,17 +1,11 @@
 package p;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import b.InforB;
@@ -31,11 +25,11 @@ public class CheckInDialog extends JDialog {
 	}*/
 
 	public CheckInDialog(WorkFrame bossframe) {
-		super(bossframe, "Check In", true);
+		super(bossframe, "CheckIn", true);
 		setAlwaysOnTop(true);
 
 	
-		this.setSize(600, 200);
+		this.setSize(500, 160);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,6 +47,7 @@ public class CheckInDialog extends JDialog {
 		contentPane.add(lbltype, "cell 0 1,alignx trailing");
 		
 		txttype = new JTextField();
+		txttype.getSize(null);
 		contentPane.add(txttype, "cell 1 1,growx");
 		
 		JLabel lbllicense = new JLabel("License Plate");
@@ -76,6 +71,8 @@ public class CheckInDialog extends JDialog {
 				CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
 				cardIdDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				cardIdDialog.setVisible(true);
+				/*JOptionPane.showMessageDialog(CheckInDialog.this, "", "CheckIn",
+						JOptionPane.INFORMATION_MESSAGE);*/
 			}
 		});
 
