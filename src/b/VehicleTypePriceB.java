@@ -30,27 +30,27 @@ public class VehicleTypePriceB {
             case 2:
                 duration = time - info[2];
                 if(duration <= 0){
-                    return "price: " + String.valueOf(info[1]);
+                    return "PRICE: " + String.valueOf(info[1]);
                 }else{
-                    return "price: " + String.valueOf(info[1] + info[3]*duration);
+                    return "PRICE: " + String.valueOf(info[1] + info[3]*duration);
                 }
             case 3:
                 duration = time - info[2];
                 if(duration <=0 ){
-                    return "price: " + String.valueOf(info[1]);
+                    return "PRICE: " + String.valueOf(info[1]);
                 }else {
                     if(duration % 24 == 0){
-                        return "price: " + String.valueOf(info[1] + info[4]*(duration/24 + 1));
+                        return "PRICE: " + String.valueOf(info[1] + info[4]*(duration/24 + 1));
                     }
                 }
             case 4:
                 duration = time - info[2];
                 if (duration <= 0 ){
-                    return "price: " + String.valueOf(info[1]);
+                    return "PRICE: " + String.valueOf(info[1]);
                 }else {
-                    return "price: " + String.valueOf(info[1] + (duration/24)*info[4] + (duration%24)*info[3]);
+                    return "PRICE: " + String.valueOf(info[1] + (duration/24)*info[4] + (duration%24)*info[3]);
                 }
         }
-        return "Lỗi hệ thống";
+        return "ERROR";
     }
 }

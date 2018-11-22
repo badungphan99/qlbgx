@@ -18,16 +18,17 @@ public class CheckOutMessDialog extends JDialog{
     private InforB inforB = new InforB();
 
     public CheckOutMessDialog(WorkFrame bossframe, String mess) {
-        super(bossframe, "CheckIN", true);
+        super(bossframe, "Check Out", true);
         setAlwaysOnTop(true);
-        this.setSize(100, 50);
-       // this.setLayout( new BorderLayout(0,0));
+        this.setSize(170, 130);
+
         contentPane = new JPanel();
-      //  contentPane.setLayout(new BorderLayout(0,0));
+
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
-
+       // contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
+        //System.out.println("ahihi");
+        contentPane.setLayout(new BorderLayout());
 //        JLabel card_number = new JLabel("Card number: ");
 //        contentPane.add(card_number, "cell 0 1,alignx trailing");
 //
@@ -36,12 +37,13 @@ public class CheckOutMessDialog extends JDialog{
 
         JLabel card_number = new JLabel(mess);
 
-        contentPane.add(card_number, "cell 0 1,alignx trailing");
-
+        //contentPane.add(card_number, "cell 2 1,alignx trailing");
+        contentPane.add(card_number,BorderLayout.CENTER);
 
         contentPane.add(card_number);
         JButton btnOk = new JButton("Ok");
-        contentPane.add(btnOk, "flowx,cell 1 4", FlowLayout.LEADING);
+       // contentPane.add(btnOk, "flowx,cell 0 2");
+        contentPane.add(btnOk,BorderLayout.PAGE_END);
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

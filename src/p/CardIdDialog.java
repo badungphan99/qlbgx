@@ -14,7 +14,7 @@ public class CardIdDialog extends JDialog {
     public CardIdDialog(WorkFrame bossframe,int card_id) {
         super(bossframe, "Check In", true);
         setAlwaysOnTop(true);
-        this.setSize(300, 130);
+        this.setSize(170, 130);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
