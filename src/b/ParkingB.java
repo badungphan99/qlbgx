@@ -66,6 +66,10 @@ public class ParkingB {
 		return da.getAllParkingIdActive();
 	}
 	
+	public String [] getAllParkingIdNotActive(){
+		return da.getAllParkingIdNotActive();
+	}
+	
 	public void deactiveParking(int id) {
 		try {
 			da.deactiveParking(id);
@@ -75,4 +79,12 @@ public class ParkingB {
 		}
 	}
 	
+	public void activeParking(int id) {
+		try {
+			da.activeParking(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

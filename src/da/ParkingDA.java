@@ -105,6 +105,14 @@ public class ParkingDA {
 
 	} 
 	
+	public void activeParking(int id) throws SQLException {
+		String sql = "UPDATE parking SET active = 1 WHERE parking_id = ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		
+		sttm.setInt(1, id);
+		sttm.executeUpdate();
+		sttm.close();
+	}
 	public void deactiveParking(int id) throws SQLException {
 		String sql = "UPDATE parking SET active = 0 WHERE parking_id = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
@@ -116,6 +124,32 @@ public class ParkingDA {
 	public String [] getAllParkingIdActive() {
 		List<String> parkingIDs = new ArrayList<String>();
 		String sql = "SELECT parking_id FROM parking WHERE active = true";
+		Statement sttm;
+		try {
+			sttm = conn.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
+			
+			while (rs.next()) {
+				String parkingID = String.valueOf(rs.getInt("parking_id"));
+				parkingIDs.add(parkingID);
+				
+			}
+			sttm.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String [] pkId = new String[parkingIDs.size()];
+		for (int i = 0; i < parkingIDs.size(); i++) {
+			pkId[i] = parkingIDs.get(i);
+		}
+		return pkId;
+	}
+	
+	public String [] getAllParkingIdNotActive() {
+		List<String> parkingIDs = new ArrayList<String>();
+		String sql = "SELECT parking_id FROM parking WHERE active = false";
 		Statement sttm;
 		try {
 			sttm = conn.createStatement();
