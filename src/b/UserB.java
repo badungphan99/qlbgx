@@ -55,6 +55,33 @@ public class UserB {
 		return model;
 	}
 	
+	public DefaultTableModel getAllUserActive(boolean active){
+		List<User> users = da.getAllUserActive(active);
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Employee_id");
+		model.addColumn("Username");
+		model.addColumn("Active");
+		model.addColumn("Email");
+		model.addColumn("Fullname");
+		model.addColumn("Role");
+		model.addColumn("Parking ID");
+		
+		for (User user : users) {
+			String []row = new String[7];
+			row[0] = String.valueOf(user.getId());
+			row[1] = user.getUsername();
+			row[2] = String.valueOf(user.isActive());
+			row[3] = user.getEmail();
+			row[4] = user.getFullname();
+			row[5] = String.valueOf(user.getRole());
+			row[6] = String.valueOf(user.getParking_id());
+			
+			model.addRow(row);
+		}
+		return model;
+	}
+	
+	
 	public void AddUser(User user) {
 		try {
 			da.insertUser(user);
@@ -73,9 +100,9 @@ public class UserB {
 		}
 	}
 	
-	public void DeleteUser(int id) {
+	public void activeUser(int id, boolean active) {
 		try {
-			da.deleteUser(id);
+			da.activeUser(id, active);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,7 +120,6 @@ public class UserB {
 		return Pattern.compile("^[a-z09]{3,15}$").matcher(name).matches();
 	}
 	
-	
 	//chưa cần dùng đến nhưng đừng xóa đi vì có thể dùng đến
 	public String[] getAllUsername() {
 		return da.getAllUsername();
@@ -102,7 +128,7 @@ public class UserB {
 	public String getUsernameBySelectId(int id) {
 		return da.getUsernameBySelectID(id);
 	}
-	public String[] getAllEmployeeID() {
-		return da.getAllEmployeeID();
+	public String[] getAllEmployeeIDActive(boolean active) {
+		return da.getAllEmployeeIDActive(active);
 	}
 }

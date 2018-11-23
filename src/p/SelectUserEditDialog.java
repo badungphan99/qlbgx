@@ -46,7 +46,7 @@ public class SelectUserEditDialog extends JDialog {
 
 		UserB userB = new UserB();
 
-		String[] employeeIds = userB.getAllEmployeeID();
+		String[] employeeIds = userB.getAllEmployeeIDActive(true);
 		employeeIdBox = new JComboBox<String>(employeeIds);
 		contentPane.add(employeeIdBox, "cell 1 1,growx");
 

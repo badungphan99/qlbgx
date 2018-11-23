@@ -58,7 +58,7 @@ public class LoginDialog extends JDialog{
 					String username = txtUsername.getText();
 					String password = txtPassword.getText();
 					User user = userB.checkLogin(username, password);
-					if(user.getRole() != -1){
+					if(user.getRole() != -1 && user.isActive()){
 						loginSession.setUser(user);
 						WorkFrame bossFrame = new WorkFrame(parent);
 						bossFrame.setVisible(true);

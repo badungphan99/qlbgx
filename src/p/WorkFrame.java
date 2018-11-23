@@ -41,6 +41,11 @@ public class WorkFrame extends JFrame {
 		table.setModel(model);
 	}
 
+	private void initModelUserActive(boolean active) {
+		model = user.getAllUserActive(active);
+		table.setModel(model);
+	}
+
 	private void initModelParking() {
 		model = parking.getAllParking();
 		table.setModel(model);
@@ -106,28 +111,28 @@ public class WorkFrame extends JFrame {
 		mnDisplay = new JMenu("Display");
 		mnUser.add(mnDisplay);
 		mnUser.addSeparator();
-		
+
 		JMenuItem displayAllUser = new JMenuItem("All");
 		mnDisplay.add(displayAllUser);
-		
+
 		JMenuItem displayActiveUser = new JMenuItem("Active");
 		mnDisplay.add(displayActiveUser);
-		
+
 		JMenuItem displayNotActiveUser = new JMenuItem("Not Active");
 		mnDisplay.add(displayNotActiveUser);
-		
+
 		JMenuItem addUser = new JMenuItem("Add User");
 		mnUser.add(addUser);
 
 		JMenuItem editUser = new JMenuItem("Edit User");
 		mnUser.add(editUser);
+		
+		JMenuItem activeUser = new JMenuItem("Active User");
+		mnUser.add(activeUser);
+		
+		JMenuItem deactiveUser = new JMenuItem("Deactive User");
+		mnUser.add(deactiveUser);
 
-		JMenuItem deleteUser = new JMenuItem("Delete User");
-		mnUser.add(deleteUser);
-
-		
-		
-		
 		JMenuItem displayParking = new JMenuItem("Display Parkings");
 		mnParking.add(displayParking);
 
@@ -220,6 +225,22 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
+		displayActiveUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initModelUserActive(true);
+			}
+		});
+
+		displayNotActiveUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initModelUserActive(false);
+
+			}
+		});
 		addUser.addActionListener(new ActionListener() {
 
 			@Override
@@ -244,15 +265,26 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
-		deleteUser.addActionListener(new ActionListener() {
+		activeUser.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActiveUserDialog actUserDl = new ActiveUserDialog(WorkFrame.this);
+				actUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				actUserDl.setVisible(true);
+				
+				initModelUserActive(true);
+			}
+		});
+		deactiveUser.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DeleteUserDialog delUserDl = new DeleteUserDialog(WorkFrame.this);
-				delUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				delUserDl.setVisible(true);
+				DeactiveUserDialog deactUserDl = new DeactiveUserDialog(WorkFrame.this);
+				deactUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				deactUserDl.setVisible(true);
 
-				initModelUser();
+				initModelUserActive(false);
 			}
 		});
 
@@ -275,6 +307,7 @@ public class WorkFrame extends JFrame {
 				initModelParking();
 			}
 		});
+
 		activeParking.addActionListener(new ActionListener() {
 
 			@Override
