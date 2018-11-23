@@ -33,9 +33,8 @@ public class AddUserDialog extends JDialog {
 		super(parent, "Add User", true);
 		setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 550, 300);
+		// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
+		setBounds(300, 200, 550, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

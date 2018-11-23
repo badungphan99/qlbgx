@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,9 +30,8 @@ public class AddParkingDialog extends JDialog {
 			super(parent, "Add Parking", true);
 			setAlwaysOnTop(true);
 
-			// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-			// khac khong o nam trong vi tri cua workframe
-			setBounds(100, 100, 600, 300);
+			// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
+			setBounds(300, 200, 600, 300);
 
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -75,8 +73,7 @@ public class AddParkingDialog extends JDialog {
 			JButton btnAddParking = new JButton("Add");
 			btnAddParking.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-						
+					try {	
 						String activeSelectBox = parkingActive.getSelectedItem().toString();
 						boolean active;
 						if (activeSelectBox.equalsIgnoreCase("Yes")) {
@@ -104,7 +101,7 @@ public class AddParkingDialog extends JDialog {
 									lblMessage.setForeground(Color.RED);
 									lblMessage.setText("Bicycle_lot or Motorbike_lot or Car_lot is not validate! It must");
 									lblMessageTwo.setForeground(Color.RED);
-									lblMessageTwo.setText("have 3-15 character and mustn't have non-numeric character.");
+									lblMessageTwo.setText("have 1-15 character and mustn't have non-numeric character.");
 								}
 								
 						} else {

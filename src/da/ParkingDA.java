@@ -59,7 +59,7 @@ public class ParkingDA {
 			sttm = conn.prepareStatement(sql);
 			sttm.setBoolean(1, isactive);
 			ResultSet rs = sttm.executeQuery();
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("parking_id");
 				String name = rs.getString("parking_name");
@@ -79,7 +79,6 @@ public class ParkingDA {
 		return parkings;
 	}
 
-	
 	public String[] getAllParkingId() {
 		List<String> parkingIDs = new ArrayList<String>();
 		String sql = "SELECT parking_id FROM parking";
@@ -106,14 +105,12 @@ public class ParkingDA {
 		return pkId;
 	}
 
-	
 	public boolean isNotExistParkingName(String parkingName) throws SQLException {
 		String sql = "SELECT * FROM parking WHERE parking_name = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		sttm.setString(1, parkingName);
 
 		ResultSet rs = sttm.executeQuery();
-
 		if (rs.next()) {
 			// đã tồn taị
 			return false;
@@ -135,7 +132,8 @@ public class ParkingDA {
 
 	}
 
-	// active là true nghĩa là trả về danh sách những tài parking đang active và ngược
+	// active là true nghĩa là trả về danh sách những tài parking đang active và
+	// ngược
 	// lại nếu active là false
 	public String[] getAllParkingIdActive(boolean active) {
 		List<String> parkingIDs = new ArrayList<String>();
@@ -163,7 +161,7 @@ public class ParkingDA {
 		}
 		return pkId;
 	}
-	
+
 	// active là true nghĩa là active parking đó, ngược lại là deactive parking đó
 	public void activeParking(int id, boolean active) throws SQLException {
 		String sql = "UPDATE parking SET active = ? WHERE parking_id = ?";
@@ -171,6 +169,68 @@ public class ParkingDA {
 		sttm.setBoolean(1, active);
 		sttm.setInt(2, id);
 		sttm.executeUpdate();
+		sttm.close();
+	}
+
+	// kiem tra parking_name dang thay doi co trung voi cac parking_name khac (ko
+	// chua parking_name dang thay doi)
+	public boolean checkEditParkingName(int id, String name) throws SQLException {
+		String sql = "SELECT * FROM parking WHERE parking_id != ?";
+		PreparedStatement sttm = conn.prepareStatement(sql);
+		sttm.setInt(1, id);
+
+		ResultSet rs = sttm.executeQuery();
+		List<String> parkingNames = new ArrayList<String>();
+		// co trung
+		while (rs.next()) {
+			String parkingName = rs.getString("parking_name");
+			parkingNames.add(parkingName);
+		}
+		for (int i = 0; i < parkingNames.size(); i++) {
+			// username ở đây là mới nhập vào khi thay đổi
+			if (parkingNames.get(i).equalsIgnoreCase(name)) {
+				// bị trùng
+				return false;
+			}
+		}
+		// ko bị trùng
+		return true;
+	}
+
+//	// chi tra lai mot parking_name duy nhat vi id la duy nhat
+//	public String getParkingNameBySelectID(int id) {
+//		String sql = "SELECT parking_name FROM parking WHERE parking_id = ?";
+//		PreparedStatement sttm = null;
+//		List<String> parkingNames = new ArrayList<String>();
+//		String parkingName = null;
+//		try {
+//			sttm = conn.prepareStatement(sql);
+//			sttm.setInt(1, id);
+//
+//			ResultSet rs = sttm.executeQuery();
+//			while (rs.next()) {
+//				parkingName = rs.getString("parking_name");
+//				parkingNames.add(parkingName);
+//			}"
+//			sttm.close();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return parkingNames.get(0);
+//	}
+	
+	//chỉ có thể edit được parking đang active
+	public void editParking(Parking parking) throws SQLException {
+		String sqlEdit = "UPDATE parking SET parking_name = ?, bicycle_lot = ?, motorbike_lot = ?, car_lot = ? WHERE parking_id = ?";
+		PreparedStatement sttm = conn.prepareStatement(sqlEdit);
+		sttm.setString(1, parking.getName());
+		sttm.setInt(2, parking.getBicycleLot());
+		sttm.setInt(3, parking.getMotorbikeLot());
+		sttm.setInt(4, parking.getCarLot());
+		sttm.setInt(5, parking.getId());
+		sttm.executeUpdate();
+
 		sttm.close();
 	}
 }

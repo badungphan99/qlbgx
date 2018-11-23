@@ -22,15 +22,14 @@ public class ActiveUserDialog extends JDialog {
 		super(parent, title + " User", true);
 		setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 600, 200);
+		// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
+		setBounds(300, 200, 550, 180);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 
-		JLabel lblemployeeID = new JLabel("ID");
+		JLabel lblemployeeID = new JLabel("Employee ID");
 		contentPane.add(lblemployeeID, "cell 0 0,alignx trailing");
 
 		UserB userB = new UserB();

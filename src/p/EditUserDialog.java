@@ -7,11 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,9 +30,7 @@ public class EditUserDialog extends JDialog {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 550, 300);
+		setBounds(300, 200, 600, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

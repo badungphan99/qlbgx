@@ -22,15 +22,14 @@ public class ActiveParkingDialog extends JDialog {
 			super(parent, title + " Parking", true);
 			setAlwaysOnTop(true);
 
-			// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-			// khac khong o nam trong vi tri cua workframe
-			setBounds(100, 100, 600, 200);
+			// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
+			setBounds(300, 200, 550, 180);
 
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 
-			JLabel lblparkingID = new JLabel("ID");
+			JLabel lblparkingID = new JLabel("Parking ID");
 			contentPane.add(lblparkingID, "cell 0 0,alignx trailing");
 
 			ParkingB parkingB = new ParkingB();

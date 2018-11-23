@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -26,44 +27,34 @@ public class CheckInDialog extends JDialog {
 	private static CheckInDialog checkIn;
 	private InforB inforB = new InforB();
 
-	/*public static CheckInDialog getCheckInFrame() {
-		return checkIn;
-	}*/
+	/*
+	 * public static CheckInDialog getCheckInFrame() { return checkIn; }
+	 */
 
 	public CheckInDialog(WorkFrame bossframe) {
 		super(bossframe, "Check In", true);
 		setAlwaysOnTop(true);
 
-	
-		this.setSize(600, 200);
+		this.setBounds(300, 200, 600, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
-		
-//		JLabel lblcardid = new JLabel("Card ID");
-//		contentPane.add(lblcardid, "cell 0 0,alignx trailing");
-		
-//		txtcardid = new JTextField();
-//		contentPane.add(txtcardid, "cell 1 0,growx");
-		
-//		txtcardid.setColumns(10);
-		
+
 		JLabel lbltype = new JLabel("Vehicle Type");
-		contentPane.add(lbltype, "cell 0 1,alignx trailing");
-		
+		contentPane.add(lbltype, "cell 0 0,alignx trailing");
+
 		txttype = new JTextField();
-		contentPane.add(txttype, "cell 1 1,growx");
-		
+		contentPane.add(txttype, "cell 1 0,growx");
+
 		JLabel lbllicense = new JLabel("License Plate");
-		contentPane.add(lbllicense, "cell 0 2,alignx trailing");
-		
+		contentPane.add(lbllicense, "cell 0 1,alignx trailing");
+
 		txtlicenseplate = new JTextField();
-		contentPane.add(txtlicenseplate, "cell 1 2,growx");
-		
+		contentPane.add(txtlicenseplate, "cell 1 1,growx");
+
 		JButton btnAdd = new JButton("Check In");
-		
-		
+
 		lblMessage = new JLabel("Please enter vehicle type and license plate");
 		contentPane.add(lblMessage, "cell 1 3");
 		contentPane.add(btnAdd, "flowx,cell 1 4");
@@ -71,24 +62,24 @@ public class CheckInDialog extends JDialog {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				Infor infor = inforB.checkin(txttype.getText(),txtlicenseplate.getText());
+				Infor infor = inforB.checkin(txttype.getText(), txtlicenseplate.getText());
 				CheckInDialog.this.setVisible(false);
-				CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
-				cardIdDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				cardIdDialog.setVisible(true);
+				String cardId = String.valueOf(infor.getCardid());
+				JOptionPane.showMessageDialog(bossframe, "Your card ID is " + cardId, "Your Card ID",
+						JOptionPane.INFORMATION_MESSAGE);
+				CheckInDialog.this.dispose();
 			}
 		});
-
 
 		JButton btnCancel = new JButton("Cancel");
 		contentPane.add(btnCancel, "cell 1 4");
 
 		btnCancel.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckInDialog.this.setVisible(false);
-				
+				CheckInDialog.this.dispose();
+
 			}
 		});
 	}

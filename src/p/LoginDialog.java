@@ -31,7 +31,7 @@ public class LoginDialog extends JDialog{
 
 		super(parent, "Login", true);
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(300, 200, 500, 200);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

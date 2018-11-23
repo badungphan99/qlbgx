@@ -70,10 +70,6 @@ public class ParkingB {
 		}
 	}
 	
-	public Parking delete(Parking parking) {
-		return null;
-	}
-	
 	public Parking update (Parking parking) {
 		return null;
 	}
@@ -93,6 +89,19 @@ public class ParkingB {
 	public void activeParking(int id, boolean active) {
 		try {
 			da.activeParking(id, active);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean checkEditParkingName(int id, String name) throws SQLException {
+		return da.checkEditParkingName(id, name);
+	}
+	
+	public void editParking (Parking parking) {
+		try {
+			da.editParking(parking);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

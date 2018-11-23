@@ -22,9 +22,7 @@ public class SelectUserEditDialog extends JDialog {
 		super(parent, "Selec User Edit", true);
 		// setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 520, 200);
+		setBounds(300, 200, 520, 180);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

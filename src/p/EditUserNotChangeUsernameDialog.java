@@ -31,9 +31,7 @@ public class EditUserNotChangeUsernameDialog extends JDialog {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 450, 200);
+		setBounds(300, 300, 450, 200);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

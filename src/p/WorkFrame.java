@@ -229,6 +229,7 @@ public class WorkFrame extends JFrame {
 
 			}
 		});
+		
 		displayAllUser.addActionListener(new ActionListener() {
 
 			@Override
@@ -332,6 +333,18 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
+		editParking.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SelectParkingEditDialog selectPEditDl = new SelectParkingEditDialog(WorkFrame.this);
+				selectPEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				selectPEditDl.setVisible(true);
+				
+				initModelParkingActive(true);
+			}
+		});
+		
 		activeParking.addActionListener(new ActionListener() {
 
 			@Override

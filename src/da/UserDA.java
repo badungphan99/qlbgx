@@ -158,11 +158,9 @@ public class UserDA {
 				// bị trùng
 				return false;
 			}
-
 		}
 		// ko bị trùng
 		return true;
-
 	}
 
 	// chi tra lai mot username duy nhat vi id la duy nhat
@@ -180,14 +178,11 @@ public class UserDA {
 				username = rs.getString("username");
 				usernames.add(username);
 			}
-
 			sttm.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		;
 		return usernames.get(0);
 	}
 
