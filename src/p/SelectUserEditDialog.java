@@ -1,30 +1,22 @@
 package p;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import b.UserB;
-import e.User;
 import net.miginfocom.swing.MigLayout;
 
 public class SelectUserEditDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
 	private JLabel lblMessage;
 	private JComboBox<String> employeeIdBox;
-	private JCheckBox changeUsername, notChangeUsername;
 	
 	public SelectUserEditDialog(WorkFrame parent) {
 		super(parent, "Selec User Edit", true);
@@ -61,7 +53,6 @@ public class SelectUserEditDialog extends JDialog {
 				// chọn Yes thì mở dialog có phần nhập username, chon No thì mở dialog ko có
 				// phần nhập username và giữ nguyên username tương ứng với id đã chọn
 				if (n == JOptionPane.YES_OPTION) {
-					
 					EditUserDialog editUserDl = new EditUserDialog(parent, id);
 					editUserDl.setVisible(true);
 				} else {
@@ -82,7 +73,6 @@ public class SelectUserEditDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				SelectUserEditDialog.this.dispose();
 			}
 		});

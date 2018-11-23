@@ -211,22 +211,24 @@ public class UserDA {
 	}
 
 	public void insertUser(User user) throws SQLException {
-		String sql = "INSERT INTO user (employee_id, username, password, email, fullname, role, parking_id)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO user (employee_id, username, password, active, email, fullname, role, parking_id)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		sttm.setInt(1, user.getId());
 		sttm.setString(2, user.getUsername());
 		sttm.setString(3, user.getPassword());
-		sttm.setString(4, user.getEmail());
-		sttm.setString(5, user.getFullname());
-		sttm.setInt(6, user.getRole());
-		sttm.setInt(7, user.getParking_id());
+		sttm.setBoolean(4, user.isActive());
+		sttm.setString(5, user.getEmail());
+		sttm.setString(6, user.getFullname());
+		sttm.setInt(7, user.getRole());
+		sttm.setInt(8, user.getParking_id());
 
 		sttm.executeUpdate();
 
 	}
 
 	// dù có thay đổi username hay không cũng dùng cái này
+	//chỉ có thể edit được tài khoản đang active
 	public void editUser(User user) throws SQLException {
 		String sqlEdit = "UPDATE user SET  username = ?, email = ?, fullname = ?, role = ?, parking_id = ? WHERE employee_id = ?";
 		PreparedStatement sttm = conn.prepareStatement(sqlEdit);

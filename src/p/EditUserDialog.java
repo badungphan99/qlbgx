@@ -15,10 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import b.ParkingB;
 import b.UserB;
 import e.User;
@@ -29,7 +27,6 @@ public class EditUserDialog extends JDialog {
 	private JTextField txtUsername, txtEmail, txtFullname;
 	private JLabel lblMessage, lblMessageTwo;
 	private JComboBox <String> parkingIdBox, roleBox;
-
 
 	public EditUserDialog(WorkFrame parent, int id) {
 		super(parent, "Edit User", true);
@@ -113,14 +110,9 @@ public class EditUserDialog extends JDialog {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
 					}
-				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 
