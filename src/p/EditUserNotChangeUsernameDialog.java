@@ -62,12 +62,12 @@ public class EditUserNotChangeUsernameDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 3,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] parkingId = parkingB.getAllParkingIdActive();
+		String [] parkingId = parkingB.getAllParkingIdActive(true);
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 3,growx");
 
-		JButton btnAddUser = new JButton("Add");
-		btnAddUser.addActionListener(new ActionListener() {
+		JButton btnEditUser = new JButton("Edit");
+		btnEditUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserB userB = new UserB();
 				String roleSelectBox = roleBox.getSelectedItem().toString();
@@ -90,7 +90,7 @@ public class EditUserNotChangeUsernameDialog extends JDialog {
 
 		lblMessage = new JLabel("Please enter information related to the user");
 		contentPane.add(lblMessage, "cell 1 4");
-		contentPane.add(btnAddUser, "flowx,cell 1 5");
+		contentPane.add(btnEditUser, "flowx,cell 1 5");
 
 		JButton btnCancel = new JButton("Cancel");
 

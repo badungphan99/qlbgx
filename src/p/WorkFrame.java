@@ -1,4 +1,3 @@
-
 package p;
 
 import java.awt.BorderLayout;
@@ -8,12 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import b.UserB;
 import b.InforB;
 import b.ParkingB;
@@ -25,11 +22,11 @@ public class WorkFrame extends JFrame {
 	private JButton btncheckIn, btncheckOut;
 	private JButton btnParking, btnParking_Card, btnInfor;
 	private DefaultTableModel model;
-	private JMenu mnUser, mnParking, mnparkingcard, mnInfor, mnDisplay;
+	private JMenu mnUser, mnParking, mnparkingcard, mnInfor;
+	private JMenu mnDisplayUser, mnDisplayParking;
 	private JMenuItem addParking, editParking, activeParking, deactiveParking;
 	private JPanel jpanel;
 	private JLabel label;
-
 	private UserB user;
 	private ParkingB parking;
 	private ParkingCardB parkingcard;
@@ -48,6 +45,11 @@ public class WorkFrame extends JFrame {
 
 	private void initModelParking() {
 		model = parking.getAllParking();
+		table.setModel(model);
+	}
+
+	private void initModelParkingActive(boolean active) {
+		model = parking.getAllParkingActive(active);
 		table.setModel(model);
 	}
 
@@ -108,34 +110,44 @@ public class WorkFrame extends JFrame {
 
 		mnUser.setEnabled(false);
 
-		mnDisplay = new JMenu("Display");
-		mnUser.add(mnDisplay);
+		mnDisplayUser = new JMenu("Display");
+		mnUser.add(mnDisplayUser);
 		mnUser.addSeparator();
-
+		
 		JMenuItem displayAllUser = new JMenuItem("All");
-		mnDisplay.add(displayAllUser);
+		mnDisplayUser.add(displayAllUser);
 
 		JMenuItem displayActiveUser = new JMenuItem("Active");
-		mnDisplay.add(displayActiveUser);
+		mnDisplayUser.add(displayActiveUser);
 
 		JMenuItem displayNotActiveUser = new JMenuItem("Not Active");
-		mnDisplay.add(displayNotActiveUser);
+		mnDisplayUser.add(displayNotActiveUser);
 
 		JMenuItem addUser = new JMenuItem("Add User");
 		mnUser.add(addUser);
 
 		JMenuItem editUser = new JMenuItem("Edit User");
 		mnUser.add(editUser);
-		
+
 		JMenuItem activeUser = new JMenuItem("Active User");
 		mnUser.add(activeUser);
-		
+
 		JMenuItem deactiveUser = new JMenuItem("Deactive User");
 		mnUser.add(deactiveUser);
 
-		JMenuItem displayParking = new JMenuItem("Display Parkings");
-		mnParking.add(displayParking);
+		mnDisplayParking = new JMenu("Display");
+		mnParking.add(mnDisplayParking);
+		mnParking.addSeparator();
+		
+		JMenuItem displayAllParking = new JMenuItem("All");
+		mnDisplayParking.add(displayAllParking);
 
+		JMenuItem displayActiveParking = new JMenuItem("Active");
+		mnDisplayParking.add(displayActiveParking);
+
+		JMenuItem displayNotActiveParking = new JMenuItem("Not Active");
+		mnDisplayParking.add(displayNotActiveParking);
+		
 		addParking = new JMenuItem("Add Parking");
 		mnParking.add(addParking);
 
@@ -261,41 +273,53 @@ public class WorkFrame extends JFrame {
 				slUserEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				slUserEditDl.setVisible(true);
 
-				initModelUser();
+				initModelUserActive(true);
 			}
 		});
 
 		activeUser.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveUserDialog actUserDl = new ActiveUserDialog(WorkFrame.this);
+				ActiveUserDialog actUserDl = new ActiveUserDialog(WorkFrame.this, "Active", true);
 				actUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				actUserDl.setVisible(true);
-				
+
 				initModelUserActive(true);
 			}
 		});
 		deactiveUser.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DeactiveUserDialog deactUserDl = new DeactiveUserDialog(WorkFrame.this);
-				deactUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				deactUserDl.setVisible(true);
+				ActiveUserDialog actUserDl = new ActiveUserDialog(WorkFrame.this, "Deactive", false);
+				actUserDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				actUserDl.setVisible(true);
 
 				initModelUserActive(false);
 			}
 		});
 
-		displayParking.addActionListener(new ActionListener() {
-
+		displayAllParking.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				initModelParking();
 			}
 		});
 
+		displayActiveParking.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initModelParkingActive(true);
+			}
+		});
+		
+		displayNotActiveParking.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initModelParkingActive(false);
+			}
+		});
+		
 		addParking.addActionListener(new ActionListener() {
 
 			@Override
@@ -312,24 +336,22 @@ public class WorkFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveParkingDialog actParkingDl = new ActiveParkingDialog(WorkFrame.this);
+				ActiveParkingDialog actParkingDl = new ActiveParkingDialog(WorkFrame.this, "Active", true);
 				actParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				actParkingDl.setVisible(true);
 
-				initModelParking();
-
+				initModelParkingActive(true);
 			}
 		});
 		deactiveParking.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DeactiveParkingDialog deactParkingDl = new DeactiveParkingDialog(WorkFrame.this);
-				deactParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				deactParkingDl.setVisible(true);
+				ActiveParkingDialog actParkingDl = new ActiveParkingDialog(WorkFrame.this, "Deactive", false);
+				actParkingDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				actParkingDl.setVisible(true);
 
-				initModelParking();
-
+				initModelParkingActive(false);
 			}
 		});
 
@@ -340,7 +362,6 @@ public class WorkFrame extends JFrame {
 				try {
 					initModelParkingCard();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -353,7 +374,6 @@ public class WorkFrame extends JFrame {
 				try {
 					initModelInfor();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

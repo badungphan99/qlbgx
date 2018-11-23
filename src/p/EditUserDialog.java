@@ -69,12 +69,12 @@ public class EditUserDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 4,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] parkingId = parkingB.getAllParkingIdActive();
+		String [] parkingId = parkingB.getAllParkingIdActive(true);
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 4,growx");
 
-		JButton btnAddUser = new JButton("Add");
-		btnAddUser.addActionListener(new ActionListener() {
+		JButton btnEditUser = new JButton("Edit");
+		btnEditUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserB userB = new UserB();
 				String roleSelectBox = roleBox.getSelectedItem().toString();
@@ -122,7 +122,7 @@ public class EditUserDialog extends JDialog {
 		lblMessageTwo = new JLabel("");
 		contentPane.add(lblMessageTwo, "cell 1 6");
 		
-		contentPane.add(btnAddUser, "flowx,cell 1 7");
+		contentPane.add(btnEditUser, "flowx,cell 1 7");
 
 		JButton btnCancel = new JButton("Cancel");
 
