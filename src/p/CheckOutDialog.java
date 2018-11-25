@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,7 @@ public class CheckOutDialog extends JDialog{
 			super(bossframe, "Check Out", true);
 			setAlwaysOnTop(true);
 		
-			this.setSize(450, 160);
+			this.setBounds(300, 200, 600, 200);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -38,17 +39,13 @@ public class CheckOutDialog extends JDialog{
 			txtcardid = new JTextField();
 			contentPane.add(txtcardid, "cell 1 0,growx");
 			
-			txtcardid.setColumns(10);
-			
 			JLabel lbllicense = new JLabel("License Plate");
 			contentPane.add(lbllicense, "cell 0 1,alignx trailing");
 			
 			txtlicenseplate = new JTextField();
 			contentPane.add(txtlicenseplate, "cell 1 1,growx");
 			
-			
 			JButton btnCheckOut = new JButton("Check Out");
-			
 			
 			lblMessage = new JLabel("Please enter your card_id and license plate");
 			contentPane.add(lblMessage, "cell 1 2");
@@ -67,9 +64,9 @@ public class CheckOutDialog extends JDialog{
 						e.printStackTrace();
 					}
 					CheckOutDialog.this.setVisible(false);
-					CheckOutMessDialog checkOutMessDialog = new CheckOutMessDialog(bossframe,mess);
-					checkOutMessDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					checkOutMessDialog.setVisible(true);
+					JOptionPane.showMessageDialog(bossframe, mess, "Information Check Out",
+							JOptionPane.INFORMATION_MESSAGE);
+					CheckOutDialog.this.dispose();
 				}
 			});
 			
@@ -77,7 +74,7 @@ public class CheckOutDialog extends JDialog{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					CheckOutDialog.this.setVisible(false);
+					CheckOutDialog.this.dispose();
 				}
 			});
 		}

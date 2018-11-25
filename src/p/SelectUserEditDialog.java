@@ -1,38 +1,28 @@
 package p;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import b.UserB;
-import e.User;
 import net.miginfocom.swing.MigLayout;
 
 public class SelectUserEditDialog extends JDialog {
 	private final JPanel contentPane = new JPanel();;
 	private JLabel lblMessage;
 	private JComboBox<String> employeeIdBox;
-	private JCheckBox changeUsername, notChangeUsername;
 	
 	public SelectUserEditDialog(WorkFrame parent) {
 		super(parent, "Selec User Edit", true);
 		// setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 520, 200);
+		setBounds(300, 200, 520, 180);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,7 +36,7 @@ public class SelectUserEditDialog extends JDialog {
 
 		UserB userB = new UserB();
 
-		String[] employeeIds = userB.getAllEmployeeID();
+		String[] employeeIds = userB.getAllEmployeeIDActive(true);
 		employeeIdBox = new JComboBox<String>(employeeIds);
 		contentPane.add(employeeIdBox, "cell 1 1,growx");
 
@@ -61,7 +51,6 @@ public class SelectUserEditDialog extends JDialog {
 				// chọn Yes thì mở dialog có phần nhập username, chon No thì mở dialog ko có
 				// phần nhập username và giữ nguyên username tương ứng với id đã chọn
 				if (n == JOptionPane.YES_OPTION) {
-					
 					EditUserDialog editUserDl = new EditUserDialog(parent, id);
 					editUserDl.setVisible(true);
 				} else {
@@ -82,7 +71,6 @@ public class SelectUserEditDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				SelectUserEditDialog.this.dispose();
 			}
 		});

@@ -4,14 +4,14 @@ public class Parking {
 	private int id;
 	private String name;
 	private boolean active;
-	private int bicycleLot, motobikeLot, carLot;
+	private int bicycleLot, motorbikeLot, carLot;
 
-	public Parking(int id, String name, boolean active, int bicycleLot, int motobikeLot, int carLot) {
+	public Parking(int id, String name, boolean active, int bicycleLot, int motorbikeLot, int carLot) {
 		this.id = id;
 		this.name = name;
 		this.active = active;
 		this.bicycleLot = bicycleLot;
-		this.motobikeLot = motobikeLot;
+		this.motorbikeLot = motorbikeLot;
 		this.carLot = carLot;
 	}
 
@@ -47,12 +47,12 @@ public class Parking {
 		this.bicycleLot = bicycleLot;
 	}
 
-	public int getMotobikeLot() {
-		return motobikeLot;
+	public int getMotorbikeLot() {
+		return motorbikeLot;
 	}
 
-	public void setMotobikeLot(int motobikeLot) {
-		this.motobikeLot = motobikeLot;
+	public void setMotorbikeLot(int motobikeLot) {
+		this.motorbikeLot = motobikeLot;
 	}
 
 	public int getCarLot() {

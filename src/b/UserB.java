@@ -29,29 +29,58 @@ public class UserB {
 		return da.checkBossUser(username, password);
 	}
 	
-	public DefaultTableModel getAllUser() throws SQLException {
+	public DefaultTableModel getAllUser(){
 		List<User> users = da.getAll();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Employee_id");
 		model.addColumn("Username");
+		model.addColumn("Active");
 		model.addColumn("Email");
 		model.addColumn("Fullname");
 		model.addColumn("Role");
 		model.addColumn("Parking ID");
 		
 		for (User user : users) {
-			String []row = new String[6];
+			String []row = new String[7];
 			row[0] = String.valueOf(user.getId());
 			row[1] = user.getUsername();
-			row[2] = user.getEmail();
-			row[3] = user.getFullname();
-			row[4] = String.valueOf(user.getRole());
-			row[5] = String.valueOf(user.getParking_id());
+			row[2] = String.valueOf(user.isActive());
+			row[3] = user.getEmail();
+			row[4] = user.getFullname();
+			row[5] = String.valueOf(user.getRole());
+			row[6] = String.valueOf(user.getParking_id());
 			
 			model.addRow(row);
 		}
 		return model;
 	}
+	
+	public DefaultTableModel getAllUserActive(boolean active){
+		List<User> users = da.getAllUserActive(active);
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Employee_id");
+		model.addColumn("Username");
+		model.addColumn("Active");
+		model.addColumn("Email");
+		model.addColumn("Fullname");
+		model.addColumn("Role");
+		model.addColumn("Parking ID");
+		
+		for (User user : users) {
+			String []row = new String[7];
+			row[0] = String.valueOf(user.getId());
+			row[1] = user.getUsername();
+			row[2] = String.valueOf(user.isActive());
+			row[3] = user.getEmail();
+			row[4] = user.getFullname();
+			row[5] = String.valueOf(user.getRole());
+			row[6] = String.valueOf(user.getParking_id());
+			
+			model.addRow(row);
+		}
+		return model;
+	}
+	
 	
 	public void AddUser(User user) {
 		try {
@@ -71,15 +100,15 @@ public class UserB {
 		}
 	}
 	
-	public void DeleteUser(int id) {
+	public void activeUser(int id, boolean active) {
 		try {
-			da.deleteUser(id);
+			da.activeUser(id, active);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	//dádsd
+	
 	
 	public boolean checkEditUsername(int id, String username) throws SQLException {
 		return da.checkEditUsername(id, username);
@@ -87,10 +116,9 @@ public class UserB {
 
 
 	// Cái này đẻ kiểm tra tính hợp lệ của username thôi mà
-	public boolean validate(final String username) {
-		return Pattern.compile("^[a-z09]{3,15}$").matcher(username).matches();
+	public boolean isValidate(final String name) {
+		return Pattern.compile("^[a-z09]{3,15}$").matcher(name).matches();
 	}
-	
 	
 	//chưa cần dùng đến nhưng đừng xóa đi vì có thể dùng đến
 	public String[] getAllUsername() {
@@ -100,7 +128,7 @@ public class UserB {
 	public String getUsernameBySelectId(int id) {
 		return da.getUsernameBySelectID(id);
 	}
-	public String[] getAllEmployeeID() {
-		return da.getAllEmployeeID();
+	public String[] getAllEmployeeIDActive(boolean active) {
+		return da.getAllEmployeeIDActive(active);
 	}
 }

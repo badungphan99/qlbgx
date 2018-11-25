@@ -7,18 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import b.ParkingB;
 import b.UserB;
 import e.User;
@@ -30,14 +26,11 @@ public class EditUserDialog extends JDialog {
 	private JLabel lblMessage, lblMessageTwo;
 	private JComboBox <String> parkingIdBox, roleBox;
 
-
 	public EditUserDialog(WorkFrame parent, int id) {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
-		// hien vi tri cua dialog so voi workframe, neu bo di thi dialog se o mot vi tri
-		// khac khong o nam trong vi tri cua workframe
-		setBounds(100, 100, 550, 300);
+		setBounds(300, 200, 600, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,12 +65,12 @@ public class EditUserDialog extends JDialog {
 		contentPane.add(lblParkingId, "cell 0 4,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] parkingId = parkingB.getAllParkingID();
+		String [] parkingId = parkingB.getAllParkingIdActive(true);
 		parkingIdBox = new JComboBox<String>(parkingId);
 		contentPane.add(parkingIdBox, "cell 1 4,growx");
 
-		JButton btnAddUser = new JButton("Add");
-		btnAddUser.addActionListener(new ActionListener() {
+		JButton btnEditUser = new JButton("Edit");
+		btnEditUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserB userB = new UserB();
 				String roleSelectBox = roleBox.getSelectedItem().toString();
@@ -96,8 +89,8 @@ public class EditUserDialog extends JDialog {
 		//			System.out.println(userB.validate(username));
 
 					if (userB.checkEditUsername(id, username)) {
-						if (userB.validate(username)) {
-							User user = new User(id, username, "", txtEmail.getText(), txtFullname.getText(), role,
+						if (userB.isValidate(username)) {
+							User user = new User(id, username, "", true, txtEmail.getText(), txtFullname.getText(), role,
 									parkingId);
 							
 							userB.EditUser(user);
@@ -105,7 +98,7 @@ public class EditUserDialog extends JDialog {
 							JOptionPane.showMessageDialog(parent, "Success!", "Edit User", JOptionPane.INFORMATION_MESSAGE);
 						}else {
 							lblMessage.setForeground(Color.RED);
-							lblMessage.setText("Username is not validate! Username must have 3-15 characters ");
+							lblMessage.setText("Username is not validate! It must have 3-15 characters ");
 							lblMessageTwo.setForeground(Color.RED);
 							lblMessageTwo.setText("and mustn't have non-alphanumeric character!");
 						}
@@ -113,14 +106,9 @@ public class EditUserDialog extends JDialog {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
 					}
-				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 
@@ -130,7 +118,7 @@ public class EditUserDialog extends JDialog {
 		lblMessageTwo = new JLabel("");
 		contentPane.add(lblMessageTwo, "cell 1 6");
 		
-		contentPane.add(btnAddUser, "flowx,cell 1 7");
+		contentPane.add(btnEditUser, "flowx,cell 1 7");
 
 		JButton btnCancel = new JButton("Cancel");
 
