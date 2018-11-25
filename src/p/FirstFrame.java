@@ -26,7 +26,7 @@ public class FirstFrame extends JFrame{
         contentPane = new JPanel();
         panel = new JPanel();
         this.setContentPane(contentPane);
-       
+        contentPane.setBackground(Color.decode("#87CEEB"));
         contentPane.setBackground(Color.WHITE);
         nameSystem = new JLabel("HỆ THỐNG QUẢN LÝ BÃI GỬI XE");
         Font font = new Font("Georgia", Font.BOLD, 20);

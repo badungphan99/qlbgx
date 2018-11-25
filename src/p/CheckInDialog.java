@@ -68,9 +68,9 @@ public class CheckInDialog extends JDialog {
 			public void actionPerformed(ActionEvent actionEvent) {
 				Infor infor = inforB.checkin(txttype.getText(),txtlicenseplate.getText());
 				CheckInDialog.this.setVisible(false);
-				CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
+				/*CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
 				cardIdDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				cardIdDialog.setVisible(true);
+				cardIdDialog.setVisible(true);*/
 				/*JOptionPane.showMessageDialog(CheckInDialog.this, "", "CheckIn",
 						JOptionPane.INFORMATION_MESSAGE);*/
 			}

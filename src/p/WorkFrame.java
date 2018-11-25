@@ -1,6 +1,6 @@
 package p;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -15,8 +15,10 @@ import b.UserB;
 import b.InforB;
 import b.ParkingB;
 import b.ParkingCardB;
+import java.awt.Color;
 
 public class WorkFrame extends JFrame {
+	//private static final Object CEEB = ;
 	private JPanel contentPane;
 	private JTable table;
 	private JButton btncheckIn, btncheckOut;
@@ -69,6 +71,7 @@ public class WorkFrame extends JFrame {
 		parkingcard = new ParkingCardB();
 		infor = new InforB();
 
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1024, 768);
 
@@ -88,6 +91,7 @@ public class WorkFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setBackground(Color.decode("#87CEEB"));
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -97,7 +101,7 @@ public class WorkFrame extends JFrame {
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-
+		panel.setBackground(Color.decode("#87CEEB"));
 		mnUser = new JMenu("User");
 		mnParking = new JMenu("Parking");
 		mnparkingcard = new JMenu("Parking Card");
