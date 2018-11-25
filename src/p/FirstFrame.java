@@ -1,5 +1,15 @@
 package p;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +20,7 @@ import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class FirstFrame extends JFrame{
     private JLabel nameSystem;
@@ -37,6 +48,13 @@ public class FirstFrame extends JFrame{
 
         btnLogin = new JButton("Login");
         contentPane.add(btnLogin);
+        try {
+            BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
+            ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+            btnLogin.setIcon(icons);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         btnLogin.addActionListener(new ActionListener() {
 

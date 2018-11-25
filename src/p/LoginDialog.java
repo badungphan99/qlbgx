@@ -3,14 +3,13 @@ package p;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import b.UserB;
@@ -90,6 +89,14 @@ public class LoginDialog extends JDialog{
 				LoginDialog.this.dispose();
 			}
 		});
+		try {
+			BufferedImage image = ImageIO.read(new File("image/icon.jpg"));
+			ImageIcon icon = new ImageIcon(image.getScaledInstance(20,20,image.SCALE_SMOOTH));
+			btnCancel.setIcon(icon);
+			btnLogin.setIcon(icon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		contentPane.add(btnCancel, "cell 1 3");
 	}
 	

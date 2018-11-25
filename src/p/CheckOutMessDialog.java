@@ -3,11 +3,15 @@ package p;
 import b.InforB;
 import net.miginfocom.swing.MigLayout;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CheckOutMessDialog extends JDialog{
     private JPanel contentPane;
@@ -43,6 +47,14 @@ public class CheckOutMessDialog extends JDialog{
         contentPane.add(card_number);
         JButton btnOk = new JButton("Ok");
        // contentPane.add(btnOk, "flowx,cell 0 2");
+        try {
+            BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
+            ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+            btnOk.setIcon(icons);
+            //btncheckOut.setIcon(icons);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         contentPane.add(btnOk,BorderLayout.PAGE_END);
         btnOk.addActionListener(new ActionListener() {
             @Override

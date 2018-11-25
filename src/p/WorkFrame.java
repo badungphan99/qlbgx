@@ -194,6 +194,14 @@ public class WorkFrame extends JFrame {
 		 * label.setIcon(icon); } catch (IOException e) { e.printStackTrace(); }
 		 * jpanel.add(label);
 		 */
+		try {
+			BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
+			ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+			btncheckIn.setIcon(icons);
+			btncheckOut.setIcon(icons);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btncheckIn.addActionListener(new ActionListener() {
 
 			@Override

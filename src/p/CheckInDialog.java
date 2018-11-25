@@ -3,8 +3,12 @@ package p;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -80,6 +84,14 @@ public class CheckInDialog extends JDialog {
 		JButton btnCancel = new JButton("Cancel");
 		contentPane.add(btnCancel, "cell 1 4");
 
+		try {
+			BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
+			ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+			btnAdd.setIcon(icons);
+			btnCancel.setIcon(icons);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override

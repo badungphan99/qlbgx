@@ -2,14 +2,13 @@ package p;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import b.InforB;
@@ -77,5 +76,13 @@ public class CheckOutDialog extends JDialog{
 					CheckOutDialog.this.dispose();
 				}
 			});
+			try {
+				BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
+				ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+				btnCheckOut.setIcon(icons);
+				btnCancel.setIcon(icons);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 }
