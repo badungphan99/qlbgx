@@ -2,14 +2,14 @@ package p;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import javafx.application.Application;
+/*import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
+import javafx.stage.Stage;*/
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
