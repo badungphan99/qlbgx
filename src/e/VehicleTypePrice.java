@@ -2,15 +2,16 @@ package e;
 
 public class VehicleTypePrice {
     private String vehicleType;
-    private int idVehicle, price, timePerios, perHour, perDay;
+    private int idVehicle, price, timePerios, perHour, perDay, mode;
 
-    public VehicleTypePrice(String vehicleType, int idVehicle, int price, int timePerios, int perHour, int perDay) {
+    public VehicleTypePrice(String vehicleType, int idVehicle, int price, int timePerios, int perHour, int perDay, int mode) {
         this.vehicleType = vehicleType;
         this.idVehicle = idVehicle;
         this.price = price;
         this.timePerios = timePerios;
         this.perHour = perHour;
         this.perDay = perDay;
+        this.mode = mode;
     }
 
     public String getVehicleType() {
@@ -59,5 +60,13 @@ public class VehicleTypePrice {
 
     public void setPerDay(int perDay) {
         this.perDay = perDay;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }

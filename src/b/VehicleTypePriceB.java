@@ -24,6 +24,7 @@ public class VehicleTypePriceB {
     public int calcPrice(int id_vehicle, int time) throws Exception {
         int[] info = vehicleTypePriceDA.getinfo(id_vehicle);
         int duration;
+        System.out.print(info[0]);
         switch (info[0]){
             case 1:
                 return info[1];
@@ -52,5 +53,25 @@ public class VehicleTypePriceB {
                 }
         }
         return -1 ;
+    }
+    public void insertVehicleSetting(int idVehicle, int price, int timePerios, int perHour, int perDay){
+        int mode = -1;
+        if((perHour == 0)&&(perDay==0)){
+            mode = 1;
+        }
+        if((perHour != 0)&&(perDay == 0)){
+            mode = 2;
+        }
+        if((perHour == 0)&&(perDay != 0)){
+            mode = 3;
+        }
+        if((perHour != 0)&&(perDay != 0)){
+            mode = 4;
+        }
+        try {
+            vehicleTypePriceDA.insertVehicleSetting(idVehicle,price,timePerios,mode,perHour,perDay);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

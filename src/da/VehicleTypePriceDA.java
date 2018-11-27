@@ -70,17 +70,17 @@ public class VehicleTypePriceDA {
         String sql = "SELECT * FROM vehicle_type_price";
         Statement sttm = conn.createStatement();
         ResultSet rs = sttm.executeQuery(sql);
-//        while (rs.next()) {
-//            VehicleTypePrice vehicleTypePrice = new VehicleTypePrice(rs.getInt("id_vehicle"),rs.getString("vehicle_type"),rs.getInt("price"),
-//                    rs.getInt("parking_perios"),rs.getInt("mode"),rs.getInt("per_hour"),rs.getInt("per_day"));
-//            if(id_vehicle == vehicleTypePrice.getIdVehicle()){
-//                info[0] = vehicleTypePrice.getMode();
-//                info[1] = vehicleTypePrice.getPrice();
-//                info[2] = vehicleTypePrice.getParkingPerios();
-//                info[3] = vehicleTypePrice.getPerHour();
-//                info[4] = vehicleTypePrice.getPerDay();
-//            }
-//        }
+        while (rs.next()) {
+            VehicleTypePrice vehicleTypePrice = new VehicleTypePrice(rs.getString("vehicle_type"), rs.getInt("id_vehicle"),rs.getInt("price"),
+                    rs.getInt("time_period"),rs.getInt("per_hour"),rs.getInt("per_day"),rs.getInt("mode"));
+            if(id_vehicle == vehicleTypePrice.getIdVehicle()){
+                info[0] = vehicleTypePrice.getMode();
+                info[1] = vehicleTypePrice.getPrice();
+                info[2] = vehicleTypePrice.getTimePerios();
+                info[3] = vehicleTypePrice.getPerHour();
+                info[4] = vehicleTypePrice.getPerDay();
+            }
+        }
         return info;
     }
 }

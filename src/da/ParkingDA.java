@@ -256,11 +256,11 @@ public class ParkingDA {
 					update.close();
 					break;
 				case 2:
-					int motobikeLot = rs.getInt("motobike_lot");
+					int motobikeLot = rs.getInt("motorbike_lot");
 					if (motobikeLot == 0){
 						return -1;
 					}
-					sqlUpdate = "UPDATE parking SET motobike_lot = ? WHERE parking_id = ?";
+					sqlUpdate = "UPDATE parking SET motorbike_lot = ? WHERE parking_id = ?";
 					update = conn.prepareStatement(sqlUpdate);
 					update.setInt(1,(motobikeLot-1));
 					update.setInt(2,parking_id);
@@ -307,13 +307,13 @@ public class ParkingDA {
 					update.close();
 					break;
 				case 2:
-					int motobikeLot = rs.getInt("motobike_lot");
-					if (motobikeLot == 0){
+					int motorbikeLot = rs.getInt("motorbike_lot");
+					if (motorbikeLot == 0){
 						return -1;
 					}
-					sqlUpdate = "UPDATE parking SET motobike_lot = ? WHERE parking_id = ?";
+					sqlUpdate = "UPDATE parking SET motorbike_lot = ? WHERE parking_id = ?";
 					update = conn.prepareStatement(sqlUpdate);
-					update.setInt(1,(motobikeLot + 1));
+					update.setInt(1,(motorbikeLot + 1));
 					update.setInt(2,parking_id);
 					update.executeUpdate();
 					update.close();

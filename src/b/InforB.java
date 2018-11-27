@@ -100,6 +100,7 @@ public class InforB {
 		}
 		int[] info = da.time(card_id);
 		int price = vehicleTypePriceB.calcPrice(info[0],info[1]);
+		System.out.print(price);
 		da.updatePrice(price,card_id);
 		parkingDA.checkOutVehicle(da.getVehivleTypeId(card_id),da.getParkingId(card_id));
 		if( price == -1){

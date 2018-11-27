@@ -71,7 +71,10 @@ public class CheckInDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				int code = inforB.checkin(Integer.parseInt(txttype.getText()),txtlicenseplate.getText());
-				System.out.print(code);
+				System.out.println(code);
+				if(code == -1){
+					System.out.print("het cho");
+				}
 				/* code: bình thường sẽ trả về số id cua vé nhưng nếu trả về -1 tức là bãi xe đã hết chỗ
 				* trả về -2 tức là có lỗi lúc insert nhưng không cần quan tâm đâu chỉ bắn ra log lỗi hệ thống thôi
 				* không hiện thị ra cho người dùng*/
