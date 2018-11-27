@@ -58,17 +58,16 @@ public class InforDA {
 	}
 	//Thêm thông tin về xe gửi vào bảng
 
-	public void insertInfo(String time_in, int id_vehicle, String license_plate, int price, int employee_id, int parking_id){
-		String sql = "INSERT INTO infor (time_in,id_vehicle,license_plate,price,employee_id,parking_id)"+"VALUES(?,?,?,?,?,?)";
+	public void insertInfo(String time_in, int id_vehicle, String license_plate, int employee_id, int parking_id){
+		String sql = "INSERT INTO infor (time_in,id_vehicle,license_plate,employee_id,parking_id)"+"VALUES(?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,time_in);
 			stmt.setInt(2,id_vehicle);
 			stmt.setString(3,license_plate);
-			stmt.setInt(4,price);
-			stmt.setInt(5,employee_id);
-			stmt.setInt(6,parking_id);
+			stmt.setInt(4,employee_id);
+			stmt.setInt(5,parking_id);
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -77,7 +76,7 @@ public class InforDA {
 
 	}
 	// trả lại số thẻ để in ra
-	public Infor getCardId(String license_plate) throws SQLException{
+	public int getCardId(String license_plate) throws SQLException{
 		String sql = "SELECT * FROM infor";
 		Statement sttm = conn.createStatement();
 		ResultSet rs = sttm.executeQuery(sql);
@@ -87,11 +86,11 @@ public class InforDA {
 					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
 					rs.getInt("employee_id"), rs.getInt("parking_id"));
 			if(license_plate.equalsIgnoreCase(infor.getLicenseplate())){
-				return infor;
+				return infor.getCardid();
 			}
 		}
 		sttm.close();
-		return new Infor();
+		return -2;
 	}
 	// kiểm tra tính hợp lệ của vé xe (vé có tồn tại hay không)
 	public Infor checkCardId(int card_id) throws SQLException{
@@ -165,5 +164,44 @@ public class InforDA {
 		}
 		sttm.close();
 		return info;
+	}
+	public int getVehivleTypeId (int card_id) throws Exception{
+		String sql = "SELECT * FROM infor WHERE card_id = "+ String.valueOf(card_id);
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+		while (rs.next()){
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if(infor.getCardid() == card_id){
+				return infor.getId_vehicle();
+			}
+		}
+		sttm.close();
+		return -1;
+	}
+	public int getParkingId (int card_id) throws Exception{
+		String sql = "SELECT * FROM infor WHERE card_id = "+ String.valueOf(card_id);
+		Statement sttm = conn.createStatement();
+		ResultSet rs = sttm.executeQuery(sql);
+		while (rs.next()){
+			Infor infor = new Infor(rs.getInt("card_id"), rs.getString("time_in"), rs.getInt("id_vehicle"),
+					rs.getString("license_plate"), rs.getString("time_out"), rs.getInt("price"),
+					rs.getInt("employee_id"), rs.getInt("parking_id"));
+			if(infor.getCardid() == card_id){
+				return infor.getParkingid();
+			}
+		}
+		sttm.close();
+		return -1;
+	}
+	public void updatePrice(int price, int card_id) throws Exception{
+		String sql = "UPDATE infor SET price = ? WHERE card_id = ?";
+		PreparedStatement sttm = null;
+		sttm = conn.prepareStatement(sql);
+		sttm.setInt(1,price);
+		sttm.setInt(2,card_id);
+		sttm.executeUpdate();
+		sttm.close();
 	}
 }

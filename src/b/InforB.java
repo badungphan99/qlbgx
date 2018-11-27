@@ -9,15 +9,19 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import da.InforDA;
+import da.ParkingDA;
 import e.Infor;
+
 
 public class InforB {
 
 	private InforDA da;
 	private VehicleTypePriceB vehicleTypePriceB;
+	private ParkingDA parkingDA;
 	
 	public InforB() {
 		da = new InforDA();
+		parkingDA = new ParkingDA();
 		vehicleTypePriceB = new VehicleTypePriceB();
 	}
 	// Hiện thị ra thành một bảng thông tin xe trong bãi
@@ -58,12 +62,17 @@ public class InforB {
 		return null;
 	}
     // check in xe khi vào bãi, tạm thời giá đang fix cứng thành một số
-	public Infor checkin(String id_vehicle, String licensePlate){
+	public int checkin(int id_vehicle, String licensePlate){
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String time_in = dateFormat.format(date);
+
 		try {
-			da.insertInfo(time_in,Integer.parseInt(id_vehicle),licensePlate,9876,loginSession.getUser().getId(), loginSession.getUser().getParking_id());
+            int errorcode = parkingDA.checkInVehicle(id_vehicle,loginSession.getUser().getParking_id());
+            if(errorcode != 0){
+                return -1;
+            }
+			da.insertInfo(time_in,id_vehicle,licensePlate,loginSession.getUser().getId(), loginSession.getUser().getParking_id());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,7 +82,7 @@ public class InforB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return new Infor();
+		return -2;
 	}
     /* Sử dụng card id = -1 để nhận biết lỗi vì card id luôn > 0
     * Ở đây có 2 lần check một lần để check xem vé xe có tồn tại hay không
@@ -90,8 +99,12 @@ public class InforB {
 		    da.insertTimeOut(card_id,time_out);
 		}
 		int[] info = da.time(card_id);
-		String mess = vehicleTypePriceB.calcPrice(info[0],info[1]);
-		return mess;
-
+		int price = vehicleTypePriceB.calcPrice(info[0],info[1]);
+		da.updatePrice(price,card_id);
+		parkingDA.checkOutVehicle(da.getVehivleTypeId(card_id),da.getParkingId(card_id));
+		if( price == -1){
+			return "Bạn vui lòng thử lại";
+		}
+		return "price: "+ String.valueOf(price);
     }
 }

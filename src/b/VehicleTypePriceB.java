@@ -21,36 +21,36 @@ public class VehicleTypePriceB {
         }
     }
 
-    public String calcPrice(int id_vehicle, int time) throws Exception {
+    public int calcPrice(int id_vehicle, int time) throws Exception {
         int[] info = vehicleTypePriceDA.getinfo(id_vehicle);
         int duration;
         switch (info[0]){
             case 1:
-                return "price: " + String.valueOf(info[1]);
+                return info[1];
             case 2:
                 duration = time - info[2];
                 if(duration <= 0){
-                    return "price: " + String.valueOf(info[1]);
+                    return info[1];
                 }else{
-                    return "price: " + String.valueOf(info[1] + info[3]*duration);
+                    return info[1] + info[3]*duration;
                 }
             case 3:
                 duration = time - info[2];
                 if(duration <=0 ){
-                    return "price: " + String.valueOf(info[1]);
+                    return info[1];
                 }else {
                     if(duration % 24 == 0){
-                        return "price: " + String.valueOf(info[1] + info[4]*(duration/24 + 1));
+                        return info[1] + info[4]*(duration/24 + 1);
                     }
                 }
             case 4:
                 duration = time - info[2];
                 if (duration <= 0 ){
-                    return "price: " + String.valueOf(info[1]);
+                    return info[1];
                 }else {
-                    return "price: " + String.valueOf(info[1] + (duration/24)*info[4] + (duration%24)*info[3]);
+                    return info[1] + (duration/24)*info[4] + (duration%24)*info[3];
                 }
         }
-        return "Lỗi hệ thống";
+        return -1 ;
     }
 }

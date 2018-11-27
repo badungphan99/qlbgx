@@ -233,4 +233,105 @@ public class ParkingDA {
 
 		sttm.close();
 	}
+	// Tự động trừ đi một ví trí trong bãi gửi xe khi có xe vào
+	public int checkInVehicle(int vehicleId, int parking_id) throws Exception{
+		String sqlGetInfo = "SELECT * FROM parking WHERE parking_id = ?";
+		PreparedStatement sttm = conn.prepareStatement(sqlGetInfo);
+		sttm.setInt(1, parking_id);
+		ResultSet rs = sttm.executeQuery();
+		String sqlUpdate;
+		PreparedStatement update;
+		while (rs.next()){
+			switch (vehicleId){
+				case 1:
+					int bicycleLot = rs.getInt("bicycle_lot");
+					if (bicycleLot == 0 ){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET bicycle_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(bicycleLot-1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+				case 2:
+					int motobikeLot = rs.getInt("motobike_lot");
+					if (motobikeLot == 0){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET motobike_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(motobikeLot-1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+				case 3:
+					int carLot = rs.getInt("car_lot");
+					if (carLot == 0){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET car_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(carLot-1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+			}
+		}
+		return 0;
+	}
+
+	// Tự động cộng thêm một vị trí khi có xe ra ngoài
+	public int checkOutVehicle(int vehicleId, int parking_id) throws Exception{
+		String sqlGetInfo = "SELECT * FROM parking WHERE parking_id = ?";
+		PreparedStatement sttm = conn.prepareStatement(sqlGetInfo);
+		sttm.setInt(1, parking_id);
+		ResultSet rs = sttm.executeQuery();
+		String sqlUpdate;
+		PreparedStatement update;
+		while (rs.next()){
+			switch (vehicleId){
+				case 1:
+					int bicycleLot = rs.getInt("bicycle_lot");
+					if (bicycleLot == 0 ){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET bicycle_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(bicycleLot + 1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+				case 2:
+					int motobikeLot = rs.getInt("motobike_lot");
+					if (motobikeLot == 0){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET motobike_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(motobikeLot + 1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+				case 3:
+					int carLot = rs.getInt("car_lot");
+					if (carLot == 0){
+						return -1;
+					}
+					sqlUpdate = "UPDATE parking SET car_lot = ? WHERE parking_id = ?";
+					update = conn.prepareStatement(sqlUpdate);
+					update.setInt(1,(carLot + 1));
+					update.setInt(2,parking_id);
+					update.executeUpdate();
+					update.close();
+					break;
+			}
+		}
+		return 0;
+	}
 }

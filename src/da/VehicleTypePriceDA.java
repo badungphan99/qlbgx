@@ -21,10 +21,10 @@ public class VehicleTypePriceDA {
 
     public void insertVehicleSetting (int id, int price, int parkingPerios, int mode, int perHour, int perDay) throws SQLException {
         PreparedStatement stmt;
-        String sql = "UPDATE vehicle_type_price SET price = ?";
+        String sql = "UPDATE vehicl_type_price SET price = ?";
         switch (mode){
             case 1:
-                sql = sql + ", parking_perios = null , mode = 1, per_hour = null, per_day = null WHERE id_vehicle = ?";
+                sql = sql + ", time_perios = null, per_hour = null, per_day = null WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, price);
                 stmt.setInt(2, id);
@@ -32,7 +32,7 @@ public class VehicleTypePriceDA {
                 stmt.close();
                 break;
             case 2:
-                sql = sql + ", parking_perios = ?, mode = 2, per_hour = ?, per_day = null WHERE id_vehicle = ?";
+                sql = sql + ", parking_perios = ?, per_hour = ?, per_day = null WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1,price);
                 stmt.setInt(2,parkingPerios);
@@ -70,17 +70,17 @@ public class VehicleTypePriceDA {
         String sql = "SELECT * FROM vehicle_type_price";
         Statement sttm = conn.createStatement();
         ResultSet rs = sttm.executeQuery(sql);
-        while (rs.next()) {
-            VehicleTypePrice vehicleTypePrice = new VehicleTypePrice(rs.getInt("id_vehicle"),rs.getString("vehicle_type"),rs.getInt("price"),
-                    rs.getInt("parking_perios"),rs.getInt("mode"),rs.getInt("per_hour"),rs.getInt("per_day"));
-            if(id_vehicle == vehicleTypePrice.getIdVehicle()){
-                info[0] = vehicleTypePrice.getMode();
-                info[1] = vehicleTypePrice.getPrice();
-                info[2] = vehicleTypePrice.getParkingPerios();
-                info[3] = vehicleTypePrice.getPerHour();
-                info[4] = vehicleTypePrice.getPerDay();
-            }
-        }
+//        while (rs.next()) {
+//            VehicleTypePrice vehicleTypePrice = new VehicleTypePrice(rs.getInt("id_vehicle"),rs.getString("vehicle_type"),rs.getInt("price"),
+//                    rs.getInt("parking_perios"),rs.getInt("mode"),rs.getInt("per_hour"),rs.getInt("per_day"));
+//            if(id_vehicle == vehicleTypePrice.getIdVehicle()){
+//                info[0] = vehicleTypePrice.getMode();
+//                info[1] = vehicleTypePrice.getPrice();
+//                info[2] = vehicleTypePrice.getParkingPerios();
+//                info[3] = vehicleTypePrice.getPerHour();
+//                info[4] = vehicleTypePrice.getPerDay();
+//            }
+//        }
         return info;
     }
 }
