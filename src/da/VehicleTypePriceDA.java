@@ -1,8 +1,11 @@
 package da;
 
+import e.Infor;
 import e.VehicleTypePrice;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleTypePriceDA {
     private static Connection conn;
@@ -17,6 +20,21 @@ public class VehicleTypePriceDA {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public List<VehicleTypePrice> getAll() throws SQLException {
+        List<VehicleTypePrice> vehicleTypePrices = new ArrayList<VehicleTypePrice>();
+        String sql = "SELECT * FROM vehicle_type_price";
+        Statement sttm = conn.createStatement();
+        ResultSet rs = sttm.executeQuery(sql);
+
+        while (rs.next()) { VehicleTypePrice vehicleTypePrice = new VehicleTypePrice(rs.getString("vehicle_type"),rs.getInt("id_vehicle"),rs.getInt("price"),
+                rs.getInt("time_period"), rs.getInt("per_hour"), rs.getInt("per_day"), rs.getInt("mode"));
+            vehicleTypePrices.add(vehicleTypePrice);
+        }
+        sttm.close();
+
+        return vehicleTypePrices;
     }
 
     public void insertVehicleSetting (int id, int price, int parkingPerios, int mode, int perHour, int perDay) throws SQLException {
