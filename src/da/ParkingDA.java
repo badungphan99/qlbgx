@@ -296,9 +296,6 @@ public class ParkingDA {
 			switch (vehicleId){
 				case 1:
 					int bicycleLot = rs.getInt("bicycle_lot");
-					if (bicycleLot == 0 ){
-						return -1;
-					}
 					sqlUpdate = "UPDATE parking SET bicycle_lot = ? WHERE parking_id = ?";
 					update = conn.prepareStatement(sqlUpdate);
 					update.setInt(1,(bicycleLot + 1));
@@ -308,9 +305,6 @@ public class ParkingDA {
 					break;
 				case 2:
 					int motorbikeLot = rs.getInt("motorbike_lot");
-					if (motorbikeLot == 0){
-						return -1;
-					}
 					sqlUpdate = "UPDATE parking SET motorbike_lot = ? WHERE parking_id = ?";
 					update = conn.prepareStatement(sqlUpdate);
 					update.setInt(1,(motorbikeLot + 1));
@@ -320,9 +314,6 @@ public class ParkingDA {
 					break;
 				case 3:
 					int carLot = rs.getInt("car_lot");
-					if (carLot == 0){
-						return -1;
-					}
 					sqlUpdate = "UPDATE parking SET car_lot = ? WHERE parking_id = ?";
 					update = conn.prepareStatement(sqlUpdate);
 					update.setInt(1,(carLot + 1));
