@@ -30,7 +30,7 @@ public class LoginDialog extends JDialog{
 
 		super(parent, "Login", true);
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(300, 200, 500, 200);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,7 +55,7 @@ public class LoginDialog extends JDialog{
 				try {
 					UserB userB = new UserB();
 					User user = userB.checkLogin(txtUsername.getText(), txtPassword.getText());
-					if(user.getRole() != -1){
+					if(user.getRole() != -1 && user.isActive()){
 						loginSession.setUser(user);
 						WorkFrame bossFrame = new WorkFrame(parent);
 						bossFrame.setVisible(true);

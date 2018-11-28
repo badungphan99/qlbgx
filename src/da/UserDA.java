@@ -107,7 +107,6 @@ public class UserDA {
 
 	}
 
-	// chua can dung den nhung dung xoa di vi co the dung den
 	public boolean checkUserExist(String username) throws SQLException {
 		String sql = "SELECT * FROM user WHERE username = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
@@ -239,7 +238,7 @@ public class UserDA {
 		sttm.close();
 	}
 
-	// active là true nghĩa là active user đó, ngược lại là deactive user đó
+	// active = true nghĩa là active user đó, ngược lại là deactive user đó
 	public void activeUser(int id, boolean active) throws SQLException {
 		String sql = "UPDATE user SET active = ? WHERE employee_id = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);

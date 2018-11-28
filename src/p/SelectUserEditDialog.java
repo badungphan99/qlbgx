@@ -19,10 +19,10 @@ public class SelectUserEditDialog extends JDialog {
 	private JComboBox<String> employeeIdBox;
 	
 	public SelectUserEditDialog(WorkFrame parent) {
-		super(parent, "Selec User Edit", true);
+		super(parent, "Select User Edit", true);
 		// setAlwaysOnTop(true);
 
-		setBounds(300, 200, 520, 180);
+		setBounds(440, 200, 520, 180);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

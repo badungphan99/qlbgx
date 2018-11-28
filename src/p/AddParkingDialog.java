@@ -31,7 +31,7 @@ public class AddParkingDialog extends JDialog {
 			setAlwaysOnTop(true);
 
 			// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
-			setBounds(300, 200, 600, 300);
+			setBounds(440, 200, 600, 300);
 
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -86,7 +86,7 @@ public class AddParkingDialog extends JDialog {
 						int motorbikeLot;
 						int carLot;
 						if (parkingB.isNotExistParkingName(name)) {
-								if (validation.isValidateParkingLot(txtBicycleLot.getText()) && validation.isValidateParkingLot(txtMotorbikeLot.getText()) && validation.isValidateParkingLot(txtCarLot.getText())) {
+								if (validation.isValidateInt(txtBicycleLot.getText()) && validation.isValidateInt(txtMotorbikeLot.getText()) && validation.isValidateInt(txtCarLot.getText())) {
 									bicycleLot = Integer.parseInt(txtBicycleLot.getText());
 									motorbikeLot = Integer.parseInt(txtMotorbikeLot.getText());
 									carLot = Integer.parseInt(txtCarLot.getText());
@@ -107,6 +107,7 @@ public class AddParkingDialog extends JDialog {
 						} else {
 							lblMessage.setForeground(Color.RED);
 							lblMessage.setText("Parking_name is already taken!");
+							lblMessageTwo.setText("");
 						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

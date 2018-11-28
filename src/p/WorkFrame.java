@@ -12,27 +12,27 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import b.UserB;
+import b.VehicleTypePriceB;
 import b.InforB;
 import b.ParkingB;
-import b.ParkingCardB;
 import java.awt.Color;
 
 public class WorkFrame extends JFrame {
-	//private static final Object CEEB = ;
 	private JPanel contentPane;
 	private JTable table;
 	private JButton btncheckIn, btncheckOut;
 	private JButton btnParking, btnParking_Card, btnInfor;
 	private DefaultTableModel model;
-	private JMenu mnUser, mnParking, mnparkingcard, mnInfor;
+	private JMenu mnUser, mnParking, mnInfor, mnVehicleTypePrice;
 	private JMenu mnDisplayUser, mnDisplayParking;
 	private JMenuItem addParking, editParking, activeParking, deactiveParking;
+	private JMenuItem editVtp;
 	private JPanel jpanel;
 	private JLabel label;
 	private UserB user;
 	private ParkingB parking;
-	private ParkingCardB parkingcard;
 	private InforB infor;
+	private VehicleTypePriceB vehicleTypeP;
 	private static WorkFrame boss;
 
 	private void initModelUser() {
@@ -55,34 +55,30 @@ public class WorkFrame extends JFrame {
 		table.setModel(model);
 	}
 
-	private void initModelParkingCard() throws SQLException {
-		model = parkingcard.getAllParkingCard();
+	private void initModelInfor() throws SQLException {
+		model = infor.getAllInfor();
 		table.setModel(model);
 	}
 
-	private void initModelInfor() throws SQLException {
-		model = infor.getAllInfor();
+	private void initModelVtp() {
+		model = vehicleTypeP.getAllInfor();
 		table.setModel(model);
 	}
 
 	public WorkFrame(FirstFrame firstframe) {
 		user = new UserB();
 		parking = new ParkingB();
-		parkingcard = new ParkingCardB();
 		infor = new InforB();
-
+		vehicleTypeP = new VehicleTypePriceB();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1024, 768);
+		this.setBounds(200, 0, 1024, 768);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenu mnAcc = new JMenu("Account");
 		menuBar.add(mnAcc);
-
-		JMenuItem mntmChange = new JMenuItem("Change");
-		mnAcc.add(mntmChange);
 
 		JMenuItem mntmLogOut = new JMenuItem("Log out");
 		mnAcc.add(mntmLogOut);
@@ -104,12 +100,10 @@ public class WorkFrame extends JFrame {
 		panel.setBackground(Color.decode("#87CEEB"));
 		mnUser = new JMenu("User");
 		mnParking = new JMenu("Parking");
-		mnparkingcard = new JMenu("Parking Card");
 		mnInfor = new JMenu("Infor");
 
 		menuBar.add(mnUser);
 		menuBar.add(mnParking);
-		menuBar.add(mnparkingcard);
 		menuBar.add(mnInfor);
 
 		mnUser.setEnabled(false);
@@ -117,7 +111,7 @@ public class WorkFrame extends JFrame {
 		mnDisplayUser = new JMenu("Display");
 		mnUser.add(mnDisplayUser);
 		mnUser.addSeparator();
-		
+
 		JMenuItem displayAllUser = new JMenuItem("All");
 		mnDisplayUser.add(displayAllUser);
 
@@ -142,7 +136,7 @@ public class WorkFrame extends JFrame {
 		mnDisplayParking = new JMenu("Display");
 		mnParking.add(mnDisplayParking);
 		mnParking.addSeparator();
-		
+
 		JMenuItem displayAllParking = new JMenuItem("All");
 		mnDisplayParking.add(displayAllParking);
 
@@ -151,7 +145,7 @@ public class WorkFrame extends JFrame {
 
 		JMenuItem displayNotActiveParking = new JMenuItem("Not Active");
 		mnDisplayParking.add(displayNotActiveParking);
-		
+
 		addParking = new JMenuItem("Add Parking");
 		mnParking.add(addParking);
 
@@ -172,31 +166,32 @@ public class WorkFrame extends JFrame {
 
 		deactiveParking.setEnabled(false);
 
-		JMenuItem displayParkingCard = new JMenuItem("Display Parking Cards");
-		mnparkingcard.add(displayParkingCard);
-
 		JMenuItem displayInfor = new JMenuItem("Display Infors");
 		mnInfor.add(displayInfor);
 		btncheckIn = new JButton("Check In");
 		panel.add(btncheckIn);
 
+		mnVehicleTypePrice = new JMenu("Vehicle Type Price");
+
+		menuBar.add(mnVehicleTypePrice);
+		JMenuItem displayVtp = new JMenuItem("Display");
+		editVtp = new JMenuItem("Edit");
+		editVtp.setEnabled(false);
+
+		mnVehicleTypePrice.add(displayVtp);
+		mnVehicleTypePrice.add(editVtp);
+
 		btncheckOut = new JButton("Check Out");
 		panel.add(btncheckOut);
 		jpanel = new JPanel();
-//		contentPane.add(jpanel,BorderLayout.CENTER);
+
 		label = new JLabel();
-		// label.setSize(1000,300);
+
 		label.setSize(1000, 300);
-		/*
-		 * try { BufferedImage image = ImageIO.read(new File("image/baixe3.jpg"));
-		 * ImageIcon icon = new
-		 * ImageIcon(image.getScaledInstance(1490,720,image.SCALE_SMOOTH));
-		 * label.setIcon(icon); } catch (IOException e) { e.printStackTrace(); }
-		 * jpanel.add(label);
-		 */
+
 		try {
 			BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
-			ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+			ImageIcon icons = new ImageIcon(images.getScaledInstance(20, 20, images.SCALE_SMOOTH));
 			btncheckIn.setIcon(icons);
 			btncheckOut.setIcon(icons);
 		} catch (IOException e) {
@@ -241,7 +236,7 @@ public class WorkFrame extends JFrame {
 
 			}
 		});
-		
+
 		displayAllUser.addActionListener(new ActionListener() {
 
 			@Override
@@ -325,14 +320,14 @@ public class WorkFrame extends JFrame {
 				initModelParkingActive(true);
 			}
 		});
-		
+
 		displayNotActiveParking.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				initModelParkingActive(false);
 			}
 		});
-		
+
 		addParking.addActionListener(new ActionListener() {
 
 			@Override
@@ -346,17 +341,17 @@ public class WorkFrame extends JFrame {
 		});
 
 		editParking.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SelectParkingEditDialog selectPEditDl = new SelectParkingEditDialog(WorkFrame.this);
 				selectPEditDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				selectPEditDl.setVisible(true);
-				
+
 				initModelParkingActive(true);
 			}
 		});
-		
+
 		activeParking.addActionListener(new ActionListener() {
 
 			@Override
@@ -380,18 +375,6 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
-		displayParkingCard.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					initModelParkingCard();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-
 		displayInfor.addActionListener(new ActionListener() {
 
 			@Override
@@ -404,6 +387,27 @@ public class WorkFrame extends JFrame {
 			}
 		});
 
+		displayVtp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initModelVtp();
+
+			}
+		});
+
+		editVtp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SelectVehicleTPDialog selectVTPDl = new SelectVehicleTPDialog(WorkFrame.this);
+				selectVTPDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				selectVTPDl.setVisible(true);
+				
+				initModelVtp();
+			}
+		});
+
 	}
 
 	void enableControl() {
@@ -412,6 +416,7 @@ public class WorkFrame extends JFrame {
 		editParking.setEnabled(true);
 		activeParking.setEnabled(true);
 		deactiveParking.setEnabled(true);
+		editVtp.setEnabled(true);
 	}
 
 }

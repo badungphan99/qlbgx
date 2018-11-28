@@ -13,7 +13,7 @@ public class VehicleTypePriceB {
 
     public VehicleTypePriceB() {vehicleTypePriceDA = new VehicleTypePriceDA();}
     // Chỗ này để hiện thị ra bảng thông tin cài đặt về các loại xe trong bãu
-    public DefaultTableModel getAllInfor() throws SQLException {
+    public DefaultTableModel getAllInfor() {
         List<VehicleTypePrice> vehicleTypePrices = vehicleTypePriceDA.getAll();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Vehicle id");
@@ -93,4 +93,7 @@ public class VehicleTypePriceB {
         return -1 ;
     }
 
+	public String[] getAllVehicleTPID() {
+		return vehicleTypePriceDA.getVehicleTPId();
+	}
 }

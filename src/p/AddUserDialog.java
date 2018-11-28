@@ -34,7 +34,7 @@ public class AddUserDialog extends JDialog {
 		setAlwaysOnTop(true);
 
 		// hien vi tri cua dialog o trong workframe, neu bo di thi dialog se o mot vi tri khac
-		setBounds(300, 200, 550, 300);
+		setBounds(440, 200, 550, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -124,6 +124,7 @@ public class AddUserDialog extends JDialog {
 					} else {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
+						lblMessageTwo.setText("");
 					}
 
 				} catch (SQLException e1) {

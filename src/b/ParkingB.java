@@ -1,6 +1,7 @@
 package b;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import da.ParkingDA;
@@ -106,5 +107,26 @@ public class ParkingB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String [] getParkingLot() {
+		List<String> vehicle = new ArrayList<String>();
+		int [] parkingLot = da.getParkingLot(loginSession.getUser().getParking_id());
+		if(parkingLot [0] > 0) {
+			vehicle.add("Bicycle");
+		}
+		if (parkingLot [1] > 0) {
+			vehicle.add("Motorbike");
+		}
+		if (parkingLot [2] > 0) {
+			vehicle.add("Car");
+		}
+		
+		String [] vehicleType = new String[vehicle.size()];
+		for (int i = 0; i < vehicleType.length; i++) {
+			vehicleType [i] = vehicle.get(i);
+		}
+		
+		return vehicleType;
 	}
 }

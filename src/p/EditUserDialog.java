@@ -30,7 +30,7 @@ public class EditUserDialog extends JDialog {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
-		setBounds(300, 200, 600, 300);
+		setBounds(440, 200, 600, 300);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,6 +105,7 @@ public class EditUserDialog extends JDialog {
 					} else {
 						lblMessage.setForeground(Color.RED);
 						lblMessage.setText("Username is already taken!");
+						lblMessageTwo.setText("");
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();

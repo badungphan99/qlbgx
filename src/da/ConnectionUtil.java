@@ -10,7 +10,7 @@ public class ConnectionUtil {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		if (conn == null) {
 			Class.forName("com.mysql.jdbc.Driver");
-			String db_url = "jdbc:mysql://localhost/qlbgxupdate";
+			String db_url = "jdbc:mysql://localhost/qlbgx";
 			String db_user = "quanly";
 			String db_password = "123456";
 			

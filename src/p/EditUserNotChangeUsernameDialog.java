@@ -31,7 +31,7 @@ public class EditUserNotChangeUsernameDialog extends JDialog {
 		super(parent, "Edit User", true);
 		setAlwaysOnTop(true);
 
-		setBounds(300, 300, 450, 200);
+		setBounds(440, 300, 450, 200);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
