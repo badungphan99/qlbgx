@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import b.InforB;
 import b.ParkingB;
+import b.Validation;
 import e.Infor;
 import net.miginfocom.swing.MigLayout;
 
@@ -40,11 +41,10 @@ public class CheckInDialog extends JDialog {
 		contentPane.add(lbltype, "cell 0 0,alignx trailing");
 
 		ParkingB parkingB = new ParkingB();
-		String [] vehicleType = parkingB.getParkingLot();
+		String[] vehicleType = parkingB.getParkingLot();
 		vehicleTypeBox = new JComboBox<String>(vehicleType);
 		contentPane.add(vehicleTypeBox, "cell 1 0,growx");
-		
-		
+
 		JLabel lbllicense = new JLabel("License Plate");
 		contentPane.add(lbllicense, "cell 0 1,alignx trailing");
 
@@ -52,7 +52,7 @@ public class CheckInDialog extends JDialog {
 		contentPane.add(txtlicenseplate, "cell 1 1,growx");
 
 		JButton btnAdd = new JButton("Check In");
-
+		Validation validation = new Validation();
 		lblMessage = new JLabel("Please enter vehicle type and license plate");
 		contentPane.add(lblMessage, "cell 1 3");
 		contentPane.add(btnAdd, "flowx,cell 1 4");
@@ -63,46 +63,54 @@ public class CheckInDialog extends JDialog {
 				int id_vehicle = 0;
 				if (vehicle_type.equalsIgnoreCase("Bicycle")) {
 					id_vehicle = 1;
-				}else if (vehicle_type.equalsIgnoreCase("Motorbike")){
+				} else if (vehicle_type.equalsIgnoreCase("Motorbike")) {
 					id_vehicle = 2;
 				} else {
 					id_vehicle = 3;
 				}
-				System.out.println(id_vehicle);
-				int code = inforB.checkin(id_vehicle,txtlicenseplate.getText());
-				if(code == -1){
-					JOptionPane.showMessageDialog(CheckInDialog.this, "Please switch to another parking", "Check in", JOptionPane.INFORMATION_MESSAGE);
-				}else{
-					String mess = "Your card id: " + String.valueOf(code);
-					JOptionPane.showMessageDialog(CheckInDialog.this, mess, "Edit User", JOptionPane.INFORMATION_MESSAGE);
-				}
-				/* code: bình thường sẽ trả về số id cua vé nhưng nếu trả về -1 tức là bãi xe đã hết chỗ
-				* trả về -2 tức là có lỗi lúc insert nhưng không cần quan tâm đâu chỉ bắn ra log lỗi hệ thống thôi
-				* không hiện thị ra cho người dùng*/
 
-				CheckInDialog.this.setVisible(false);
+				if (validation.isValidateLicense(txtlicenseplate.getText())) {
+					int code = inforB.checkin(id_vehicle, txtlicenseplate.getText());
+					if (code == -1) {
+						JOptionPane.showMessageDialog(CheckInDialog.this, "Please switch to another parking",
+								"Check in", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						String mess = "Your card id: " + String.valueOf(code);
+						JOptionPane.showMessageDialog(CheckInDialog.this, mess, "Edit User",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+					CheckInDialog.this.dispose();
+				} else {
+					lblMessage.setText("License plate is not validate!");
+				}
+				/*
+				 * code: bình thường sẽ trả về số id cua vé nhưng nếu trả về -1 tức là bãi xe đã
+				 * hết chỗ trả về -2 tức là có lỗi lúc insert nhưng không cần quan tâm đâu chỉ
+				 * bắn ra log lỗi hệ thống thôi không hiện thị ra cho người dùng
+				 */
+
 				
+
 			}
 		});
-
 
 		JButton btnCancel = new JButton("Cancel");
 		contentPane.add(btnCancel, "cell 1 4");
 
 		try {
 			BufferedImage images = ImageIO.read(new File("image/icon.jpg"));
-			ImageIcon icons = new ImageIcon(images.getScaledInstance(20,20,images.SCALE_SMOOTH));
+			ImageIcon icons = new ImageIcon(images.getScaledInstance(20, 20, images.SCALE_SMOOTH));
 			btnAdd.setIcon(icons);
 			btnCancel.setIcon(icons);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		btnCancel.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckInDialog.this.setVisible(false);
-				
+				CheckInDialog.this.dispose();
+
 			}
 		});
 	}

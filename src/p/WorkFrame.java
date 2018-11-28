@@ -197,18 +197,26 @@ public class WorkFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		btncheckIn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckInDialog checkinDl = new CheckInDialog(WorkFrame.this);
-				checkinDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				checkinDl.setVisible(true);
-				try {
-					initModelInfor();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				String[] vehicleType = parking.getParkingLot();
+				if (vehicleType.length > 0) {
+					CheckInDialog checkinDl = new CheckInDialog(WorkFrame.this);
+					checkinDl.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					checkinDl.setVisible(true);
+					try {
+						initModelInfor();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(WorkFrame.this, "Bãi gửi xe này đã hết chỗ gửi", "Hết chỗ",
+							JOptionPane.PLAIN_MESSAGE);
 				}
+				
 			}
 		});
 
