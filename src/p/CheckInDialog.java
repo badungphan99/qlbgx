@@ -81,6 +81,7 @@ public class CheckInDialog extends JDialog {
 					}
 					CheckInDialog.this.dispose();
 				} else {
+					lblMessage.setForeground(Color.RED);
 					lblMessage.setText("License plate is not validate!");
 				}
 				/*

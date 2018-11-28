@@ -8,7 +8,7 @@ public class Validation {
 	}
 	
 	public boolean isValidateLicense(final String txtLicense) {
-		return Pattern.compile("^[a-z0-9]{1,15}$").matcher(txtLicense).matches();
+		return Pattern.compile("^[a-zA-Z0-9]{1,15}$").matcher(txtLicense).matches();
 	}
 	
 }

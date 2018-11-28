@@ -117,7 +117,7 @@ public class UserB {
 
 	// Cái này đẻ kiểm tra tính hợp lệ của username thôi mà
 	public boolean isValidate(final String name) {
-		return Pattern.compile("^[a-z0-9]{3,15}$").matcher(name).matches();
+		return Pattern.compile("^[a-zA-Z0-9]{3,15}$").matcher(name).matches();
 	}
 	
 	//chưa cần dùng đến nhưng đừng xóa đi vì có thể dùng đến
