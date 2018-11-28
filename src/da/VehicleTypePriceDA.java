@@ -1,6 +1,5 @@
 package da;
 
-import e.Infor;
 import e.VehicleTypePrice;
 
 import java.sql.*;
@@ -42,7 +41,7 @@ public class VehicleTypePriceDA {
         String sql = "UPDATE vehicl_type_price SET price = ?";
         switch (mode){
             case 1:
-                sql = sql + ", time_perios = null, per_hour = null, per_day = null WHERE id_vehicle = ?";
+                sql = sql + ", time_period = null, per_hour = null, per_day = null, mode = 1 WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, price);
                 stmt.setInt(2, id);
@@ -50,7 +49,7 @@ public class VehicleTypePriceDA {
                 stmt.close();
                 break;
             case 2:
-                sql = sql + ", parking_perios = ?, per_hour = ?, per_day = null WHERE id_vehicle = ?";
+                sql = sql + ", parking_period = ?, per_hour = ?, per_day = null, mode = 2 WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1,price);
                 stmt.setInt(2,parkingPerios);
@@ -60,7 +59,7 @@ public class VehicleTypePriceDA {
                 stmt.close();
                 break;
             case 3:
-                sql = sql + ", parking_perios = ?, mode = 3, per_hour = null, per_day = ? WHERE id_vehicle = ?";
+                sql = sql + ", parking_period = ?, per_hour = null, per_day = ?, mode = 3 WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1,price);
                 stmt.setInt(2,parkingPerios);
@@ -70,7 +69,7 @@ public class VehicleTypePriceDA {
                 stmt.close();
                 break;
             case 4:
-                sql = sql + ", parking_perios = ?, mode = 4, per_hour = ?, per_day = ? WHERE id_vehicle = ?";
+                sql = sql + ", parking_period = ?, per_hour = ?, per_day = ?, , mode = 4 WHERE id_vehicle = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1,price);
                 stmt.setInt(2,parkingPerios);

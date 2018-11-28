@@ -63,7 +63,6 @@ public class VehicleTypePriceB {
     public int calcPrice(int id_vehicle, int time) throws Exception {
         int[] info = vehicleTypePriceDA.getinfo(id_vehicle);
         int duration;
-        System.out.print(info[0]);
         switch (info[0]){
             case 1:
                 return info[1];

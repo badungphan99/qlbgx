@@ -71,13 +71,16 @@ public class CheckInDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				int code = inforB.checkin(Integer.parseInt(txttype.getText()),txtlicenseplate.getText());
-				System.out.println(code);
 				if(code == -1){
-					System.out.print("het cho");
+					JOptionPane.showMessageDialog(bossframe, "Please switch to another parking", "Check in", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					String mess = "Your card id: " + String.valueOf(code);
+					JOptionPane.showMessageDialog(bossframe,mess, "Edit User", JOptionPane.INFORMATION_MESSAGE);
 				}
 				/* code: bình thường sẽ trả về số id cua vé nhưng nếu trả về -1 tức là bãi xe đã hết chỗ
 				* trả về -2 tức là có lỗi lúc insert nhưng không cần quan tâm đâu chỉ bắn ra log lỗi hệ thống thôi
 				* không hiện thị ra cho người dùng*/
+
 				CheckInDialog.this.setVisible(false);
 				/*CardIdDialog cardIdDialog = new CardIdDialog(bossframe, infor.getCardid());
 				cardIdDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
