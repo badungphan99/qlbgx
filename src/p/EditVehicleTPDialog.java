@@ -37,23 +37,23 @@ public class EditVehicleTPDialog extends JDialog {
 		txtTimePerios = new JTextField();
 		contentPane.add(txtTimePerios, "cell 1 1,growx");
 
-		JLabel lblMode = new JLabel("Mode");
-		contentPane.add(lblMode, "cell 0 2,alignx trailing");
+//		JLabel lblMode = new JLabel("Mode");
+//		contentPane.add(lblMode, "cell 0 2,alignx trailing");
 
-		txtMode = new JTextField();
-		contentPane.add(txtMode, "cell 1 2,growx");
+//		txtMode = new JTextField();
+//		contentPane.add(txtMode, "cell 1 2,growx");
 
 		JLabel lblPerHour = new JLabel("Per hour");
-		contentPane.add(lblPerHour, "cell 0 3,alignx trailing");
+		contentPane.add(lblPerHour, "cell 0 2,alignx trailing");
 
 		txtPerHour = new JTextField();
-		contentPane.add(txtPerHour, "cell 1 3,growx");
+		contentPane.add(txtPerHour, "cell 1 2,growx");
 
 		JLabel lblPerDay = new JLabel("Per day");
-		contentPane.add(lblPerDay, "cell 0 4,alignx trailing");
+		contentPane.add(lblPerDay, "cell 0 3,alignx trailing");
 		
 		txtPerDay = new JTextField();
-		contentPane.add(txtPerDay, "cell 1 4,growx" );
+		contentPane.add(txtPerDay, "cell 1 3,growx" );
 		
 		
 		Validation validation = new Validation();
@@ -63,15 +63,14 @@ public class EditVehicleTPDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				int price;
 				int parkingPerios;
-				int mode;
 				int perHour;
 				int perDay;
 				if (validation.isValidateInt(txtPrice.getText())
 						&& validation.isValidateInt(txtTimePerios.getText())
-						&& validation.isValidateInt(txtMode.getText())) {
+						&& validation.isValidateInt(txtPerHour.getText())
+						&& validation.isValidateInt(txtPerDay.getText())) {
 					price = Integer.parseInt(txtPrice.getText());
 					parkingPerios = Integer.parseInt(txtTimePerios.getText());
-					mode = Integer.parseInt(txtMode.getText());
 					perHour = Integer.parseInt(txtPerHour.getText());
 					perDay = Integer.parseInt(txtPerDay.getText());
 					

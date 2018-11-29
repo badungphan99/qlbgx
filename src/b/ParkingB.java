@@ -88,12 +88,15 @@ public class ParkingB {
 	}
 	
 	public void activeParking(int id, boolean active) {
-		try {
-			da.activeParking(id, active);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+			try {
+				da.activeParking(id, active);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
 	}
 	
 	public boolean checkEditParkingName(int id, String name) throws SQLException {

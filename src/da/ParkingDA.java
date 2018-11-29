@@ -168,7 +168,7 @@ public class ParkingDA {
 		String sql = "UPDATE parking SET active = ? WHERE parking_id = ?";
 		PreparedStatement sttm = conn.prepareStatement(sql);
 		if (!active) {
-			String sqlUser = "UPDATE user SET active = ? WHERE employee_id = ?";
+			String sqlUser = "UPDATE user SET active = ? WHERE parking_id = ?";
 			PreparedStatement sttm2 = conn.prepareStatement(sqlUser);
 			sttm2.setBoolean(1, active);
 			sttm2.setInt(2, id);
